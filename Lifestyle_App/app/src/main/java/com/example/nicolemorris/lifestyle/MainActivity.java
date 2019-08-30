@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    String username = "Nicole";
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
