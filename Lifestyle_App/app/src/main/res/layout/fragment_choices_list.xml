@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChoicesListFragment">
+
+    <TextView
+        android:id="@+id/tv_choose"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Choose an activity"
+        app:layout_constraintBottom_toTopOf="@+id/ib_profile"
+        app:layout_constraintEnd_toStartOf="@+id/ib_pic"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <ImageButton
+        android:id="@+id/ib_profile"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/ib_goals"
+        app:layout_constraintEnd_toStartOf="@+id/tv_profile"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_choose"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_goals"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/ib_bmi"
+        app:layout_constraintEnd_toStartOf="@+id/tv_goals"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_profile"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+    <ImageButton
+        android:id="@+id/ib_bmi"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/ib_hike"
+        app:layout_constraintEnd_toStartOf="@+id/tv_bmi"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_goals"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_hike"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/ib_weather"
+        app:layout_constraintEnd_toStartOf="@+id/tv_hike"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_bmi"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_weather"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/ib_help"
+        app:layout_constraintEnd_toStartOf="@+id/tv_weather"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_hike"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_help"
+        tools:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_help"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_weather"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        />
+
+
+    <ImageButton
+        android:id="@+id/ib_pic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/tv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tv_choose"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
+
+
+    <TextView
+        android:id="@+id/tv_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Profile"
+        app:layout_constraintBottom_toTopOf="@+id/tv_goals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_profile"
+        app:layout_constraintTop_toBottomOf="@+id/ib_pic"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+
+    <TextView
+        android:id="@+id/tv_goals"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Fitness Goals"
+        app:layout_constraintBottom_toTopOf="@+id/tv_bmi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_goals"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+
+    <TextView
+        android:id="@+id/tv_bmi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="BMI"
+        app:layout_constraintBottom_toTopOf="@+id/tv_hike"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_bmi"
+        app:layout_constraintTop_toBottomOf="@+id/tv_goals"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+
+    <TextView
+        android:id="@+id/tv_hike"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Find-A-Hike"
+        app:layout_constraintBottom_toTopOf="@+id/tv_weather"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_hike"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bmi"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Weather"
+        app:layout_constraintBottom_toTopOf="@+id/tv_help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_weather"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hike"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+
+    <TextView
+        android:id="@+id/tv_help"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ib_help"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="2" />
+
+</android.support.constraint.ConstraintLayout>
