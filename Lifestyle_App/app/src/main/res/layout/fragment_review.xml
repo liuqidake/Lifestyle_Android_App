@@ -17,13 +17,8 @@
         android:text="Name:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_age_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_name_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_age_hc"
@@ -35,13 +30,8 @@
         android:text="Age:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_city_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_age_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_hc" />
 
     <TextView
         android:id="@+id/tv_city_hc"
@@ -53,13 +43,8 @@
         android:text="City:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_state_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_city_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_age_hc" />
 
     <TextView
         android:id="@+id/tv_state_hc"
@@ -71,13 +56,8 @@
         android:text="State:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_height_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_state_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_hc" />
 
     <TextView
         android:id="@+id/tv_height_hc"
@@ -89,13 +69,8 @@
         android:text="Height:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_weight_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_height_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_state_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_state_hc" />
 
     <TextView
         android:id="@+id/tv_weight_hc"
@@ -107,13 +82,8 @@
         android:text="Weight:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_sex_hc"
-        app:layout_constraintEnd_toStartOf="@+id/tv_weight_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_height_hc" />
 
     <TextView
         android:id="@+id/tv_sex_hc"
@@ -126,18 +96,13 @@
         android:text="Sex:"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_sex_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc" />
 
     <TextView
         android:id="@+id/tv_name_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -146,17 +111,15 @@
         android:gravity="center_vertical"
         android:text="Bob Snow"
         app:layout_constraintBottom_toTopOf="@+id/tv_age_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_name_hc"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/tv_age_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -164,18 +127,14 @@
         android:gravity="center_vertical"
         android:text="26"
         app:layout_constraintBottom_toTopOf="@+id/tv_city_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_age_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_d" />
 
     <TextView
         android:id="@+id/tv_city_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -183,18 +142,14 @@
         android:gravity="center_vertical"
         android:text="Salt Lake City"
         app:layout_constraintBottom_toTopOf="@+id/tv_state_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_city_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_age_d" />
 
     <TextView
         android:id="@+id/tv_state_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -202,18 +157,14 @@
         android:gravity="center_vertical"
         android:text="Utah"
         app:layout_constraintBottom_toTopOf="@+id/tv_height_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_state_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_d" />
 
     <TextView
         android:id="@+id/tv_height_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -221,18 +172,14 @@
         android:gravity="center_vertical"
         android:text="6 feet 0 inches"
         app:layout_constraintBottom_toTopOf="@+id/tv_weight_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_height_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_state_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_state_d" />
 
     <TextView
         android:id="@+id/tv_weight_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -240,18 +187,14 @@
         android:gravity="center_vertical"
         android:text="175 pounds"
         app:layout_constraintBottom_toTopOf="@+id/tv_sex_d"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_weight_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_height_d" />
 
     <TextView
         android:id="@+id/tv_sex_d"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -260,12 +203,43 @@
         android:gravity="center_vertical"
         android:text="Male"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toEndOf="@+id/tv_sex_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_d"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:layout_constraintHorizontal_weight="2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_d" />
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/b_edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/b_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Edit Profile"
+        app:layout_constraintBottom_toTopOf="@+id/b_finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
+
+    <Button
+        android:id="@+id/b_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b_edit_profile" />
 
 </android.support.constraint.ConstraintLayout>
