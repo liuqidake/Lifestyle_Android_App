@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    int creation_step;
+    int creation_step = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
