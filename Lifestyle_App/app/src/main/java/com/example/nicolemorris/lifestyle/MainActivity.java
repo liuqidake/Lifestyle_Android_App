@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    String username = "Nicole";
+    String username;
     int user_choice = 2;
 
     @Override
