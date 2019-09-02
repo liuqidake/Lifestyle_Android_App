@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    int creation_step = 2;
+    int creation_step = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class NewUserActivity extends AppCompatActivity {
         } else if (creation_step==5) {
 
             //Edit details
-            fTrans.replace(R.id.fl_frag_ph_2,new ReviewFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2,new ChangeProfileFragment(), "Location");
             creation_step++;
 
         } else {

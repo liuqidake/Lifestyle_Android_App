@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+//    String username = "Nicole";
     String username;
     int user_choice = 2;
 
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (user_choice == 2){
 
             //Launch bmi
+            fTrans.replace(R.id.fl_frag_ph_2,new HeaderFragment(),"Choices");
             fTrans.replace(R.id.fl_frag_ph_1,new BmiFragment(),"Choices");
-            fTrans.replace(R.id.fl_frag_ph_2,new BottomButtons(),"Choices");
+            fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
 
         } else if (user_choice == 3){
 
