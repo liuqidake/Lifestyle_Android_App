@@ -8,8 +8,8 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnDataPass {
 
-//    String username = "Nicole";
     String username = "Nicole";
+//    String username;
     int user_choice = 1;
     double height_inches = 72;
     double weight_pounds = 105;
@@ -20,14 +20,12 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //user_choice = getIntent().getIntExtra("CHOICE",0);
+        user_choice = getIntent().getIntExtra("CHOICE",0);
 
         if (username == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
