@@ -8,7 +8,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
 //    String username = "Nicole";
-    String username;
+    String username = "Nicole";
     int user_choice = 2;
 
     @Override
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (user_choice == 2){
 
             //Launch bmi
-            fTrans.replace(R.id.fl_frag_ph_2,new HeaderFragment(),"Choices");
-            fTrans.replace(R.id.fl_frag_ph_1,new BmiFragment(),"Choices");
+            fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
+            fTrans.replace(R.id.fl_frag_ph_2,new BmiFragment(),"BMI");
             fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
 
         } else if (user_choice == 3){

@@ -7,39 +7,86 @@
     android:layout_margin="8dp"
     tools:context=".BottomButtons">
 
-    <ImageButton
-        android:id="@+id/imageButton"
+    <Button
+        android:id="@+id/b_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:src="@tools:sample/avatars" />
+        android:text="Profile"
+        />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
+    <Button
+        android:id="@+id/b_goals"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:src="@tools:sample/avatars" />
+        android:text="Goals"
+        />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
+    <Button
+        android:id="@+id/b_bmi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:src="@tools:sample/avatars" />
+        android:text="BMI"
+        />
 
-    <ImageButton
-        android:id="@+id/imageButton4"
+    <Button
+        android:id="@+id/b_hikes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:src="@tools:sample/avatars" />
+        android:text="Hikes"
+        />
 
-    <ImageButton
-        android:id="@+id/imageButton5"
+    <Button
+        android:id="@+id/b_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:src="@tools:sample/avatars" />
+        android:text="Weather"
+        />
+
+    <Button
+        android:id="@+id/b_help"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Help"
+        />
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:src="@tools:sample/avatars" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:src="@tools:sample/avatars" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:src="@tools:sample/avatars" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:src="@tools:sample/avatars" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/imageButton5"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:src="@tools:sample/avatars" />-->
 
 </LinearLayout>
