@@ -62,6 +62,7 @@
             app:layout_constraintStart_toEndOf="@+id/tv_birthday"
             app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
+        <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/pickers.html#DatePicker-->
         <Button
             android:id="@+id/b_birthday"
             android:layout_width="match_parent"
@@ -139,6 +140,7 @@
         app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toStartOf="parent">
 
+        <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
             android:id="@+id/s_feet"
             android:layout_width="match_parent"
@@ -162,6 +164,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/s_feet" />
 
+        <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
             android:id="@+id/s_inches"
             android:layout_width="match_parent"
@@ -198,6 +201,7 @@
         app:layout_constraintEnd_toStartOf="@+id/iv_profile"
         app:layout_constraintStart_toStartOf="parent">
 
+        <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
             android:id="@+id/s_weight"
             android:layout_width="match_parent"
