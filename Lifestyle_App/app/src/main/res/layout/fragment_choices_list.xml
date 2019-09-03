@@ -23,14 +23,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_profile"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@null"
+        android:text="Profile"
         app:layout_constraintBottom_toTopOf="@+id/ib_goals"
         app:layout_constraintEnd_toStartOf="@+id/tv_profile"
         app:layout_constraintHorizontal_bias="0.5"
@@ -41,14 +41,14 @@
         app:layout_constraintVertical_chainStyle="spread_inside"
         />
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_goals"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@null"
+        android:text="Fitness Goals"
         app:layout_constraintBottom_toTopOf="@+id/ib_bmi"
         app:layout_constraintEnd_toStartOf="@+id/tv_goals"
         app:layout_constraintHorizontal_bias="0.5"
@@ -58,14 +58,14 @@
         tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_bmi"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@null"
+        android:text="BMI"
         app:layout_constraintBottom_toTopOf="@+id/ib_hike"
         app:layout_constraintEnd_toStartOf="@+id/tv_bmi"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,14 +76,14 @@
         app:layout_constraintVertical_chainStyle="spread_inside"
         />
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_hike"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@null"
+        android:text="Find-A-Hike"
         app:layout_constraintBottom_toTopOf="@+id/ib_weather"
         app:layout_constraintEnd_toStartOf="@+id/tv_hike"
         app:layout_constraintHorizontal_bias="0.5"
@@ -94,14 +94,14 @@
         app:layout_constraintVertical_chainStyle="spread_inside"
         />
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_weather"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@null"
+        android:text="Weather"
         app:layout_constraintBottom_toTopOf="@+id/ib_help"
         app:layout_constraintEnd_toStartOf="@+id/tv_weather"
         app:layout_constraintHorizontal_bias="0.5"
@@ -112,7 +112,7 @@
         app:layout_constraintVertical_chainStyle="spread_inside"
         />
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_help"
         tools:layout_constraintHorizontal_weight="1"
         android:layout_width="0dp"
@@ -120,7 +120,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
+        android:text="Help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_help"
         app:layout_constraintHorizontal_bias="0.5"
@@ -132,7 +132,7 @@
         />
 
 
-    <ImageButton
+    <Button
         android:id="@+id/ib_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"

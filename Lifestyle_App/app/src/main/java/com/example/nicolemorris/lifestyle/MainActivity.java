@@ -5,38 +5,72 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements BottomButtons.OnDataPass {
 
 //    String username = "Nicole";
     String username = "Nicole";
-    int user_choice = 2;
+    int user_choice = 1;
     double height_inches = 72;
-    double weight_pounds = 305;
+    double weight_pounds = 105;
+
+    ReviewFragment pf;
+    GoalsFragment gf;
     BmiFragment bf;
+    WeatherFragment wf;
+    HelpFragment hf;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Find each frame layout, replace with corresponding fragment
-        FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+        //user_choice = getIntent().getIntExtra("CHOICE",0);
 
         if (username == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
             this.startActivity(messageIntent);
 
-        } else if (user_choice == 0){
+        } else if (user_choice != 0){
+
+            changeFragments();
+
+        } else {
+
+            Intent messageIntent = new Intent(this, HomeActivity.class);
+            this.startActivity(messageIntent);
+        }
+
+    }
+
+    @Override
+    public void onDataPass(int data) {
+
+        user_choice = data;
+        changeFragments();
+
+    }
+
+    private void changeFragments(){
+
+        //Find each frame layout, replace with corresponding fragment
+        FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+
+        if (user_choice == 1){
 
             //Launch profile information
-
-        } else if (user_choice == 1){
-
-            //Launch fitness goals
+            pf = new ReviewFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
 
-            //Add data to fragment
+            //Launch fitness goals
+            gf = new GoalsFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
+
+        } else if (user_choice == 3){
 
             bf = new BmiFragment();
 
@@ -50,17 +84,21 @@ public class MainActivity extends AppCompatActivity {
             fTrans.replace(R.id.fl_frag_ph_2,bf,"BMI");
 
 
-        } else if (user_choice == 3){
+        } else if (user_choice == 4){
 
             //Launch find-a-hike
 
-        } else if (user_choice == 4){
-
-            //Launch weather information
-
         } else if (user_choice == 5){
 
+            //Launch weather information
+            wf = new WeatherFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,wf,"Weather");
+
+        } else if (user_choice == 6){
+
             //Launch help
+            hf = new HelpFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,hf,"Help");
 
         } else {
 
@@ -70,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
         fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
-
     }
 }
 
