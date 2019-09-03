@@ -10,6 +10,9 @@ public class MainActivity extends AppCompatActivity {
 //    String username = "Nicole";
     String username = "Nicole";
     int user_choice = 2;
+    double height_inches = 72;
+    double weight_pounds = 305;
+    BmiFragment bf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,19 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (user_choice == 2){
 
+            //Add data to fragment
+
+            bf = new BmiFragment();
+
+            //Send data to it
+            Bundle sentData = new Bundle();
+            sentData.putDouble("HEIGHT",height_inches);
+            sentData.putDouble("WEIGHT",weight_pounds);
+            bf.setArguments(sentData);
+
             //Launch bmi
-            fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
-            fTrans.replace(R.id.fl_frag_ph_2,new BmiFragment(),"BMI");
-            fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
+            fTrans.replace(R.id.fl_frag_ph_2,bf,"BMI");
+
 
         } else if (user_choice == 3){
 
@@ -55,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
             //Launch main activity
         }
 
-//        fTrans.replace(R.id.fl_frag_ph_1,new ChoicesListFragment(),"Choices");
+        fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
+        fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
 
     }

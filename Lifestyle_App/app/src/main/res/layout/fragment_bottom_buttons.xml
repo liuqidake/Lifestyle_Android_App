@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Profile"
-        />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/b_goals"
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Goals"
-        />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/b_bmi"
@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="BMI"
-        />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/b_hikes"
@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Hikes"
-        />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/b_weather"
@@ -45,7 +45,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Weather"
-        />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/b_help"
@@ -53,7 +53,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Help"
-        />
+        android:textSize="10sp" />
     <!--<ImageButton-->
         <!--android:id="@+id/imageButton"-->
         <!--android:layout_width="match_parent"-->
