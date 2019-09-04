@@ -1,5 +1,4 @@
 package com.example.nicolemorris.lifestyle;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,8 +21,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnDataPass {
 
+    //    String username = "Nicole";
     String username = "Nicole";
-//    String username;
     int user_choice = 1;
     double height_inches = 72;
     double weight_pounds = 105;
@@ -34,12 +33,24 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
 
+
+
+    //variables for find-a-hike
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION=1;
+    String latitude,longitude;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_choice = getIntent().getIntExtra("CHOICE",0);
+        //user_choice = getIntent().getIntExtra("CHOICE",0);
+
+        //Add permission for getting access to the current location
+        ActivityCompat.requestPermissions(this,new String[]
+                {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         if (username == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
@@ -72,11 +83,9 @@ public class MainActivity extends AppCompatActivity
 
         if (user_choice == 1){
 
-            ChangeProfileFragment cf = new ChangeProfileFragment();
-            fTrans.replace(R.id.fl_frag_ph_2,cf,"Profile");
             //Launch profile information
-//            pf = new ReviewFragment();
-//            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
+            pf = new ReviewFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
 
@@ -100,7 +109,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 4){
 
-            //Launch find-a-hike
+            findHikeAround();
 
         } else if (user_choice == 5){
 
@@ -122,6 +131,104 @@ public class MainActivity extends AppCompatActivity
         fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
         fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
+    }
+
+    private void findHikeAround(){
+        locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //Check gps is enable or not
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            //Enable gps
+            OnGPS();
+        }
+        else
+        {
+            //Get latitude and longitude and open map based on the location
+            getLocation();
+            getHikeResult();
+        }
+    }
+
+    private void getLocation() {
+
+        //Check Permissions again
+
+        if (ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this,
+
+                Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+        else
+        {
+            Location LocationGps= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+            if (LocationGps !=null)
+            {
+                double lat=LocationGps.getLatitude();
+                double longi=LocationGps.getLongitude();
+
+                latitude=String.valueOf(lat);
+                longitude=String.valueOf(longi);
+            }
+            else if (LocationNetwork !=null)
+            {
+                double lat=LocationNetwork.getLatitude();
+                double longi=LocationNetwork.getLongitude();
+
+                latitude=String.valueOf(lat);
+                longitude=String.valueOf(longi);
+            }
+            else if (LocationPassive !=null)
+            {
+                double lat=LocationPassive.getLatitude();
+                double longi=LocationPassive.getLongitude();
+
+                latitude=String.valueOf(lat);
+                longitude=String.valueOf(longi);
+            }
+            else
+            {
+                Toast.makeText(this, "Can't Get Your Location", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void OnGPS() {
+
+        final AlertDialog.Builder builder= new AlertDialog.Builder(this);
+
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
+
+    private void getHikeResult(){
+        Uri searchUri = Uri.parse("geo:"+latitude+","+longitude+"?q=" + "hike");
+
+        //Create the implicit intent
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, searchUri);
+
+        //If there's an activity associated with this intent, launch it
+        if(mapIntent.resolveActivity(getPackageManager())!=null){
+            startActivity(mapIntent);
+        }
     }
 }
 
