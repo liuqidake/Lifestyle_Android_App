@@ -19,11 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnDataPass {
+        implements BottomButtons.OnDataPass, ReviewFragment.ReviewOnDataPass {
 
-    //    String username = "Nicole";
-    String username;
-    int user_choice;
+        String username = "Nicole";
+//    String username;
+    int user_choice = 0;
     double height_inches = 72;
     double weight_pounds = 105;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         user_choice = getIntent().getIntExtra("CHOICE",0);
-
+        System.out.println(user_choice);
         //Add permission for getting access to the current location
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDataPass(int data) {
 
-        user_choice = data;
+        user_choice = getIntent().getIntExtra("CHOICE",0);
         changeFragments();
 
     }
@@ -228,5 +228,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(mapIntent);
         }
     }
+
+    @Override
+    public void onReviewDataPass(int choice){
+
+    }
+
+//    @Override
+//    public void onHomeOnDataPass(int data) {
+//        user_choice = data;
+//        changeFragments();
+//    }
 }
 
