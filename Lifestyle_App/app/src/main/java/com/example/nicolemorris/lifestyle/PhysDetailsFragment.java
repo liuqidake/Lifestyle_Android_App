@@ -46,7 +46,7 @@ dataToPass = new String[3];
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        nextButton = view.findViewById(R.id.b_next_page);
+        nextButton = view.findViewById(R.id.b_next);
         nextButton.setOnClickListener(this);
         // Apply the adapter to the spinner
         s_sex.setAdapter(adapter);
@@ -75,7 +75,9 @@ dataToPass = new String[3];
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.b_next_page: {
+            case R.id.b_next: {
+
+                //NEED TO ADD HEIGHT, WEIGHT, SEX TO PASS FOR STORAGE :)
                 mDataPasser.onPhysDataPass(dataToPass);
                 break;
             }

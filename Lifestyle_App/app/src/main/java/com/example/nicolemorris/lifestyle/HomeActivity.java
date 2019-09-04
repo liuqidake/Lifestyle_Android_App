@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onDataPass(int data) {
 
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CHOICE", data);
         startActivity(intent);
 

@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnDataPass {
 
     //    String username = "Nicole";
-    String username = "Nicole";
-    int user_choice = 1;
+    String username;
+    int user_choice;
     double height_inches = 72;
     double weight_pounds = 105;
 
@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity
     BmiFragment bf;
     WeatherFragment wf;
     HelpFragment hf;
-
-
 
     //variables for find-a-hike
     LocationManager locationManager;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //user_choice = getIntent().getIntExtra("CHOICE",0);
+        user_choice = getIntent().getIntExtra("CHOICE",0);
 
         //Add permission for getting access to the current location
         ActivityCompat.requestPermissions(this,new String[]

@@ -1,6 +1,7 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -14,17 +15,36 @@ import java.util.Calendar;
 
 public class NameAgeFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener, View.OnClickListener{
 
-    private Button mButton;
+    private Button bDate,bNext;
     java.util.Date date;
+    NameAgeOnDataPass mDataPasser;
+
+    //Callback interface
+    public interface NameAgeOnDataPass{
+        public void onNameAgeDataPass(java.util.Date data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try{
+            mDataPasser = (NameAgeOnDataPass) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement OnDataPass");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_name_age, container, false);
-        mButton = (Button)view.findViewById(R.id.b_birthday);
-        mButton.setOnClickListener(this);
+        bDate = (Button)view.findViewById(R.id.b_birthday);
+        bDate.setOnClickListener(this);
 
+        bNext = view.findViewById(R.id.b_next);
+        bNext.setOnClickListener(this);
         return view;
     }
 
@@ -33,6 +53,13 @@ public class NameAgeFragment extends DialogFragment implements DatePickerDialog.
         switch(view.getId()){
             case R.id.b_birthday:{
                 showTimePickerDialog(view);
+            }
+
+            case R.id.b_next: {
+
+                //NEED TO ADD DATE TO PASS FOR STORAGE :)
+                mDataPasser.onNameAgeDataPass(date);
+
             }
         }
     }
@@ -59,7 +86,7 @@ public class NameAgeFragment extends DialogFragment implements DatePickerDialog.
     private void showTimePickerDialog(View v) {
         DialogFragment newFragment = new NameAgeFragment();
         newFragment.show(getFragmentManager(), "timePicker");
-        onDateSet((DatePicker) v,2019,9,3);
+//        onDateSet((DatePicker) v,2019,9,3);
     }
 
 }
