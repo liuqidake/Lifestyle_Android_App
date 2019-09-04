@@ -25,7 +25,7 @@
 
     <Button
         android:id="@+id/ib_profile"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -37,13 +37,13 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_choose"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        />
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/ib_goals"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -55,12 +55,13 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ib_profile"
-        tools:src="@tools:sample/avatars"
-        app:layout_constraintVertical_chainStyle="spread_inside"/>
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/ib_bmi"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -72,13 +73,13 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ib_goals"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        />
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/ib_hike"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -90,13 +91,13 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ib_bmi"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        />
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/ib_weather"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -108,13 +109,13 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ib_hike"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        />
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/ib_help"
-        tools:layout_constraintHorizontal_weight="1"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -127,9 +128,9 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ib_weather"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        />
+        tools:layout_constraintHorizontal_weight="1"
+        tools:src="@tools:sample/avatars" />
 
 
     <Button

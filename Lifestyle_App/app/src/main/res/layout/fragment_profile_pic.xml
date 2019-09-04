@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/button_take_pic"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,6 +22,7 @@
 
     <Button
         android:id="@+id/button_select_pic"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -51,6 +53,7 @@
 
     <Button
         android:id="@+id/button_next"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

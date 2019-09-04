@@ -65,11 +65,12 @@
         <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/pickers.html#DatePicker-->
         <Button
             android:id="@+id/b_birthday"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Pick Date"
             android:layout_weight="1"
+            android:text="Pick Date"
             app:layout_constraintEnd_toStartOf="@+id/iv_profile"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/et_age"
@@ -118,6 +119,7 @@
 
     <Button
         android:id="@+id/b_location"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -277,6 +279,7 @@
 
     <Button
         android:id="@+id/b_edit_pic"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -302,6 +305,7 @@
 
     <Button
         android:id="@+id/b_save"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
