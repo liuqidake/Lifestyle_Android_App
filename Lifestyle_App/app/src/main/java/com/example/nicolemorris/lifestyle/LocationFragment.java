@@ -29,11 +29,29 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private String city, state;
     private EditText cityText, stateText;
     private Button locate, next;
-
+    private String[] data;
     private LocationManager locationManager;
 
     int REQUEST_LOCATION = 1;
     double latitude, longitude;
+
+    LocationOnDataPass mDataPasser;
+
+    //Callback interface
+    public interface LocationOnDataPass{
+        public void onLocationDataPass(String[] data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try{
+            mDataPasser = (LocationOnDataPass) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement OnDataPass");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +85,12 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 } catch(Exception e){
                     Toast.makeText(getContext(), "Can't located you. Are you at Area 51??", Toast.LENGTH_SHORT).show();
                 }
-
+                break;
+            }
+            case R.id.b_next:{
+                //NEED TO ADD LOCATION TO PASS FOR STORAGE :)
+                mDataPasser.onLocationDataPass(data);
+                break;
             }
         }
     }

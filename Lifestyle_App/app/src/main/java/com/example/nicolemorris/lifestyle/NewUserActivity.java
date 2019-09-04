@@ -7,9 +7,10 @@ import android.os.Bundle;
 
 public class NewUserActivity extends AppCompatActivity
         implements NameAgeFragment.NameAgeOnDataPass, PhysDetailsFragment.PhysOnDataPass,
-        ProfilePicFragment.ProfilePicOnDataPass, ReviewFragment.ReviewOnDataPass {
+        LocationFragment.LocationOnDataPass, ProfilePicFragment.ProfilePicOnDataPass,
+        ReviewFragment.ReviewOnDataPass {
 
-    int creation_step = 3;
+    int creation_step = 0;
     String name, city, state, height, weight, sex;
     int age;
 
@@ -54,6 +55,14 @@ public class NewUserActivity extends AppCompatActivity
         setView();
     }
 
+
+    @Override
+    public void onLocationDataPass(String[] data) {
+
+        creation_step=3;
+        setView();
+
+    }
 
     @Override
     public void onProfilePicDataPass(String data) {
