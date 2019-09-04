@@ -4,9 +4,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class NewUserActivity extends AppCompatActivity {
+public class NewUserActivity extends AppCompatActivity
+        implements PhysDetailsFragment.PhysOnDataPass {
 
-    int creation_step = 5;
+    int creation_step = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,11 @@ public class NewUserActivity extends AppCompatActivity {
 
         //Put them in the outgoing Bundle
         outState.putInt("STEP",creation_step);
+
+    }
+
+    @Override
+    public void onPhysDataPass(String[] data) {
 
     }
 

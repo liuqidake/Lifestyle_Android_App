@@ -72,9 +72,11 @@ public class MainActivity extends AppCompatActivity
 
         if (user_choice == 1){
 
+            ChangeProfileFragment cf = new ChangeProfileFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,cf,"Profile");
             //Launch profile information
-            pf = new ReviewFragment();
-            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
+//            pf = new ReviewFragment();
+//            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
 
