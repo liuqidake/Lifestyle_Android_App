@@ -1,4 +1,5 @@
 *.DS_Store
 .gradle
 .idea
+Lifestyle_App/app/app.iml
 local.properties
