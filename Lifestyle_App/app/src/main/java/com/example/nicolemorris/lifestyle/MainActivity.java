@@ -16,16 +16,18 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass {
+        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
+        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
 
-//        String username = "Nicole";
-    String username;
+        String username = "Nicole";
+//    String username;
     int user_choice = 0;
     double height_inches = 72;
     double weight_pounds = 105;
-
+    boolean hasGoal = false;
     ReviewFragment pf;
     GoalsFragment gf;
+    ChangeGoalFragment cgf;
     BmiFragment bf;
     WeatherFragment wf;
     HelpFragment hf;
@@ -74,6 +76,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void onChangeGoalDataPass(){
+        hasGoal = true;
+        changeFragments();
+    }
+
+    @Override
+    public void onGoalsDataPass(){
+        hasGoal = false;
+        changeFragments();
+    }
     private void changeFragments(){
 
         //Find each frame layout, replace with corresponding fragment
@@ -87,9 +100,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 2){
 
-            //Launch fitness goals
-            gf = new GoalsFragment();
-            fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
+            if(hasGoal){
+                //Launch fitness goals
+                gf = new GoalsFragment();
+                fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
+            } else {
+                //Launch change fitness goals
+                cgf = new ChangeGoalFragment();
+                fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
+            }
 
         } else if (user_choice == 3){
 
