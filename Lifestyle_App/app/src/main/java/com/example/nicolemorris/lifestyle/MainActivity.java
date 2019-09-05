@@ -13,16 +13,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnDataPass, ReviewFragment.ReviewOnDataPass {
+        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass {
 
-        String username = "Nicole";
-//    String username;
+//        String username = "Nicole";
+    String username;
     int user_choice = 0;
     double height_inches = 72;
     double weight_pounds = 105;
@@ -44,7 +41,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_choice = getIntent().getIntExtra("CHOICE",0);
+        if(getIntent().getExtras() != null){
+            user_choice = getIntent().getExtras().getInt("CHOICE");
+        }
+
         System.out.println(user_choice);
         //Add permission for getting access to the current location
         ActivityCompat.requestPermissions(this,new String[]
@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDataPass(int data) {
+    public void onBottomDataPass(int data) {
 
-        user_choice = getIntent().getIntExtra("CHOICE",0);
+        user_choice = data;
         changeFragments();
 
     }
@@ -234,10 +234,5 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//    @Override
-//    public void onHomeOnDataPass(int data) {
-//        user_choice = data;
-//        changeFragments();
-//    }
 }
 

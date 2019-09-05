@@ -11,12 +11,12 @@ import android.widget.Button;
 public class ChoicesListFragment extends Fragment
         implements View.OnClickListener {
 
-    OnDataPass mDataPasser;
+    OnChoiceDataPass mDataPasser;
     Button profile_data, goals, bmi, hikes, weather, help;
 
     //Callback interface
-    public interface OnDataPass{
-        public void onDataPass(int data);
+    public interface OnChoiceDataPass{
+        public void onChoiceDataPass(int data);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ChoicesListFragment extends Fragment
         super.onAttach(context);
 
         try{
-            mDataPasser = (OnDataPass) context;
+            mDataPasser = (OnChoiceDataPass) context;
         }catch(ClassCastException e){
             throw new ClassCastException(context.toString() + " must implement OnDataPass");
         }
@@ -59,32 +59,32 @@ public class ChoicesListFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_profile: {
-                mDataPasser.onDataPass(1);
+                mDataPasser.onChoiceDataPass(1);
                 break;
             }
 
             case R.id.ib_goals: {
-                mDataPasser.onDataPass(2);
+                mDataPasser.onChoiceDataPass(2);
                 break;
             }
 
             case R.id.ib_bmi: {
-                mDataPasser.onDataPass(3);
+                mDataPasser.onChoiceDataPass(3);
                 break;
             }
 
             case R.id.ib_hike: {
-                mDataPasser.onDataPass(4);
+                mDataPasser.onChoiceDataPass(4);
                 break;
             }
 
             case R.id.ib_weather: {
-                mDataPasser.onDataPass(5);
+                mDataPasser.onChoiceDataPass(5);
                 break;
             }
 
             case R.id.ib_help: {
-                mDataPasser.onDataPass(6);
+                mDataPasser.onChoiceDataPass(6);
                 break;
             }
 

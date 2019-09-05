@@ -53,12 +53,14 @@ public class NameAgeFragment extends DialogFragment implements DatePickerDialog.
         switch(view.getId()){
             case R.id.b_birthday:{
                 showTimePickerDialog(view);
+                break;
             }
 
             case R.id.b_next: {
 
                 //NEED TO ADD DATE TO PASS FOR STORAGE :)
                 mDataPasser.onNameAgeDataPass(date);
+                break;
 
             }
         }

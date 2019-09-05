@@ -43,13 +43,28 @@ public class PhysDetailsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_phys_details, container, false);
 dataToPass = new String[3];
         s_sex = (Spinner) view.findViewById(R.id.s_sex);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+
+        ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.number_array, android.R.layout.simple_spinner_item);
+
+        s_h_feet  = view.findViewById(R.id.s_feet);
+        s_h_feet.setAdapter(num_adapter);
+
+        s_h_inches = view.findViewById(R.id.s_inches);
+        s_h_inches.setAdapter(num_adapter);
+
+        s_w_pounds = view.findViewById(R.id.s_weight);
+        s_w_pounds.setAdapter(num_adapter);
+
+        ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        s_sex = view.findViewById(R.id.s_sex);
+        s_sex.setAdapter(gender_adapter);
+
         nextButton = view.findViewById(R.id.b_next);
         nextButton.setOnClickListener(this);
-        // Apply the adapter to the spinner
-        s_sex.setAdapter(adapter);
+
 
 
         return view;
@@ -59,8 +74,19 @@ dataToPass = new String[3];
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         switch (view.getId()){
+            case R.id.s_feet: {
+
+                break;
+            }
+            case R.id.s_inches: {
+                break;
+            }
+            case R.id.s_weight: {
+                break;
+            }
             case R.id.s_sex: {
                 dataToPass[2] = parent.getItemAtPosition(pos).toString();
+                break;
             }
         }
 

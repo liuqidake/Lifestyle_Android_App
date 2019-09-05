@@ -12,12 +12,12 @@ import android.widget.Button;
 public class BottomButtons extends Fragment
         implements View.OnClickListener {
 
-    OnDataPass mDataPasser;
+    OnBottomDataPass mDataPasser;
     Button profile_data, goals, bmi, hikes, weather, help;
 
     //Callback interface
-    public interface OnDataPass{
-        public void onDataPass(int data);
+    public interface OnBottomDataPass{
+        public void onBottomDataPass(int data);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class BottomButtons extends Fragment
         super.onAttach(context);
 
         try{
-            mDataPasser = (OnDataPass) context;
+            mDataPasser = (OnBottomDataPass) context;
         }catch(ClassCastException e){
             throw new ClassCastException(context.toString() + " must implement OnDataPass");
         }
@@ -62,32 +62,32 @@ public class BottomButtons extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_profile: {
-                mDataPasser.onDataPass(1);
+                mDataPasser.onBottomDataPass(1);
                 break;
             }
 
             case R.id.b_goals: {
-                mDataPasser.onDataPass(2);
+                mDataPasser.onBottomDataPass(2);
                 break;
             }
 
             case R.id.b_bmi: {
-                mDataPasser.onDataPass(3);
+                mDataPasser.onBottomDataPass(3);
                 break;
             }
 
             case R.id.b_hikes: {
-                mDataPasser.onDataPass(4);
+                mDataPasser.onBottomDataPass(4);
                 break;
             }
 
             case R.id.b_weather: {
-                mDataPasser.onDataPass(5);
+                mDataPasser.onBottomDataPass(5);
                 break;
             }
 
             case R.id.b_help: {
-                mDataPasser.onDataPass(6);
+                mDataPasser.onBottomDataPass(6);
                 break;
             }
 

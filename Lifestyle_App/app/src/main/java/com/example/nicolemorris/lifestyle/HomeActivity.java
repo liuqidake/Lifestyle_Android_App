@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class HomeActivity extends AppCompatActivity
-        implements ChoicesListFragment.OnDataPass {
+        implements ChoicesListFragment.OnChoiceDataPass {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDataPass(int data) {
+    public void onChoiceDataPass(int data) {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CHOICE", data);

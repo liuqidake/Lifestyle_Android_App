@@ -10,7 +10,7 @@ public class NewUserActivity extends AppCompatActivity
         LocationFragment.LocationOnDataPass, ProfilePicFragment.ProfilePicOnDataPass,
         ReviewFragment.ReviewOnDataPass {
 
-    int creation_step = 0;
+    int creation_step = 4;
     String name, city, state, height, weight, sex;
     int age;
 
