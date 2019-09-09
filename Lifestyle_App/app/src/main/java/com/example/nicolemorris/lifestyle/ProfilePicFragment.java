@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class ProfilePicFragment extends Fragment
+public class
+ProfilePicFragment extends Fragment
         implements View.OnClickListener {
 
     Button bTakePic,bSelectPic,bNext;
