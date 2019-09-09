@@ -82,6 +82,8 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                     state = addresses.get(0).getAdminArea();
                     cityText.setText(city);
                     stateText.setText(state);
+                    data[0] = state;
+                    data[1] = city;
                 } catch(Exception e){
                     Toast.makeText(getContext(), "Can't located you. Are you at Area 51??", Toast.LENGTH_SHORT).show();
                 }

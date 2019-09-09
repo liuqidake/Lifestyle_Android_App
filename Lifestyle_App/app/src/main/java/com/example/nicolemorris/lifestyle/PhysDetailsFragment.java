@@ -16,7 +16,6 @@ public class PhysDetailsFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     Spinner s_h_feet,s_h_inches,s_w_pounds,s_sex;
-    String height,weight,sex;
     String[] dataToPass;
     PhysOnDataPass mDataPasser;
     Button nextButton;
@@ -65,8 +64,6 @@ dataToPass = new String[3];
         nextButton = view.findViewById(R.id.b_next);
         nextButton.setOnClickListener(this);
 
-
-
         return view;
 
     }
@@ -75,17 +72,19 @@ dataToPass = new String[3];
                                int pos, long id) {
         switch (view.getId()){
             case R.id.s_feet: {
-
+                dataToPass[0] = s_h_feet.getSelectedItem().toString(); // number of feet e.g."5"
                 break;
             }
             case R.id.s_inches: {
+                dataToPass[1] = s_h_inches.getSelectedItem().toString(); // number of inches e.g. "10"
                 break;
             }
             case R.id.s_weight: {
+                dataToPass[2] = s_w_pounds.getSelectedItem().toString();
                 break;
             }
             case R.id.s_sex: {
-                dataToPass[2] = parent.getItemAtPosition(pos).toString();
+                dataToPass[3] = parent.getItemAtPosition(pos).toString();
                 break;
             }
         }
@@ -96,6 +95,10 @@ dataToPass = new String[3];
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+        dataToPass[0] = "0";
+        dataToPass [1] = "0";
+        dataToPass[2] = "0";
+        dataToPass[3] = "unknown";
     }
 
     @Override
