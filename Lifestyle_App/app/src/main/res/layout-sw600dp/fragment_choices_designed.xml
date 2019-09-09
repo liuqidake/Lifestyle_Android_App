@@ -26,8 +26,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="651dp"
+        android:layout_height="650dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
@@ -35,8 +35,8 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -48,11 +48,11 @@
 
         <ImageButton
             android:id="@+id/imageButton3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/icon_bmi"
@@ -61,8 +61,8 @@
 
         <ImageButton
             android:id="@+id/imageButton2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
@@ -77,10 +77,10 @@
 
         <ImageButton
             android:id="@+id/imageButton4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
@@ -92,8 +92,8 @@
 
         <ImageButton
             android:id="@+id/imageButton5"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
