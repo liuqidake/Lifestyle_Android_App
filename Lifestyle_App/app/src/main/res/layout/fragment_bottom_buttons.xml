@@ -7,92 +7,58 @@
     android:layout_margin="8dp"
     tools:context=".BottomButtons">
 
-    <Button
-        android:id="@+id/b_profile"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Profile"
-        android:textSize="10sp" />
+        <ImageButton
+            android:id="@+id/b_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_profile" />
 
-    <Button
-        android:id="@+id/b_goals"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Goals"
-        android:textSize="10sp" />
+        <ImageButton
+            android:id="@+id/b_goals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_goals" />
 
-    <Button
-        android:id="@+id/b_bmi"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="BMI"
-        android:textSize="10sp" />
+        <ImageButton
+            android:id="@+id/b_bmi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_bmi" />
 
-    <Button
-        android:id="@+id/b_hikes"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Hikes"
-        android:textSize="10sp" />
+        <ImageButton
+            android:id="@+id/b_hikes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_hikes" />
 
-    <Button
-        android:id="@+id/b_weather"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Weather"
-        android:textSize="10sp" />
+        <ImageButton
+            android:id="@+id/b_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_weather" />
 
-    <Button
-        android:id="@+id/b_help"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Help"
-        android:textSize="10sp" />
-    <!--<ImageButton-->
-        <!--android:id="@+id/imageButton"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--tools:src="@tools:sample/avatars" />-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/imageButton2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--tools:src="@tools:sample/avatars" />-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/imageButton3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--tools:src="@tools:sample/avatars" />-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/imageButton4"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--tools:src="@tools:sample/avatars" />-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/imageButton5"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:src="@drawable/icon_profile" />-->
+        <ImageButton
+            android:id="@+id/b_help"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_help"/>
 
 </LinearLayout>

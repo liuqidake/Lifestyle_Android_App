@@ -6,242 +6,343 @@
     android:layout_height="match_parent"
     tools:context=".ReviewFragment">
 
-    <TextView
-        android:id="@+id/tv_name_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="Name:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_age_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_age_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center_vertical"
-        android:text="Age:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_city_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_hc" />
-
-    <TextView
-        android:id="@+id/tv_city_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center_vertical"
-        android:text="City:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_state_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_hc" />
-
-    <TextView
-        android:id="@+id/tv_state_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center_vertical"
-        android:text="State:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_height_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_hc" />
-
-    <TextView
-        android:id="@+id/tv_height_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center_vertical"
-        android:text="Height:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_weight_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_state_hc" />
-
-    <TextView
-        android:id="@+id/tv_weight_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center_vertical"
-        android:text="Weight:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_sex_hc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_hc" />
-
-    <TextView
-        android:id="@+id/tv_sex_hc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:text="Sex:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc" />
-
-    <TextView
-        android:id="@+id/tv_name_d"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="Bob Snow"
-        app:layout_constraintBottom_toTopOf="@+id/tv_age_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_name_hc"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
-
-    <TextView
-        android:id="@+id/tv_age_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="26"
-        app:layout_constraintBottom_toTopOf="@+id/tv_city_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_age_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_d" />
-
-    <TextView
-        android:id="@+id/tv_city_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="Salt Lake City"
-        app:layout_constraintBottom_toTopOf="@+id/tv_state_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_city_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_d" />
-
-    <TextView
-        android:id="@+id/tv_state_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="Utah"
-        app:layout_constraintBottom_toTopOf="@+id/tv_height_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_state_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_d" />
-
-    <TextView
-        android:id="@+id/tv_height_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="6 feet 0 inches"
-        app:layout_constraintBottom_toTopOf="@+id/tv_weight_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_height_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_state_d" />
-
-    <TextView
-        android:id="@+id/tv_weight_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="175 pounds"
-        app:layout_constraintBottom_toTopOf="@+id/tv_sex_d"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_weight_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_d" />
-
-    <TextView
-        android:id="@+id/tv_sex_d"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:text="Male"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toEndOf="@+id/tv_sex_hc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_d" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Name:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_age_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Bob Snow"
+                app:layout_constraintBottom_toTopOf="@+id/tv_age_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_name_hc"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_age_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Age:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_city_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_hc" />
+
+            <TextView
+                android:id="@+id/tv_age_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="26"
+                app:layout_constraintBottom_toTopOf="@+id/tv_city_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_age_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_d" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_city_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="City:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_state_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_hc" />
+
+            <TextView
+                android:id="@+id/tv_city_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Salt Lake City"
+                app:layout_constraintBottom_toTopOf="@+id/tv_state_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_city_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_d" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_state_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="State:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_height_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_city_hc" />
+
+            <TextView
+                android:id="@+id/tv_state_d"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Utah"
+                app:layout_constraintBottom_toTopOf="@+id/tv_height_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_state_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_city_d" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_height_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Height:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_weight_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_state_hc" />
+
+            <TextView
+                android:id="@+id/tv_height_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="6 feet 0 inches"
+                app:layout_constraintBottom_toTopOf="@+id/tv_weight_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_height_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_state_d" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_weight_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Weight:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sex_hc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_height_hc" />
+
+            <TextView
+                android:id="@+id/tv_weight_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="175 pounds"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sex_d"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_weight_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_height_d" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_sex_hc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Sex:"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc" />
+
+            <TextView
+                android:id="@+id/tv_sex_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"
+                android:text="Male"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_sex_hc"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weight_d" />
+        </LinearLayout>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/b_edit_profile"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pic_profile_test"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/b_edit_profile"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:autoSizeTextType="uniform"
         android:text="Edit Profile"
-        app:layout_constraintBottom_toTopOf="@+id/b_finish"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
     <Button
         android:id="@+id/b_finish"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:autoSizeTextType="uniform"
         android:text="Finish"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/b_edit_profile"
         app:layout_constraintTop_toBottomOf="@+id/b_edit_profile" />
 
 </android.support.constraint.ConstraintLayout>
