@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class HomeActivity extends AppCompatActivity
-        implements ChoicesListFragment.OnChoiceDataPass {
+        implements ChoicesDesignedFragment.OnChoiceDataPass {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +14,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
-        fTrans.replace(R.id.fl_frag_ph_1,new ChoicesListFragment(),"Choices");
+        fTrans.replace(R.id.fl_frag_ph_1,new ChoicesDesignedFragment(),"Choices");
         fTrans.commit();
 
     }

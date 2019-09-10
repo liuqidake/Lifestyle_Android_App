@@ -29,7 +29,10 @@
     
     <string-array name="activity_levels">
         <item>Sedentary</item>
-        <item>Active</item>
+        <item>Lightly Active</item>
+        <item>Moderately Active</item>
+        <item>Very Active</item>
+        <item>Extremely Active</item>
     </string-array>
 
     <string-array name="weight_amount">

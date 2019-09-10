@@ -5,13 +5,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class NewUserActivity extends AppCompatActivity
         implements NameAgeFragment.NameAgeOnDataPass, PhysDetailsFragment.PhysOnDataPass,
         LocationFragment.LocationOnDataPass, ProfilePicFragment.ProfilePicOnDataPass,
         ReviewFragment.ReviewOnDataPass {
 
-    int creation_step = 4;
-    String name, city, state, height, weight, sex;
+    int creation_step = 1;
+    String name, city, state, weight, sex;
+    int feet, inches;
     int age;
 
     @Override
@@ -24,7 +28,6 @@ public class NewUserActivity extends AppCompatActivity
         } else {
             setView();
         }
-
     }
 
     @Override
@@ -37,19 +40,25 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNameAgeDataPass(java.util.Date data) {
-
+    public void onNameAgeDataPass(Calendar date, String name) {
+        // print to test
+        this.name = name;
+        Calendar today = Calendar.getInstance();
+        this.age = today.get(Calendar.YEAR) - date.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) < date.get(Calendar.DAY_OF_YEAR)){
+            this.age--;
+        }
         creation_step=1;
         setView();
-
     }
 
     @Override
     public void onPhysDataPass(String[] data) {
 
-//        height = data[0];
-//        weight = data[1];
-//        sex = data[2];
+        feet = Integer.valueOf(data[0]);
+        inches = Integer.valueOf(data[1]);
+        weight = data[2];
+        sex = data[3];
 
         creation_step=2;
         setView();
@@ -58,15 +67,15 @@ public class NewUserActivity extends AppCompatActivity
 
     @Override
     public void onLocationDataPass(String[] data) {
-
+        this.state = data[0];
+        this.city = data[1];
         creation_step=3;
         setView();
-
     }
 
     @Override
     public void onProfilePicDataPass(String data) {
-
+        // no data returned from profile fragment
         creation_step=4;
         setView();
 
@@ -74,7 +83,7 @@ public class NewUserActivity extends AppCompatActivity
 
     @Override
     public void onReviewDataPass(int choice) {
-
+        // no returned data
         creation_step=choice;
         setView();
 
