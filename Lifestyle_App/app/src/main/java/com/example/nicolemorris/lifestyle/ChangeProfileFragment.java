@@ -1,7 +1,5 @@
 package com.example.nicolemorris.lifestyle;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.nicolemorris.lifestyle.Database.DatabaseHelper;
+
 public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -21,6 +21,11 @@ public class ChangeProfileFragment extends Fragment
     String dHeight,dWeight,dSex;
     String[] dataToPass;
     Button bSave;
+
+    String name, city, state;
+
+    //Add database
+    DatabaseHelper db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +58,8 @@ public class ChangeProfileFragment extends Fragment
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
 
+        db = new DatabaseHelper(getActivity());
+
         return view;
     }
 
@@ -60,7 +67,7 @@ public class ChangeProfileFragment extends Fragment
                                int pos, long id) {
         switch (view.getId()){
             case R.id.s_feet: {
-
+                //parent.getItemAtPosition()
             }
             case R.id.s_inches: {
 
@@ -85,7 +92,6 @@ public class ChangeProfileFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_save: {
-
                 break;
             }
         }
