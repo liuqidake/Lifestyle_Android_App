@@ -53,4 +53,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updateDate(int id, String name, String age, String city, String state, String height, String weight, String sex){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        try{
+            int ageInt = Integer.parseInt(age);
+            int sexInt = sex.equals("Male") ? 1 : 0;
+            contentValues.put(PROFILE_TABLE_COLS.get(0), name);
+            contentValues.put(PROFILE_TABLE_COLS.get(1), ageInt);
+            contentValues.put(PROFILE_TABLE_COLS.get(2), city);
+            contentValues.put(PROFILE_TABLE_COLS.get(3), state);
+            contentValues.put(PROFILE_TABLE_COLS.get(4), height);
+            contentValues.put(PROFILE_TABLE_COLS.get(5), weight);
+            contentValues.put(PROFILE_TABLE_COLS.get(6), sexInt);
+            long res = db.update(PROFILE_TABLE,contentValues, "id="+id, null);
+            return res == -1?false:true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+
+
 }
