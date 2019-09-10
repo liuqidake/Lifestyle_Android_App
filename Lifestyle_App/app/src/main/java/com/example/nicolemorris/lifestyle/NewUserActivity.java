@@ -1,12 +1,13 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
+import com.example.nicolemorris.lifestyle.Database.DatabaseHelper;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class NewUserActivity extends AppCompatActivity
         implements NameAgeFragment.NameAgeOnDataPass, PhysDetailsFragment.PhysOnDataPass,
@@ -18,10 +19,16 @@ public class NewUserActivity extends AppCompatActivity
     int feet, inches;
     int age;
 
+    //Add database
+    DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+
+        //Get database
+        db = new DatabaseHelper(this);
 
         if(savedInstanceState!=null){
             creation_step = savedInstanceState.getInt("STEP");
@@ -122,6 +129,8 @@ public class NewUserActivity extends AppCompatActivity
 
             //Review
             fTrans.replace(R.id.fl_frag_ph_2,new ReviewFragment(), "Location");
+            //store current collected data into database
+            db.insertData(name, age, city, state, feet, inches, weight, sex);
             creation_step++;
 
         } else if (creation_step==5) {
