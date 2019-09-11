@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
 
+    int goal, act_level, goal_amount;
+
     //variables for find-a-hike
     LocationManager locationManager;
     private static final int REQUEST_LOCATION=1;
@@ -77,8 +79,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChangeGoalDataPass(){
+    public void onChangeGoalDataPass(int g, int l, int a){
         hasGoal = true;
+        goal = g;
+        act_level = l;
+        goal_amount = a;
         changeFragments();
     }
 
@@ -99,17 +104,20 @@ public class MainActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
-
             if(hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
+                Bundle sentData = new Bundle();
+                sentData.putInt("Goal",goal);
+                sentData.putInt("Act_Level",act_level);
+                sentData.putInt("Amount", goal_amount);
+                gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();
                 fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
             }
-
         } else if (user_choice == 3){
 
             bf = new BmiFragment();
