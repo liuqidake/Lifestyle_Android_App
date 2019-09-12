@@ -1,4 +1,5 @@
 package com.example.nicolemorris.lifestyle;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,20 +8,27 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Toast;
+
+import com.example.nicolemorris.lifestyle.Model.User;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
 
-        String username = "Nicole";
-//    String username;
+//        String username = "Nicole";
+    String username;
     int user_choice = 0;
     double height_inches = 72;
     double weight_pounds = 105;
@@ -32,10 +40,21 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
 
+    int goal, act_level, goal_amount;
+
     //variables for find-a-hike
     LocationManager locationManager;
     private static final int REQUEST_LOCATION=1;
     String latitude,longitude;
+
+    //Add user or updte user
+    User newUser;
+    User existedUser;
+
+    //File information
+    FileOutputStream out;
+    FileInputStream in;
+    String fileName = "user_profile";
 
 
     @Override
@@ -47,10 +66,22 @@ public class MainActivity extends AppCompatActivity
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
+        if(getIntent().getParcelableExtra("add user") != null){
+            newUser = (User)getIntent().getParcelableExtra("add user");
+            saveUserProfile(newUser);
+        }
+
+        if(getIntent().getParcelableExtra("update user") != null){
+            existedUser = (User)getIntent().getParcelableExtra("update user");
+            updateUserProfile(existedUser);
+        }
+
+
         System.out.println(user_choice);
         //Add permission for getting access to the current location
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+
 
         if (username == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
@@ -76,11 +107,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onChangeGoalDataPass(){
-        hasGoal = true;
-        changeFragments();
-    }
+//    @Override
+////    public void onChangeGoalDataPass(){
+////        hasGoal = true;
+////        changeFragments();
+////    }
 
     @Override
     public void onGoalsDataPass(){
@@ -103,12 +134,18 @@ public class MainActivity extends AppCompatActivity
             if(hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
+                Bundle sentData = new Bundle();
+                sentData.putInt("Goal",goal);
+                sentData.putInt("Act_Level",act_level);
+                sentData.putInt("Amount", goal_amount);
+                gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();
                 fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
             }
+
 
         } else if (user_choice == 3){
 
@@ -218,7 +255,6 @@ public class MainActivity extends AppCompatActivity
     private void OnGPS() {
 
         final AlertDialog.Builder builder= new AlertDialog.Builder(this);
-
         builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -231,7 +267,6 @@ public class MainActivity extends AppCompatActivity
                 dialog.cancel();
             }
         });
-
         final AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
@@ -253,5 +288,53 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void onChangeGoalDataPass(int g, int l, int a){
+        hasGoal = true;
+        goal = g;
+        act_level = l;
+        goal_amount = a;
+        changeFragments();
+    }
+
+    public String serializeUser(User user){
+        String content = user.getName()+","+user.getAge()+","+user.getName()+","+user.getState()+","+user.getFeet()+","+
+                user.getInches()+","+user.getWeight()+","+user.getSex()+"\n";
+        return content;
+    }
+
+
+    private void saveUserProfile(User user){
+        try {
+            out = openFileOutput(fileName, Context.MODE_PRIVATE);
+            String fileContents = serializeUser(user);
+            out.write(fileContents.getBytes());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateUserProfile(User user){
+        try {
+            in = openFileInput(fileName);
+            String temp = "";
+            Scanner sc = new Scanner((InputStream)in);
+            while(sc.hasNextLine()){
+                String next = sc.nextLine();
+                String currName = next.substring(0, next.indexOf(","));
+                if(user.getName().equals(currName)){
+                    temp += serializeUser(user);
+                }else{
+                    temp += next;
+                }
+            }
+            out = openFileOutput(fileName, Context.MODE_PRIVATE);
+            out.write(temp.getBytes());
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
