@@ -2,9 +2,11 @@ package com.example.nicolemorris.lifestyle;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -18,8 +20,10 @@ import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -47,14 +51,16 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_LOCATION=1;
     String latitude,longitude;
 
-    //Add user or updte user
+    //Add user or update user
     User newUser;
     User existedUser;
+    Bitmap profileImage;
 
     //File information
     FileOutputStream out;
     FileInputStream in;
     String fileName = "user_profile";
+    String folder = "profile_images/";
 
 
     @Override
@@ -74,6 +80,11 @@ public class MainActivity extends AppCompatActivity
         if(getIntent().getParcelableExtra("update user") != null){
             existedUser = (User)getIntent().getParcelableExtra("update user");
             updateUserProfile(existedUser);
+        }
+
+        if(getIntent().getParcelableExtra("profileImage") != null){
+            profileImage = (Bitmap)getIntent().getParcelableExtra("profileImage");
+            saveProfileImage(profileImage);
         }
 
 
@@ -336,6 +347,29 @@ public class MainActivity extends AppCompatActivity
             in.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void saveProfileImage(Bitmap profileImage){
+        ContextWrapper cw = new ContextWrapper(this);
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir(folder, Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,username+".jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            profileImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

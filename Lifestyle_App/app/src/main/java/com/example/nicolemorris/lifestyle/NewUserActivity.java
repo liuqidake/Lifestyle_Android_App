@@ -1,6 +1,7 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +19,13 @@ public class NewUserActivity extends AppCompatActivity
 
     int creation_step = 1;
     String name, city, state, weight, sex;
+    Bitmap profileImage;
     int feet, inches;
     int age;
 
     //Add database
     DatabaseHelper db;
 
-    String fileName = "user_profie";
     FileOutputStream out;
 
     @Override
@@ -86,8 +87,8 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
-    public void onProfilePicDataPass(String data) {
-        // no data returned from profile fragment
+    public void onProfilePicDataPass(Bitmap image) {
+        profileImage = image;
         creation_step=4;
         setView();
 
@@ -125,6 +126,7 @@ public class NewUserActivity extends AppCompatActivity
             creation_step++;
 
         } else if (creation_step==3){
+            //Pass username to profile picture fragment
 
             //Profile Picture
             fTrans.replace(R.id.fl_frag_ph_2,new ProfilePicFragment(), "Location");
@@ -152,12 +154,10 @@ public class NewUserActivity extends AppCompatActivity
             Intent userIntent = new Intent(this, MainActivity.class);
             User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
             userIntent.putExtra("add user", user);
+            userIntent.putExtra("profileImage", profileImage);
             this.startActivity(userIntent);
         }
 
         fTrans.commit();
     }
-
-
-
 }

@@ -11,7 +11,7 @@ import android.widget.Button;
 public class ReviewFragment extends Fragment
         implements View.OnClickListener {
 
-    Button bEditProfile,bFinish;
+    Button bEditProfile;
     ReviewOnDataPass mDataPasser;
 
     //Callback interface
@@ -38,9 +38,6 @@ public class ReviewFragment extends Fragment
 
         bEditProfile = view.findViewById(R.id.b_edit_profile);
         bEditProfile.setOnClickListener(this);
-
-        bFinish = view.findViewById(R.id.b_finish);
-        bFinish.setOnClickListener(this);
 
         return view;
     }
