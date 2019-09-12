@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.nicolemorris.lifestyle.Database.DatabaseHelper;
+import com.example.nicolemorris.lifestyle.Model.User;
 
+import java.io.FileOutputStream;
 import java.util.Calendar;
 
 public class NewUserActivity extends AppCompatActivity
@@ -21,6 +23,9 @@ public class NewUserActivity extends AppCompatActivity
 
     //Add database
     DatabaseHelper db;
+
+    String fileName = "user_profie";
+    FileOutputStream out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +134,8 @@ public class NewUserActivity extends AppCompatActivity
 
             //Review
             fTrans.replace(R.id.fl_frag_ph_2,new ReviewFragment(), "Location");
-            //store current collected data into database
-            db.insertData(name, age, city, state, feet, inches, weight, sex);
+//            //store current collected data into database
+//            saveUserProfile(name, age, city, state, feet, inches, weight, sex);
             creation_step++;
 
         } else if (creation_step==5) {
@@ -142,12 +147,17 @@ public class NewUserActivity extends AppCompatActivity
         } else if (creation_step==6){
 
             //Change to home view
-            Intent messageIntent = new Intent(this, HomeActivity.class);
-            this.startActivity(messageIntent);
-
+//            Intent messageIntent = new Intent(this, HomeActivity.class);
+//            this.startActivity(messageIntent);
+            Intent userIntent = new Intent(this, MainActivity.class);
+            User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
+            userIntent.putExtra("add user", user);
+            this.startActivity(userIntent);
         }
 
         fTrans.commit();
     }
+
+
 
 }
