@@ -40,26 +40,35 @@ public class PhysDetailsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phys_details, container, false);
-dataToPass = new String[3];
-        s_sex = (Spinner) view.findViewById(R.id.s_sex);
+
+        dataToPass = new String[4];
+        dataToPass[0] = "0";
+        dataToPass [1] = "0";
+        dataToPass[2] = "0";
+        dataToPass[3] = "unknown";
 
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
 
-        s_h_feet  = view.findViewById(R.id.s_feet);
+        s_h_feet  = (Spinner)view.findViewById(R.id.s_feet);
         s_h_feet.setAdapter(num_adapter);
+        s_h_feet.setOnItemSelectedListener(this);
 
-        s_h_inches = view.findViewById(R.id.s_inches);
+        s_h_inches = (Spinner)view.findViewById(R.id.s_inches);
         s_h_inches.setAdapter(num_adapter);
+        s_h_inches.setOnItemSelectedListener(this);
 
-        s_w_pounds = view.findViewById(R.id.s_weight);
+        s_w_pounds = (Spinner)view.findViewById(R.id.s_weight);
         s_w_pounds.setAdapter(num_adapter);
+        s_w_pounds.setOnItemSelectedListener(this);
+
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
 
-        s_sex = view.findViewById(R.id.s_sex);
+        s_sex = (Spinner)view.findViewById(R.id.s_sex);
         s_sex.setAdapter(gender_adapter);
+        s_sex.setOnItemSelectedListener(this);
 
         nextButton = view.findViewById(R.id.b_next);
         nextButton.setOnClickListener(this);
@@ -72,19 +81,19 @@ dataToPass = new String[3];
                                int pos, long id) {
         switch (view.getId()){
             case R.id.s_feet: {
-                dataToPass[0] = s_h_feet.getSelectedItem().toString(); // number of feet e.g."5"
+                dataToPass[0] = (String) parent.getItemAtPosition(pos); // number of feet e.g."5"
                 break;
             }
             case R.id.s_inches: {
-                dataToPass[1] = s_h_inches.getSelectedItem().toString(); // number of inches e.g. "10"
+                dataToPass[1] = (String)parent.getItemAtPosition(pos); // number of inches e.g. "10"
                 break;
             }
             case R.id.s_weight: {
-                dataToPass[2] = s_w_pounds.getSelectedItem().toString();
+                dataToPass[2] = (String)parent.getItemAtPosition(pos);
                 break;
             }
             case R.id.s_sex: {
-                dataToPass[3] = parent.getItemAtPosition(pos).toString();
+                dataToPass[3] = (String)parent.getItemAtPosition(pos);
                 break;
             }
         }
