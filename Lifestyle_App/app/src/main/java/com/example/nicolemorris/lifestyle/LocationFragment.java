@@ -58,6 +58,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_location, container, false);
+        data = new String[2];
         cityText = view.findViewById(R.id.et_city);
         stateText = view.findViewById(R.id.et_state);
         locate = view.findViewById(R.id.b_location);
@@ -85,7 +86,6 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                     data[0] = state;
                     data[1] = city;
                 } catch(Exception e){
-                    Toast.makeText(getContext(), "Can't located you. Are you at Area 51??", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
