@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
 
-//        String username = "Nicole";
+        //String username = "Nicole";
     String username;
     int user_choice = 0;
     double height_inches = 72;
@@ -107,11 +107,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+//
 //    @Override
-////    public void onChangeGoalDataPass(){
-////        hasGoal = true;
-////        changeFragments();
-////    }
+//    public void onChangeGoalDataPass(int g, int l, int a){
+//        hasGoal = true;
+//        goal = g;
+//        act_level = l;
+//        goal_amount = a;
+//        changeFragments();
+//    }
 
     @Override
     public void onGoalsDataPass(){
@@ -129,25 +133,23 @@ public class MainActivity extends AppCompatActivity
             pf = new ReviewFragment();
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
-        } else if (user_choice == 2){
-
-            if(hasGoal){
+        } else if (user_choice == 2) {
+            if (hasGoal) {
                 //Launch fitness goals
                 gf = new GoalsFragment();
                 Bundle sentData = new Bundle();
-                sentData.putInt("Goal",goal);
-                sentData.putInt("Act_Level",act_level);
+                sentData.putInt("Goal", goal);
+                sentData.putInt("Act_Level", act_level);
                 sentData.putInt("Amount", goal_amount);
                 gf.setArguments(sentData);
-                fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
+                fTrans.replace(R.id.fl_frag_ph_2, gf, "Goals");
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();
-                fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
+                fTrans.replace(R.id.fl_frag_ph_2, cgf, "Goals");
             }
 
-
-        } else if (user_choice == 3){
+        }else if (user_choice == 3){
 
             bf = new BmiFragment();
 
