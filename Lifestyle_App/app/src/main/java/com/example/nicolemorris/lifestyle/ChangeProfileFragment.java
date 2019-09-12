@@ -101,7 +101,7 @@ public class ChangeProfileFragment extends DialogFragment
                 name = etName.getText().toString();
                 city = etCity.getText().toString();
                 state = etState.getText().toString();
-                db.updateData(name, age, city, state, feet, inches, weight, sex);
+                //db.updateData(name, age, city, state, feet, inches, weight, sex);
                 break;
             }
         }

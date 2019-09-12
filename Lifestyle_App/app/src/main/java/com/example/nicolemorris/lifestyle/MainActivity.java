@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -14,6 +15,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+import java.io.IOException;
+import java.util.List;
+import 	android.location.Geocoder;
 
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
@@ -138,8 +142,21 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 5){
 
-            //Launch weather information
+//            double lat = Double.parseDouble(latitude);
+//            double longi = Double.parseDouble(longitude);
+//            Geocoder geocoder = new Geocoder(this);
+//            String city = "default city";
+//            try {
+//                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
+//                city = addresses.get(0).getLocality();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            String city = "Salt Lake City";
             wf = new WeatherFragment();
+            Bundle sentData = new Bundle();
+            sentData.putString("city",city);
+            wf.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_2,wf,"Weather");
 
         } else if (user_choice == 6){
