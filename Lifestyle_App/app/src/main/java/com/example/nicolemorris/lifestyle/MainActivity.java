@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -25,13 +27,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
 
-    //String username = "Nicole";
+    //        String username = "Nicole";
     String username;
     int user_choice = 0;
     double height_inches = 72;
@@ -68,11 +71,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if(getIntent().getExtras() != null){
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
         if(getIntent().getParcelableExtra("add user") != null){
+            System.out.println("-----------------------------------------------------here");
             newUser = (User)getIntent().getParcelableExtra("add user");
             saveUserProfile(newUser);
         }
@@ -118,15 +123,20 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//
+    @Override
+    public void onChangeGoalDataPass(int g, int l, int a){
+        hasGoal = true;
+        goal = g;
+        act_level = l;
+        goal_amount = a;
+        changeFragments();
+    }
+
 //    @Override
-//    public void onChangeGoalDataPass(int g, int l, int a){
-//        hasGoal = true;
-//        goal = g;
-//        act_level = l;
-//        goal_amount = a;
-//        changeFragments();
-//    }
+////    public void onChangeGoalDataPass(){
+////        hasGoal = true;
+////        changeFragments();
+////    }
 
     @Override
     public void onGoalsDataPass(){
@@ -144,23 +154,23 @@ public class MainActivity extends AppCompatActivity
             pf = new ReviewFragment();
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
-        } else if (user_choice == 2) {
-            if (hasGoal) {
+        } else if (user_choice == 2){
+            if(hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
                 Bundle sentData = new Bundle();
-                sentData.putInt("Goal", goal);
-                sentData.putInt("Act_Level", act_level);
+                sentData.putInt("Goal",goal);
+                sentData.putInt("Act_Level",act_level);
                 sentData.putInt("Amount", goal_amount);
                 gf.setArguments(sentData);
-                fTrans.replace(R.id.fl_frag_ph_2, gf, "Goals");
+                fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();
-                fTrans.replace(R.id.fl_frag_ph_2, cgf, "Goals");
+                fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
             }
 
-        }else if (user_choice == 3){
+        } else if (user_choice == 3){
 
             bf = new BmiFragment();
 
@@ -180,8 +190,21 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 5){
 
-            //Launch weather information
+            double lat = Double.parseDouble(latitude);
+            double longi = Double.parseDouble(longitude);
+            Geocoder geocoder = new Geocoder(this);
+            String city = "default city";
+            try {
+                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
+                city = addresses.get(0).getLocality();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //String city = "Salt Lake City";
             wf = new WeatherFragment();
+            Bundle sentData = new Bundle();
+            sentData.putString("city",city);
+            wf.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_2,wf,"Weather");
 
         } else if (user_choice == 6){
@@ -301,14 +324,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void onChangeGoalDataPass(int g, int l, int a){
-        hasGoal = true;
-        goal = g;
-        act_level = l;
-        goal_amount = a;
-        changeFragments();
-    }
-
     public String serializeUser(User user){
         String content = user.getName()+","+user.getAge()+","+user.getName()+","+user.getState()+","+user.getFeet()+","+
                 user.getInches()+","+user.getWeight()+","+user.getSex()+"\n";
@@ -318,13 +333,27 @@ public class MainActivity extends AppCompatActivity
 
     private void saveUserProfile(User user){
         try {
-            out = openFileOutput(fileName, Context.MODE_PRIVATE);
+            out = openFileOutput(fileName, MODE_PRIVATE);
             String fileContents = serializeUser(user);
             out.write(fileContents.getBytes());
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        try {
+//            FileOutputStream fileOutputStream = openFileOutput("Tutorial File.txt", MODE_PRIVATE);
+//            fileOutputStream.write(textToSave.getBytes());
+//            fileOutputStream.close();
+//
+//            Toast.makeText(getApplicationContext(), "Text Saved", Toast.LENGTH_SHORT).show();
+//
+//            inputField.setText("");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void updateUserProfile(User user){
@@ -373,4 +402,5 @@ public class MainActivity extends AppCompatActivity
         }
     }
 }
+
 
