@@ -29,7 +29,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private String city, state;
     private EditText cityText, stateText;
     private Button locate, next;
-    private String location;
+    private String[] location;
     private LocationManager locationManager;
 
     int REQUEST_LOCATION = 1;
@@ -39,7 +39,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
 
     //Callback interface
     public interface LocationOnDataPass{
-        public void onLocationDataPass(String data);
+        public void onLocationDataPass(String[] data);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_location, container, false);
-        location = "";
+        location = new String[2];
         cityText = view.findViewById(R.id.et_city);
         stateText = view.findViewById(R.id.et_state);
         locate = view.findViewById(R.id.b_location);
@@ -88,7 +88,8 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
             }
             case R.id.b_next:{
                 //NEED TO ADD LOCATION TO PASS FOR STORAGE :)
-                location += state+" "+city;
+                location[0] = state;
+                location[1] = city;
                 if(location.equals("")){
                     Toast.makeText(getContext(), "Please specify your location", Toast.LENGTH_SHORT).show();
                 }
