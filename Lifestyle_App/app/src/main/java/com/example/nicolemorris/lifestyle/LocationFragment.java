@@ -29,7 +29,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private String city, state;
     private EditText cityText, stateText;
     private Button locate, next;
-    private String[] data;
+    private String location;
     private LocationManager locationManager;
 
     int REQUEST_LOCATION = 1;
@@ -39,7 +39,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
 
     //Callback interface
     public interface LocationOnDataPass{
-        public void onLocationDataPass(String[] data);
+        public void onLocationDataPass(String data);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_location, container, false);
-        data = new String[2];
+        location = "";
         cityText = view.findViewById(R.id.et_city);
         stateText = view.findViewById(R.id.et_state);
         locate = view.findViewById(R.id.b_location);
@@ -75,7 +75,6 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         switch(view.getId()){
             case R.id.b_location:{
                 findCoordinates();
-                System.out.print(latitude+"ooo");
                 Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
                 try{
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -83,15 +82,17 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                     state = addresses.get(0).getAdminArea();
                     cityText.setText(city);
                     stateText.setText(state);
-                    data[0] = state;
-                    data[1] = city;
                 } catch(Exception e){
                 }
                 break;
             }
             case R.id.b_next:{
                 //NEED TO ADD LOCATION TO PASS FOR STORAGE :)
-                mDataPasser.onLocationDataPass(data);
+                location += state+" "+city;
+                if(location.equals("")){
+                    Toast.makeText(getContext(), "Please specify your location", Toast.LENGTH_SHORT).show();
+                }
+                mDataPasser.onLocationDataPass(location);
                 break;
             }
         }

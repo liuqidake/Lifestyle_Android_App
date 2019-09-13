@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.nicolemorris.lifestyle.Database.DatabaseHelper;
 import com.example.nicolemorris.lifestyle.Model.User;
 
 import java.io.FileOutputStream;
@@ -17,14 +16,11 @@ public class NewUserActivity extends AppCompatActivity
         LocationFragment.LocationOnDataPass, ProfilePicFragment.ProfilePicOnDataPass,
         ReviewFragment.ReviewOnDataPass {
 
-    int creation_step = 1;
+    int creation_step = 0;
     String name, city, state, weight, sex;
     Bitmap profileImage;
     int feet, inches;
     int age;
-
-    //Add database
-    DatabaseHelper db;
 
     FileOutputStream out;
 
@@ -33,10 +29,7 @@ public class NewUserActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
-        //Get database
-        db = new DatabaseHelper(this);
-
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             creation_step = savedInstanceState.getInt("STEP");
         } else {
             setView();
@@ -48,7 +41,7 @@ public class NewUserActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
 
         //Put them in the outgoing Bundle
-        outState.putInt("STEP",creation_step);
+        outState.putInt("STEP", creation_step);
 
     }
 
@@ -58,10 +51,10 @@ public class NewUserActivity extends AppCompatActivity
         this.name = name;
         Calendar today = Calendar.getInstance();
         this.age = today.get(Calendar.YEAR) - date.get(Calendar.YEAR);
-        if (today.get(Calendar.DAY_OF_YEAR) < date.get(Calendar.DAY_OF_YEAR)){
+        if (today.get(Calendar.DAY_OF_YEAR) < date.get(Calendar.DAY_OF_YEAR)) {
             this.age--;
         }
-        creation_step=1;
+        creation_step = 1;
         setView();
     }
 
@@ -73,23 +66,24 @@ public class NewUserActivity extends AppCompatActivity
         weight = data[2];
         sex = data[3];
 
-        creation_step=2;
+        creation_step = 2;
         setView();
     }
 
 
     @Override
-    public void onLocationDataPass(String[] data) {
-        this.state = data[0];
-        this.city = data[1];
-        creation_step=3;
+    public void onLocationDataPass(String location) {
+        String[] data = location.split(" ");
+        state = data[0];
+        city = data[1];
+        creation_step = 3;
         setView();
     }
 
     @Override
     public void onProfilePicDataPass(Bitmap image) {
         profileImage = image;
-        creation_step=4;
+        creation_step = 4;
         setView();
 
     }
@@ -97,60 +91,64 @@ public class NewUserActivity extends AppCompatActivity
     @Override
     public void onReviewDataPass(int choice) {
         // no returned data
-        creation_step=choice;
+        creation_step = choice;
         setView();
 
     }
 
-    private void setView(){
+    private void setView() {
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
-        fTrans.replace(R.id.fl_frag_ph_1,new TitleFragment(),"Title");
+        fTrans.replace(R.id.fl_frag_ph_1, new TitleFragment(), "Title");
 
-        if(creation_step==0){
+        if (creation_step == 0) {
 
             //Name & birthday
-            fTrans.replace(R.id.fl_frag_ph_2,new NameAgeFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, new NameAgeFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step==1){
+        } else if (creation_step == 1) {
 
             //Physical details
-            fTrans.replace(R.id.fl_frag_ph_2,new PhysDetailsFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, new PhysDetailsFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step==2){
+        } else if (creation_step == 2) {
 
             //Location
-            fTrans.replace(R.id.fl_frag_ph_2,new LocationFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, new LocationFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step==3){
+        } else if (creation_step == 3) {
             //Pass username to profile picture fragment
 
             //Profile Picture
-            fTrans.replace(R.id.fl_frag_ph_2,new ProfilePicFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, new ProfilePicFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step==4){
+        } else if (creation_step == 4) {
 
             //Review
-            fTrans.replace(R.id.fl_frag_ph_2,new ReviewFragment(), "Location");
-//            //store current collected data into database
-//            saveUserProfile(name, age, city, state, feet, inches, weight, sex);
+            fTrans.replace(R.id.fl_frag_ph_2, new ReviewFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step==5) {
+        } else if (creation_step == 5) {
+            Bundle bundle = new Bundle();
+            bundle.putString("name", name);
+            bundle.putString("city", city);
+            bundle.putString("state", state);
+            bundle.putString("sex", sex);
+
+            ChangeProfileFragment fragment = new ChangeProfileFragment();
+            fragment.setArguments(bundle);
 
             //Edit details
-            fTrans.replace(R.id.fl_frag_ph_2,new ChangeProfileFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
 
-        } else if (creation_step==6){
+        } else if (creation_step == 6) {
 
             //Change to home view
-//            Intent messageIntent = new Intent(this, HomeActivity.class);
-//            this.startActivity(messageIntent);
             Intent userIntent = new Intent(this, MainActivity.class);
             User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
             userIntent.putExtra("add user", user);
@@ -160,4 +158,5 @@ public class NewUserActivity extends AppCompatActivity
 
         fTrans.commit();
     }
+
 }

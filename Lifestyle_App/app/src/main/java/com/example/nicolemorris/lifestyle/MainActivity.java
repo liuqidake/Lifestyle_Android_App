@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
 
-        //String username = "Nicole";
+    //String username = "Nicole";
     String username;
     int user_choice = 0;
     double height_inches = 72;

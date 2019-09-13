@@ -43,31 +43,38 @@ public class ChangeProfileFragment extends DialogFragment
         View view = inflater.inflate(R.layout.fragment_change_profile, container, false);
 
         etName = view.findViewById(R.id.et_name);
+        etName.setText(getArguments().get("name").toString());
+
         etCity = view.findViewById(R.id.et_city);
+        etCity.setText(getArguments().get("city").toString());
+
         etState = view.findViewById(R.id.et_state);
+        etState.setText(getArguments().get("state").toString());
 
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
 
         s_h_feet  = view.findViewById(R.id.s_feet);
         s_h_feet.setAdapter(num_adapter);
+        s_h_feet.setOnItemSelectedListener(this);
 
         s_h_inches = view.findViewById(R.id.s_inches);
         s_h_inches.setAdapter(num_adapter);
+        s_h_inches.setOnItemSelectedListener(this);
 
         s_w_pounds = view.findViewById(R.id.s_weight);
         s_w_pounds.setAdapter(num_adapter);
+        s_w_pounds.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
 
         s_sex = view.findViewById(R.id.s_sex);
         s_sex.setAdapter(gender_adapter);
+        s_sex.setOnItemSelectedListener(this);
 
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
-
-        db = new DatabaseHelper(getActivity());
 
         return view;
     }
@@ -104,6 +111,7 @@ public class ChangeProfileFragment extends DialogFragment
                 name = etName.getText().toString();
                 city = etCity.getText().toString();
                 state = etState.getText().toString();
+
                 if(name.equals("") || city.equals("") || state.equals("")){
                     Toast.makeText(getContext(), "You have empty fields!", Toast.LENGTH_SHORT).show();
                 }
