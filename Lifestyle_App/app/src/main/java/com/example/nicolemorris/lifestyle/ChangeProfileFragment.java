@@ -2,7 +2,7 @@ package com.example.nicolemorris.lifestyle;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.nicolemorris.lifestyle.Database.DatabaseHelper;
 import com.example.nicolemorris.lifestyle.Model.User;
 
 import java.util.Calendar;
@@ -33,23 +32,41 @@ public class ChangeProfileFragment extends DialogFragment
     String name, city, state, weight, sex;
     int feet, inches, age;
 
-    //Add database
-    DatabaseHelper db;
+    User user;
+    ChangeProfileOnDataPass userDataPasser;
+
+    public interface ChangeProfileOnDataPass{
+        public void onChangeProfileDataPass(User user);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try{
+            userDataPasser = (ChangeProfileOnDataPass) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement ChangeProfileOnDataPass");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_profile, container, false);
-
+        user = getArguments().getParcelable("user");
         etName = view.findViewById(R.id.et_name);
-        etName.setText(getArguments().get("name").toString());
+        name = user.getName();
+        etName.setText(name);
 
-        etCity = view.findViewById(R.id.et_city);
-        etCity.setText(getArguments().get("city").toString());
+        etCity = view.findViewById(R.id.tv_city_hc);
+        city = user.getCity();
+        etCity.setText(city);
 
-        etState = view.findViewById(R.id.et_state);
-        etState.setText(getArguments().get("state").toString());
+        etState = view.findViewById(R.id.tv_state_hc);
+        state = user.getState();
+        etState.setText(state);
 
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
@@ -57,14 +74,18 @@ public class ChangeProfileFragment extends DialogFragment
         s_h_feet  = view.findViewById(R.id.s_feet);
         s_h_feet.setAdapter(num_adapter);
         s_h_feet.setOnItemSelectedListener(this);
+        feet = user.getFeet();
+
 
         s_h_inches = view.findViewById(R.id.s_inches);
         s_h_inches.setAdapter(num_adapter);
         s_h_inches.setOnItemSelectedListener(this);
+        inches = user.getInches();
 
         s_w_pounds = view.findViewById(R.id.s_weight);
         s_w_pounds.setAdapter(num_adapter);
         s_w_pounds.setOnItemSelectedListener(this);
+        weight = user.getWeight();
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
@@ -72,6 +93,7 @@ public class ChangeProfileFragment extends DialogFragment
         s_sex = view.findViewById(R.id.s_sex);
         s_sex.setAdapter(gender_adapter);
         s_sex.setOnItemSelectedListener(this);
+        sex = user.getSex();
 
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
@@ -115,10 +137,8 @@ public class ChangeProfileFragment extends DialogFragment
                 if(name.equals("") || city.equals("") || state.equals("")){
                     Toast.makeText(getContext(), "You have empty fields!", Toast.LENGTH_SHORT).show();
                 }
-                Intent userIntent = new Intent(getActivity(), MainActivity.class);
-                User user = new User(name, age, feet, inches, city, state, weight, sex);
-                userIntent.putExtra("update user", user);
-                this.startActivity(userIntent);
+                user = new User(name, user.getAge(), feet, inches, city, state, weight, sex );
+                userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
         }

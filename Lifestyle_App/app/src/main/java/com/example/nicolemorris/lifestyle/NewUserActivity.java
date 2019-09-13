@@ -1,5 +1,6 @@
 package com.example.nicolemorris.lifestyle;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,13 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Scanner;
 
 public class NewUserActivity extends AppCompatActivity
         implements NameAgeFragment.NameAgeOnDataPass, PhysDetailsFragment.PhysOnDataPass,
         LocationFragment.LocationOnDataPass, ProfilePicFragment.ProfilePicOnDataPass,
-        ReviewFragment.ReviewOnDataPass {
+        ReviewFragment.ReviewOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass{
 
     int creation_step = 0;
     String name, city, state, weight, sex;
@@ -22,7 +26,12 @@ public class NewUserActivity extends AppCompatActivity
     int feet, inches;
     int age;
 
+    User user;
+
     FileOutputStream out;
+    FileInputStream in;
+
+    String fileName = "user_profile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +69,19 @@ public class NewUserActivity extends AppCompatActivity
 
     @Override
     public void onPhysDataPass(String[] data) {
-
-        feet = Integer.valueOf(data[0]);
+        feet = Integer.parseInt(data[0]);
         inches = Integer.valueOf(data[1]);
         weight = data[2];
         sex = data[3];
-
         creation_step = 2;
         setView();
     }
 
 
     @Override
-    public void onLocationDataPass(String location) {
-        String[] data = location.split(" ");
-        state = data[0];
-        city = data[1];
+    public void onLocationDataPass(String[] location) {
+        state = location[0];
+        city = location[1];
         creation_step = 3;
         setView();
     }
@@ -89,12 +95,19 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
+    public void onChangeProfileDataPass(User newUser) {
+        user = newUser;
+    }
+
+    @Override
     public void onReviewDataPass(int choice) {
         // no returned data
         creation_step = choice;
         setView();
 
     }
+
+
 
     private void setView() {
         //Find each frame layout, replace with corresponding fragment
@@ -126,37 +139,107 @@ public class NewUserActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2, new ProfilePicFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step == 4) {
+         }
+        else if (creation_step == 4) {
+            Intent userIntent = new Intent(this, MainActivity.class);
+            user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
+            saveUserProfile(user);
 
             //Review
             fTrans.replace(R.id.fl_frag_ph_2, new ReviewFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step == 5) {
-            Bundle bundle = new Bundle();
-            bundle.putString("name", name);
-            bundle.putString("city", city);
-            bundle.putString("state", state);
-            bundle.putString("sex", sex);
-
+         }
+        else if (creation_step == 5) {
+            //Edit details
             ChangeProfileFragment fragment = new ChangeProfileFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("user", user);
             fragment.setArguments(bundle);
 
-            //Edit details
             fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
 
-        } else if (creation_step == 6) {
+        }
+        else if (creation_step == 6) {
+
+            updateUserProfile(user);
 
             //Change to home view
             Intent userIntent = new Intent(this, MainActivity.class);
-            User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
-            userIntent.putExtra("add user", user);
-            userIntent.putExtra("profileImage", profileImage);
+            //User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
+            userIntent.putExtra("user", user);
+            //userIntent.putExtra("profileImage", profileImage);
             this.startActivity(userIntent);
         }
 
         fTrans.commit();
     }
+
+    public String serializeUser(User user){
+        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
+                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+"\n";
+        return content;
+    }
+
+
+    private void saveUserProfile(User user){
+        try {
+            out = openFileOutput(fileName, MODE_APPEND);
+            String fileContents = serializeUser(user);
+            out.write(fileContents.getBytes());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void updateUserProfile(User user){
+        try {
+            in = openFileInput(fileName);
+            String temp = "";
+            Scanner sc = new Scanner((InputStream)in);
+            while(sc.hasNextLine()){
+                String next = sc.nextLine();
+                String currName = next.substring(0, next.indexOf(","));
+                if(user.getName().equals(currName)){
+                    temp += serializeUser(user);
+                }else{
+                    temp += next;
+                }
+            }
+            out = openFileOutput(fileName, Context.MODE_PRIVATE);
+            out.write(temp.getBytes());
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    private void saveProfileImage(Bitmap profileImage){
+//        ContextWrapper cw = new ContextWrapper(this);
+//        // path to /data/data/yourapp/app_data/imageDir
+//        File directory = cw.getDir(folder, Context.MODE_PRIVATE);
+//        // Create imageDir
+//        File mypath=new File(directory,username+".jpg");
+//
+//        FileOutputStream fos = null;
+//        try {
+//            fos = new FileOutputStream(mypath);
+//            // Use the compress method on the BitMap object to write image to the OutputStream
+//            profileImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                fos.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 }

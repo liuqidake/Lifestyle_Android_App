@@ -55,9 +55,7 @@ public class MainActivity extends AppCompatActivity
     String latitude,longitude;
 
     //Add user or update user
-    User newUser;
-    User existedUser;
-    Bitmap profileImage;
+    List<User> users;
 
     //File information
     FileOutputStream out;
@@ -71,25 +69,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        if(getIntent().getExtras() != null){
+        if(getIntent().getExtras()!= null){
             user_choice = getIntent().getExtras().getInt("CHOICE");
-        }
-
-        if(getIntent().getParcelableExtra("add user") != null){
-            System.out.println("-----------------------------------------------------here");
-            newUser = (User)getIntent().getParcelableExtra("add user");
-            saveUserProfile(newUser);
-        }
-
-        if(getIntent().getParcelableExtra("update user") != null){
-            existedUser = (User)getIntent().getParcelableExtra("update user");
-            updateUserProfile(existedUser);
-        }
-
-        if(getIntent().getParcelableExtra("profileImage") != null){
-            profileImage = (Bitmap)getIntent().getParcelableExtra("profileImage");
-            saveProfileImage(profileImage);
         }
 
 
