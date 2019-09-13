@@ -1,27 +1,27 @@
 package com.example.nicolemorris.lifestyle;
 
-import android.app.Dialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.app.DatePickerDialog;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class NameAgeFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener, View.OnClickListener{
+public class NameAgeFragment extends Fragment implements View.OnClickListener{
 
     private Button bDate,bNext;
     private EditText tname;
     String name;
     Calendar date;
     NameAgeOnDataPass mDataPasser;
+    DatePickerDialog picker;
 
     //Callback interface
     public interface NameAgeOnDataPass{
@@ -59,43 +59,33 @@ public class NameAgeFragment extends DialogFragment implements DatePickerDialog.
     public void onClick(View view){
         switch(view.getId()){
             case R.id.b_birthday:{
-                showTimePickerDialog(view);
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar c = Calendar.getInstance();
+                                c.set(year, monthOfYear, dayOfMonth);
+                                date = c;
+                            }
+                        }, year, month, day);
+                picker.show();
                 break;
             }
-
             case R.id.b_next: {
-
-                onDateSet((DatePicker)getView(), 0000, 0, 0);
+                name = tname.getText().toString().trim();
+                if(name.equals("")){
+                    Toast.makeText(getContext(), "Please input your name", Toast.LENGTH_SHORT).show();
+                }
                 mDataPasser.onNameAgeDataPass(date,name);
                 break;
 
             }
         }
-    }
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current date as the default date in the picker
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
-    }
-
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(view.getYear(), view.getMonth(), view.getDayOfMonth());
-        this.date = calendar;
-        this.name = tname.getText().toString();
-    }
-
-    private void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new NameAgeFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
     }
 
 }
