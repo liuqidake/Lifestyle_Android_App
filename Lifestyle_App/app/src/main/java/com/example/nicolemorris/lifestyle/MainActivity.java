@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
     User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
-    //        String username = "Nicole";
+//    User u;
     String username;
     int user_choice;
     double height_inches = 72;
