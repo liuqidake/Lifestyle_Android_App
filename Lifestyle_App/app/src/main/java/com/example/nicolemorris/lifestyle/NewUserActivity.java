@@ -97,6 +97,8 @@ public class NewUserActivity extends AppCompatActivity
     @Override
     public void onChangeProfileDataPass(User newUser) {
         user = newUser;
+        creation_step = 6;
+        setView();
     }
 
     @Override
@@ -143,6 +145,8 @@ public class NewUserActivity extends AppCompatActivity
         else if (creation_step == 4) {
             //Intent userIntent = new Intent(this, MainActivity.class);
             user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim());
+            System.out.println(user.getFeet());
+            System.out.println(user.getWeight());
             saveUserProfile(user);
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
@@ -169,7 +173,6 @@ public class NewUserActivity extends AppCompatActivity
 
             updateUserProfile(user);
 
-            //Change to home view
             Intent userIntent = new Intent(this, MainActivity.class);
             //User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
             userIntent.putExtra("user", user);
@@ -210,8 +213,14 @@ public class NewUserActivity extends AppCompatActivity
                 String currName = next.substring(0, next.indexOf(","));
                 if(user.getName().equals(currName)){
                     temp += serializeUser(user);
+                    if(sc.hasNextLine()){
+                        temp+="\n";
+                    }
                 }else{
                     temp += next;
+                    if(sc.hasNextLine()){
+                        temp+="\n";
+                    }
                 }
             }
             out = openFileOutput(fileName, Context.MODE_PRIVATE);

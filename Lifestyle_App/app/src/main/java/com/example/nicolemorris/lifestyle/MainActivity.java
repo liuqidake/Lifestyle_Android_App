@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
-//    User u;
+    //User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
+    User u;
     String username;
     int user_choice;
     double height_inches = 72;
@@ -76,8 +76,9 @@ public class MainActivity extends AppCompatActivity
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
+        u = readUserProfile();
 
-        System.out.println(user_choice);
+        System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
@@ -113,12 +114,6 @@ public class MainActivity extends AppCompatActivity
         u.setGoal(g,l,a);
         changeFragments();
     }
-
-//    @Override
-////    public void onChangeGoalDataPass(){
-////        hasGoal = true;
-////        changeFragments();
-////    }
 
     @Override
     public void onGoalsDataPass(){
@@ -401,6 +396,25 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
+    }
+
+    private User readUserProfile(){
+        try{
+            in = openFileInput(fileName);
+            String temp = "";
+            Scanner sc = new Scanner((InputStream)in);
+            String userInfo = "";
+            if(sc.hasNextLine()){
+                userInfo = sc.nextLine();
+                String[] info = userInfo.split(",");
+                User user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7]);
+                return user;
+            }
+            return null;
+        }catch(Exception e){
+            return null;
+        }
+
     }
 }
 
