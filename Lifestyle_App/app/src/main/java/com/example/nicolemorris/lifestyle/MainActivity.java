@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (getIntent().getExtras() != null) {
             user_choice = getIntent().getExtras().getInt("CHOICE");
@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity
 
         System.out.println(user_choice);
         //Add permission for getting access to the current location
-        ActivityCompat.requestPermissions(this, new String[]
-                {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
 
         if (u == null) {
@@ -245,23 +244,53 @@ public class MainActivity extends AppCompatActivity
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
             }else{
+                Geocoder geocoder = new Geocoder(this);
+
                 Location LocationGps= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
                 if (LocationGps !=null)
                 {
-                    lat=LocationGps.getLatitude();
-                    longi=LocationGps.getLongitude();
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if (LocationNetwork !=null)
+                {
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (LocationPassive !=null)
+                {
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }else{
-                    Log.d("failLoc","fail to locate you for weather");
+                    city = "Salt Lake City";
+                    Log.d("failLoc","fail to locate you for weather, using SLC");
                 }
             }
 
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
-                city = addresses.get(0).getLocality();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Geocoder geocoder = new Geocoder(this);
+//            try {
+//                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
+//                city = addresses.get(0).getLocality();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
     }
@@ -325,7 +354,6 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "Can't Get Your Location", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     private void OnGPS() {
