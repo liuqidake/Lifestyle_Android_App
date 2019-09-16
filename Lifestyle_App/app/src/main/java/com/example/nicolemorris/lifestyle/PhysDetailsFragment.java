@@ -42,33 +42,37 @@ public class PhysDetailsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_phys_details, container, false);
 
         dataToPass = new String[4];
-        dataToPass[0] = "0";
-        dataToPass [1] = "0";
-        dataToPass[2] = "0";
+        dataToPass[0] = "-1";
+        dataToPass [1] = "-1";
+        dataToPass[2] = "-1";
         dataToPass[3] = "unknown";
 
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
 
         s_h_feet  = (Spinner)view.findViewById(R.id.s_feet);
-        s_h_feet.setAdapter(num_adapter);
         s_h_feet.setOnItemSelectedListener(this);
+        s_h_feet.setAdapter(num_adapter);
+
 
         s_h_inches = (Spinner)view.findViewById(R.id.s_inches);
-        s_h_inches.setAdapter(num_adapter);
         s_h_inches.setOnItemSelectedListener(this);
+        s_h_inches.setAdapter(num_adapter);
+
 
         s_w_pounds = (Spinner)view.findViewById(R.id.s_weight);
-        s_w_pounds.setAdapter(num_adapter);
         s_w_pounds.setOnItemSelectedListener(this);
+        s_w_pounds.setAdapter(num_adapter);
+
 
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
 
         s_sex = (Spinner)view.findViewById(R.id.s_sex);
-        s_sex.setAdapter(gender_adapter);
         s_sex.setOnItemSelectedListener(this);
+        s_sex.setAdapter(gender_adapter);
+
 
         nextButton = view.findViewById(R.id.b_next);
         nextButton.setOnClickListener(this);
@@ -79,7 +83,7 @@ public class PhysDetailsFragment extends Fragment
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-        switch (view.getId()){
+        switch (parent.getId()){
             case R.id.s_feet: {
                 dataToPass[0] = (String) parent.getItemAtPosition(pos); // number of feet e.g."5"
                 break;
@@ -96,6 +100,10 @@ public class PhysDetailsFragment extends Fragment
                 dataToPass[3] = (String)parent.getItemAtPosition(pos);
                 break;
             }
+            default:{
+                System.out.println("Nothing selected");
+            }
+
         }
 
         // An item was selected. You can retrieve the selected item using
@@ -104,10 +112,6 @@ public class PhysDetailsFragment extends Fragment
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
-        dataToPass[0] = "0";
-        dataToPass [1] = "0";
-        dataToPass[2] = "0";
-        dataToPass[3] = "unknown";
     }
 
     @Override
