@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/fl_frag_ph_1"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"

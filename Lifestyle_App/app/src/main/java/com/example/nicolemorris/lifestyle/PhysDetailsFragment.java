@@ -15,7 +15,7 @@ import android.widget.Spinner;
 public class PhysDetailsFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    Spinner s_h_feet,s_h_inches,s_w_pounds,s_sex;
+    Spinner s_h_feet,s_h_inches,s_w_pounds1,s_w_pounds2,s_w_pounds3,s_sex;
     String[] dataToPass;
     PhysOnDataPass mDataPasser;
     Button nextButton;
@@ -58,9 +58,17 @@ public class PhysDetailsFragment extends Fragment
         s_h_inches.setAdapter(num_adapter);
         s_h_inches.setOnItemSelectedListener(this);
 
-        s_w_pounds = (Spinner)view.findViewById(R.id.s_weight);
-        s_w_pounds.setAdapter(num_adapter);
-        s_w_pounds.setOnItemSelectedListener(this);
+        s_w_pounds1 = (Spinner)view.findViewById(R.id.s_weight1);
+        s_w_pounds1.setAdapter(num_adapter);
+        s_w_pounds1.setOnItemSelectedListener(this);
+
+        s_w_pounds2 = (Spinner)view.findViewById(R.id.s_weight2);
+        s_w_pounds2.setAdapter(num_adapter);
+        s_w_pounds2.setOnItemSelectedListener(this);
+
+        s_w_pounds3 = (Spinner)view.findViewById(R.id.s_weight3);
+        s_w_pounds3.setAdapter(num_adapter);
+        s_w_pounds3.setOnItemSelectedListener(this);
 
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
