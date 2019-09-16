@@ -141,12 +141,16 @@ public class NewUserActivity extends AppCompatActivity
 
          }
         else if (creation_step == 4) {
-            Intent userIntent = new Intent(this, MainActivity.class);
+            //Intent userIntent = new Intent(this, MainActivity.class);
             user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim());
             saveUserProfile(user);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("user", user);
+            ReviewFragment fragment = new ReviewFragment();
+            fragment.setArguments(bundle);
 
             //Review
-            fTrans.replace(R.id.fl_frag_ph_2, new ReviewFragment(), "Location");
+            fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
 
          }
