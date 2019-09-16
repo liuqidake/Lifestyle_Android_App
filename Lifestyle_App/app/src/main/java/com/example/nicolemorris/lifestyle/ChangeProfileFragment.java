@@ -23,13 +23,15 @@ public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     EditText etName, etCity, etState;
-    Spinner s_h_feet,s_h_inches,s_w_pounds,s_sex;
+    Spinner s_h_feet,s_h_inches,s_weight1, s_weight2, s_weight3,s_sex;
     Calendar date;
     String[] dataToPass;
     Button bSave, bDate;
 
-    String name, city, state, weight, sex, newWeight;
-    int feet, inches, age, newFeet, newInches;
+    String w1="",w2="",w3="";
+
+    String name, city, state, sex;
+    int feet, inches, age, newFeet, newInches, weight, newWeight;
 
 
     User user;
@@ -87,9 +89,17 @@ public class ChangeProfileFragment extends Fragment
         s_h_inches.setAdapter(num_adapter);
         inches = user.getInches();
 
-        s_w_pounds = (Spinner)view.findViewById(R.id.s_weight);
-        s_w_pounds.setOnItemSelectedListener(this);
-        s_w_pounds.setAdapter(num_adapter);
+        s_weight1 = (Spinner)view.findViewById(R.id.s_weight1);
+        s_weight1.setOnItemSelectedListener(this);
+        s_weight1.setAdapter(num_adapter);
+
+        s_weight2 = (Spinner)view.findViewById(R.id.s_weight2);
+        s_weight2.setOnItemSelectedListener(this);
+        s_weight2.setAdapter(num_adapter);
+
+        s_weight3 = (Spinner)view.findViewById(R.id.s_weight3);
+        s_weight3.setOnItemSelectedListener(this);
+        s_weight3.setAdapter(num_adapter);
         weight = user.getWeight();
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -117,8 +127,16 @@ public class ChangeProfileFragment extends Fragment
                 newInches = Integer.parseInt((String)parent.getItemAtPosition(pos));
                 break;
             }
-            case R.id.s_weight: {
-                newWeight = (String)parent.getItemAtPosition(pos);
+            case R.id.s_weight1: {
+                w1 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight2: {
+                w2 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight3: {
+                w3 = (String)parent.getItemAtPosition(pos);
                 break;
             }
             case R.id.s_sex: {
@@ -152,8 +170,17 @@ public class ChangeProfileFragment extends Fragment
 
                 if(newFeet!=0) feet = newFeet;
                 if(newInches != 0) inches = newInches;
-                if(!newWeight.equals("0")) weight = newWeight;
+                newWeight = Integer.parseInt(w1+w2+w3);
+                if(newWeight != 0) weight = newWeight;
                 user = new User(name, age, feet, inches, city, state, weight, sex);
+                System.out.println(user.getName());
+                System.out.println(user.getAge());
+                System.out.println(user.getFeet());
+                System.out.println(user.getInches());
+                System.out.println(user.getCity());
+                System.out.println(user.getState());
+                System.out.println(user.getWeight());
+                System.out.println(user.getSex());
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
