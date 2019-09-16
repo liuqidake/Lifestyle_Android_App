@@ -29,8 +29,8 @@ public class ChangeProfileFragment extends DialogFragment
     String[] dataToPass;
     Button bSave;
 
-    String name, city, state, weight, sex;
-    int feet, inches, age;
+    String name, city, state, sex;
+    int feet, inches, age,weight;
 
     User user;
     ChangeProfileOnDataPass userDataPasser;
@@ -111,7 +111,7 @@ public class ChangeProfileFragment extends DialogFragment
                 inches = (Integer)parent.getItemAtPosition(pos);
             }
             case R.id.s_weight: {
-                weight = (String)parent.getItemAtPosition(pos);
+                weight = (Integer) parent.getItemAtPosition(pos);
             }
             case R.id.s_sex: {
                 sex = (String)parent.getItemAtPosition(pos);

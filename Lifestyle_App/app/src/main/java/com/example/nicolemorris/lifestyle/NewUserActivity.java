@@ -21,9 +21,9 @@ public class NewUserActivity extends AppCompatActivity
         ReviewFragment.ReviewOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass{
 
     int creation_step = 0;
-    String name, city, state, weight, sex;
+    String name, city, state, sex;
     Bitmap profileImage;
-    int feet, inches;
+    int feet, inches, weight;
     int age;
 
     User user;
@@ -71,7 +71,7 @@ public class NewUserActivity extends AppCompatActivity
     public void onPhysDataPass(String[] data) {
         feet = Integer.parseInt(data[0]);
         inches = Integer.valueOf(data[1]);
-        weight = data[2];
+        weight = Integer.parseInt(data[2]);
         sex = data[3];
         creation_step = 2;
         setView();
@@ -100,9 +100,9 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
-    public void onReviewDataPass(int choice) {
+    public void onReviewDataPass() {
         // no returned data
-        creation_step = choice;
+        creation_step = 5;
         setView();
 
     }
@@ -142,7 +142,7 @@ public class NewUserActivity extends AppCompatActivity
          }
         else if (creation_step == 4) {
             Intent userIntent = new Intent(this, MainActivity.class);
-            user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
+            user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim());
             saveUserProfile(user);
 
             //Review

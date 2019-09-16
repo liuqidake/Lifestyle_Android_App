@@ -32,20 +32,23 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
-        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass {
+        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
+    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
     //        String username = "Nicole";
     String username;
-    int user_choice = 0;
+    int user_choice;
     double height_inches = 72;
     double weight_pounds = 105;
     boolean hasGoal = false;
+
     ReviewFragment pf;
     GoalsFragment gf;
     ChangeGoalFragment cgf;
     BmiFragment bf;
     WeatherFragment wf;
     HelpFragment hf;
+    ChangeProfileFragment cpf;
 
     int goal, act_level, goal_amount;
 
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
 
-        if (username == null) {
+        if (u == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
             this.startActivity(messageIntent);
 
@@ -107,9 +110,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onChangeGoalDataPass(int g, int l, int a){
         hasGoal = true;
-        goal = g;
-        act_level = l;
-        goal_amount = a;
+        u.setGoal(g,l,a);
         changeFragments();
     }
 
@@ -124,6 +125,18 @@ public class MainActivity extends AppCompatActivity
         hasGoal = false;
         changeFragments();
     }
+
+    @Override
+    public void onReviewDataPass(){
+        user_choice = 7;
+        changeFragments();
+    }
+
+    @Override
+    public void onChangeProfileDataPass(User user){
+        u = user;
+    }
+
     private void changeFragments(){
 
         //Find each frame layout, replace with corresponding fragment
@@ -133,16 +146,22 @@ public class MainActivity extends AppCompatActivity
 
             //Launch profile information
             pf = new ReviewFragment();
+
+            //Put this into a bundle
+            Bundle fragmentBundle = new Bundle();
+            fragmentBundle.putParcelable("user",u);
+            pf.setArguments(fragmentBundle);
+
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
-            if(hasGoal){
+            if(u.checkGoal() && hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
                 Bundle sentData = new Bundle();
-                sentData.putInt("Goal",goal);
-                sentData.putInt("Act_Level",act_level);
-                sentData.putInt("Amount", goal_amount);
+                sentData.putInt("Goal",u.getGoal());
+                sentData.putInt("Act_Level",u.getAct_level());
+                sentData.putInt("Amount", u.getGoal());
                 gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
@@ -194,9 +213,15 @@ public class MainActivity extends AppCompatActivity
             hf = new HelpFragment();
             fTrans.replace(R.id.fl_frag_ph_2,hf,"Help");
 
-        } else {
+        } else if (user_choice == 7) {
+            cpf = new ChangeProfileFragment();
+            //Put this into a bundle
+            Bundle fragmentBundle = new Bundle();
+            fragmentBundle.putParcelable("user",u);
+            cpf.setArguments(fragmentBundle);
 
-            //Launch main activity
+            fTrans.replace(R.id.fl_frag_ph_2,cpf,"Profile");
+
         }
 
         fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
@@ -298,11 +323,6 @@ public class MainActivity extends AppCompatActivity
         if(mapIntent.resolveActivity(getPackageManager())!=null){
             startActivity(mapIntent);
         }
-    }
-
-    @Override
-    public void onReviewDataPass(int choice){
-
     }
 
     public String serializeUser(User user){
