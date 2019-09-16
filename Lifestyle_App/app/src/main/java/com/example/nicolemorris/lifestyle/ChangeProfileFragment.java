@@ -90,7 +90,7 @@ public class ChangeProfileFragment extends Fragment
         s_w_pounds = (Spinner)view.findViewById(R.id.s_weight);
         s_w_pounds.setOnItemSelectedListener(this);
         s_w_pounds.setAdapter(num_adapter);
-        //weight = user.getWeight();
+        weight = user.getWeight();
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
@@ -153,7 +153,7 @@ public class ChangeProfileFragment extends Fragment
                 if(newFeet!=0) feet = newFeet;
                 if(newInches != 0) inches = newInches;
                 if(!newWeight.equals("0")) weight = newWeight;
-                //user = new User(name, age, feet, inches, city, state, weight, sex);
+                user = new User(name, age, feet, inches, city, state, weight, sex);
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
