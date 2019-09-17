@@ -22,8 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintHorizontal_weight="1" />
 
-    <ImageView
-        android:id="@+id/iv_header"
+    <TextView
+        android:id="@+id/tv_header_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,8 +31,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/header_bmi"
+        android:gravity="center"
+        android:text="Find-A-Hike"
+        android:textColor="@color/darkBlue"
+        android:textSize="72dp"
+        app:fontFamily="@font/bigelow_rules"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_profile"
         app:layout_constraintStart_toStartOf="parent"

@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
-//    User u;
+//    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
+    User u;
     String username;
     int user_choice;
     double height_inches = 72;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
-//        u = readUserProfile();
+        u = readUserProfile();
 
         System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
@@ -179,8 +179,9 @@ public class MainActivity extends AppCompatActivity
 
             //Send data to it
             Bundle sentData = new Bundle();
+            height_inches = (u.getFeet() * 12) + u.getInches();
             sentData.putDouble("HEIGHT",height_inches);
-            sentData.putDouble("WEIGHT",weight_pounds);
+            sentData.putDouble("WEIGHT",u.getWeight());
             bf.setArguments(sentData);
 
             //Launch bmi
@@ -235,6 +236,9 @@ public class MainActivity extends AppCompatActivity
 
         if(addHeader){
             hef = new HeaderFragment();
+            Bundle sentData = new Bundle();
+            sentData.putInt("CHOICE",user_choice);
+            hef.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
         } else {
             if(!isFirstChoice){

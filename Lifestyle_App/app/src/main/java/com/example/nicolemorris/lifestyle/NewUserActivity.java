@@ -114,7 +114,12 @@ public class NewUserActivity extends AppCompatActivity
     private void setView() {
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
-        fTrans.replace(R.id.fl_frag_ph_1, new TitleFragment(), "Title");
+
+        TitleFragment tf = new TitleFragment();
+        Bundle sentData = new Bundle();
+        sentData.putInt("STEP",creation_step);
+        tf.setArguments(sentData);
+        fTrans.replace(R.id.fl_frag_ph_1, tf, "Title");
 
         if (creation_step == 0) {
 
