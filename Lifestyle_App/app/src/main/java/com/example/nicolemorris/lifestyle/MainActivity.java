@@ -1,7 +1,6 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
@@ -70,8 +69,7 @@ public class MainActivity extends AppCompatActivity
     String fileName = "user_profile";
     String folder = "profile_images/";
 
-    private FusedLocationProviderClient fusedLocationClient;
-    Double lat = 0.0;
+   Double lat = 0.0;
     Double longi = 0.0;
     String city = "default city";
 
@@ -250,9 +248,9 @@ public class MainActivity extends AppCompatActivity
                 Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
+                List<Address> addresses = null;
                 if (LocationGps !=null)
                 {
-                    List<Address> addresses = null;
                     try {
                         addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
                         city = addresses.get(0).getLocality();
@@ -261,9 +259,8 @@ public class MainActivity extends AppCompatActivity
                     }
                 }else if (LocationNetwork !=null)
                 {
-                    List<Address> addresses = null;
                     try {
-                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        addresses = geocoder.getFromLocation(LocationNetwork.getLatitude(), LocationNetwork.getLongitude(), 1);
                         city = addresses.get(0).getLocality();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -271,9 +268,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if (LocationPassive !=null)
                 {
-                    List<Address> addresses = null;
                     try {
-                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        addresses = geocoder.getFromLocation(LocationPassive.getLatitude(), LocationPassive.getLongitude(), 1);
                         city = addresses.get(0).getLocality();
                     } catch (IOException e) {
                         e.printStackTrace();
