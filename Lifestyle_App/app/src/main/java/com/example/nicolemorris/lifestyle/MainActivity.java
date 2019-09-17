@@ -22,8 +22,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,13 +35,14 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-    User u = new User("Andrew Android", 24, 5, 8, "Lehi", "Utah", 160, "Male");
-    //    User u;
+//    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
+    User u;
     String username;
     int user_choice;
     double height_inches = 72;
     double weight_pounds = 105;
     boolean hasGoal = false;
+    boolean isFirstChoice;
 
     ReviewFragment pf;
     GoalsFragment gf;
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
     ChangeProfileFragment cpf;
+    HeaderFragment hef;
 
     int goal, act_level, goal_amount;
 
@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity
     String fileName = "user_profile";
     String folder = "profile_images/";
 
-   Double lat = 0.0;
-    Double longi = 0.0;
     String city = "default city";
 
     @Override
@@ -78,23 +76,24 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if (getIntent().getExtras() != null) {
+        if(getIntent().getExtras()!= null){
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
+        u = readUserProfile();
 
-        System.out.println(user_choice);
+        System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        ActivityCompat.requestPermissions(this,new String[]
+                {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        isFirstChoice = true;
 
         if (u == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
             this.startActivity(messageIntent);
 
-        } else if (user_choice != 0) {
+        } else if (user_choice != 0){
 
             changeFragments();
 
@@ -115,89 +114,92 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChangeGoalDataPass(int g, int l, int a) {
+    public void onChangeGoalDataPass(int g, int l, int a){
         hasGoal = true;
-        u.setGoal(g, l, a);
+        u.setGoal(g,l,a);
         changeFragments();
     }
 
-//    @Override
-////    public void onChangeGoalDataPass(){
-////        hasGoal = true;
-////        changeFragments();
-////    }
-
     @Override
-    public void onGoalsDataPass() {
+    public void onGoalsDataPass(){
         hasGoal = false;
         changeFragments();
     }
 
     @Override
-    public void onReviewDataPass() {
+    public void onReviewDataPass(){
         user_choice = 7;
         changeFragments();
     }
 
     @Override
-    public void onChangeProfileDataPass(User user) {
+    public void onChangeProfileDataPass(User user){
         u = user;
     }
 
-    private void changeFragments() {
+    private void changeFragments(){
+
+        boolean addHeader = true;
 
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
 
-        if (user_choice == 1) {
+        if (user_choice == 1){
+
+            isFirstChoice = false;
 
             //Launch profile information
             pf = new ReviewFragment();
 
             //Put this into a bundle
             Bundle fragmentBundle = new Bundle();
-            fragmentBundle.putParcelable("user", u);
+            fragmentBundle.putParcelable("user",u);
             pf.setArguments(fragmentBundle);
 
-            fTrans.replace(R.id.fl_frag_ph_2, pf, "Profile");
+            fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
-        } else if (user_choice == 2) {
-            if (u.checkGoal() && hasGoal) {
+        } else if (user_choice == 2){
+            isFirstChoice = false;
+            if(u.checkGoal() && hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
                 Bundle sentData = new Bundle();
-                sentData.putInt("Goal", u.getGoal());
-                sentData.putInt("Act_Level", u.getAct_level());
+                sentData.putInt("Goal",u.getGoal());
+                sentData.putInt("Act_Level",u.getAct_level());
                 sentData.putInt("Amount", u.getGoal());
                 gf.setArguments(sentData);
-                fTrans.replace(R.id.fl_frag_ph_2, gf, "Goals");
+                fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();
-                fTrans.replace(R.id.fl_frag_ph_2, cgf, "Goals");
+                fTrans.replace(R.id.fl_frag_ph_2,cgf,"Goals");
             }
 
-        } else if (user_choice == 3) {
-
+        } else if (user_choice == 3){
+            isFirstChoice = false;
             bf = new BmiFragment();
 
             //Send data to it
             Bundle sentData = new Bundle();
-            sentData.putDouble("HEIGHT", height_inches);
-            sentData.putDouble("WEIGHT", weight_pounds);
+            height_inches = (u.getFeet() * 12) + u.getInches();
+            sentData.putDouble("HEIGHT",height_inches);
+            sentData.putDouble("WEIGHT",u.getWeight());
             bf.setArguments(sentData);
 
             //Launch bmi
-            fTrans.replace(R.id.fl_frag_ph_2, bf, "BMI");
+            fTrans.replace(R.id.fl_frag_ph_2,bf,"BMI");
 
 
-        } else if (user_choice == 4) {
+        } else if (user_choice == 4){
 
+            isFirstChoice = false;
             findHikeAround();
 
-        } else if (user_choice == 5) {
+        } else if (user_choice == 5){
 
             locateForWeather();
+
+            isFirstChoice = false;
 
             wf = new WeatherFragment();
             Bundle sentData = new Bundle();
@@ -207,11 +209,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 6){
 
+            if(isTablet()){
+                addHeader = false;
+            }
             //Launch help
             hf = new HelpFragment();
             fTrans.replace(R.id.fl_frag_ph_2,hf,"Help");
 
         } else if (user_choice == 7) {
+            isFirstChoice = false;
             cpf = new ChangeProfileFragment();
             //Put this into a bundle
             Bundle fragmentBundle = new Bundle();
@@ -222,7 +228,18 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
+        if(addHeader){
+            hef = new HeaderFragment();
+            Bundle sentData = new Bundle();
+            sentData.putInt("CHOICE",user_choice);
+            hef.setArguments(sentData);
+            fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
+        } else {
+            if(!isFirstChoice){
+                fTrans.remove(hef);
+            }
+        }
+
         fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
     }
@@ -311,9 +328,12 @@ public class MainActivity extends AppCompatActivity
 
         //Check Permissions again
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this,
+
+                Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+            ActivityCompat.requestPermissions(this,new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
         else
         {
@@ -350,6 +370,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "Can't Get Your Location", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     private void OnGPS() {
@@ -459,6 +480,30 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
+    }
+
+    private User readUserProfile(){
+        try{
+            in = openFileInput(fileName);
+            String temp = "";
+            Scanner sc = new Scanner((InputStream)in);
+            String userInfo = "";
+            if(sc.hasNextLine()){
+                userInfo = sc.nextLine();
+                String[] info = userInfo.split(",");
+                User user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7]);
+                return user;
+            }
+            return null;
+        }catch(Exception e){
+            return null;
+        }
+
+    }
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }
 

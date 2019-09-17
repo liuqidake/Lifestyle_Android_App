@@ -14,7 +14,7 @@ public class ChoicesDesignedFragment extends Fragment
         implements View.OnClickListener {
 
     OnChoiceDataPass mDataPasser;
-    ImageButton profile_data, goals, bmi, hikes, weather, help;
+    ImageButton profile_data, goals, bmi, hikes, weather, help, pic;
 
     //Callback interface
     public interface OnChoiceDataPass{
