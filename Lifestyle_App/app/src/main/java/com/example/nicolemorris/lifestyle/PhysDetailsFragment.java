@@ -100,7 +100,7 @@ public class PhysDetailsFragment extends Fragment
                 dataToPass[1] = (String)parent.getItemAtPosition(pos); // number of inches e.g. "10"
                 break;
             }
-            case R.id.s_weight: {
+            case R.id.s_weight1: {
                 dataToPass[2] = (String)parent.getItemAtPosition(pos);
                 break;
             }

@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-    //User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
-    User u;
+    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
+//    User u;
     String username;
     int user_choice;
     double height_inches = 72;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
-        u = readUserProfile();
+//        u = readUserProfile();
 
         System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
