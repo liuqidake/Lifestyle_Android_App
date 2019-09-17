@@ -20,6 +20,8 @@ public class PhysDetailsFragment extends Fragment
     PhysOnDataPass mDataPasser;
     Button nextButton;
 
+    String w1 = "",w2 = "",w3 = "";
+
     //Callback interface
     public interface PhysOnDataPass{
         public void onPhysDataPass(String[] data);
@@ -100,8 +102,16 @@ public class PhysDetailsFragment extends Fragment
                 dataToPass[1] = (String)parent.getItemAtPosition(pos); // number of inches e.g. "10"
                 break;
             }
-            case R.id.s_weight: {
-                dataToPass[2] = (String)parent.getItemAtPosition(pos);
+            case R.id.s_weight1: {
+                w1 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight2: {
+                w2 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight3: {
+                w3 = (String)parent.getItemAtPosition(pos);
                 break;
             }
             case R.id.s_sex: {
@@ -126,7 +136,7 @@ public class PhysDetailsFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_next: {
-
+                dataToPass[2] = w1+w2+w3;
                 //NEED TO ADD HEIGHT, WEIGHT, SEX TO PASS FOR STORAGE :)
                 mDataPasser.onPhysDataPass(dataToPass);
                 break;

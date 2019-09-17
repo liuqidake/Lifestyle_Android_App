@@ -81,6 +81,9 @@ public class NameAgeFragment extends Fragment implements View.OnClickListener{
                 if(name.equals("")){
                     Toast.makeText(getContext(), "Please input your name", Toast.LENGTH_SHORT).show();
                 }
+                if(date == null){
+                    Toast.makeText(getContext(), "Please choose your birth date", Toast.LENGTH_SHORT).show();
+                }
                 mDataPasser.onNameAgeDataPass(date,name);
                 break;
 
