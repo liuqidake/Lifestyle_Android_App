@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     double height_inches = 72;
     double weight_pounds = 105;
     boolean hasGoal = false;
+    boolean isFirstChoice;
 
     ReviewFragment pf;
     GoalsFragment gf;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
     ChangeProfileFragment cpf;
+    HeaderFragment hef;
 
     int goal, act_level, goal_amount;
 
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        isFirstChoice = true;
 
         if (u == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
@@ -134,10 +137,14 @@ public class MainActivity extends AppCompatActivity
 
     private void changeFragments(){
 
+        boolean addHeader = true;
+
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
 
         if (user_choice == 1){
+
+            isFirstChoice = false;
 
             //Launch profile information
             pf = new ReviewFragment();
@@ -150,6 +157,7 @@ public class MainActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
+            isFirstChoice = false;
             if(u.checkGoal() && hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
@@ -166,7 +174,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (user_choice == 3){
-
+            isFirstChoice = false;
             bf = new BmiFragment();
 
             //Send data to it
@@ -181,10 +189,12 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 4){
 
+            isFirstChoice = false;
             findHikeAround();
 
         } else if (user_choice == 5){
 
+            isFirstChoice = false;
             double lat = Double.parseDouble(latitude);
             double longi = Double.parseDouble(longitude);
             Geocoder geocoder = new Geocoder(this);
@@ -204,11 +214,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 6){
 
+            if(isTablet()){
+                addHeader = false;
+            }
             //Launch help
             hf = new HelpFragment();
             fTrans.replace(R.id.fl_frag_ph_2,hf,"Help");
 
         } else if (user_choice == 7) {
+            isFirstChoice = false;
             cpf = new ChangeProfileFragment();
             //Put this into a bundle
             Bundle fragmentBundle = new Bundle();
@@ -219,7 +233,15 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
+        if(addHeader){
+            hef = new HeaderFragment();
+            fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
+        } else {
+            if(!isFirstChoice){
+                fTrans.remove(hef);
+            }
+        }
+
         fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
     }
@@ -415,6 +437,11 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
+    }
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }
 

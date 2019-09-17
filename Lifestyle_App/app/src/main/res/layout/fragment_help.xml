@@ -19,7 +19,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -46,7 +46,7 @@
                 android:gravity="center_vertical"
                 android:text="= Profile Information"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +71,7 @@
                 android:gravity="center_vertical"
                 android:text="= Fitness Goals"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +96,7 @@
                 android:gravity="center_vertical"
                 android:text="= BMI Information"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,7 +121,7 @@
                 android:gravity="center_vertical"
                 android:text="= Find-A-Hike"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -144,52 +144,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="= Weather"
+                android:text="= Weather Information"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="1"
-        android:text="To change users,"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:text="click on your profile picture."
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>
