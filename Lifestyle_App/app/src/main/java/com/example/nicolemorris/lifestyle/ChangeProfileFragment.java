@@ -130,6 +130,7 @@ public class ChangeProfileFragment extends Fragment
 
         s_sex = (Spinner)view.findViewById(R.id.s_sex);
         s_sex.setOnItemSelectedListener(this);
+        s_sex.setAdapter(gender_adapter);
 
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
@@ -174,7 +175,6 @@ public class ChangeProfileFragment extends Fragment
 
             sex = user.getSex();
             int genderPosition = gender_adapter.getPosition(sex);
-            s_sex.setAdapter(gender_adapter);
             s_sex.setSelection(genderPosition);
 
         }
