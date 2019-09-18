@@ -86,13 +86,8 @@ public class ChangeProfileFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_profile, container, false);
-        user = getArguments().getParcelable("user");
-        //byte[] imageByte = getArguments().getByteArray("image");
-        //profile_image = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
 
         etName = view.findViewById(R.id.et_name);
-        name = user.getName();
-        etName.setText(name);
 
         bDate = view.findViewById(R.id.b_birthday);
         bDate.setOnClickListener(this);
@@ -101,16 +96,10 @@ public class ChangeProfileFragment extends Fragment
         bLocation.setOnClickListener(this);
 
         etCity = view.findViewById(R.id.tv_city_hc);
-        city = user.getCity();
-        etCity.setText(city);
 
         etState = view.findViewById(R.id.tv_state_hc);
-        state = user.getState();
-        etState.setText(state);
 
         etAge = view.findViewById(R.id.et_age);
-        age = user.getAge();
-        etAge.setText(""+age);
 
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
@@ -119,49 +108,23 @@ public class ChangeProfileFragment extends Fragment
         s_h_feet  = (Spinner)view.findViewById(R.id.s_feet);
         s_h_feet.setOnItemSelectedListener(this);
         s_h_feet.setAdapter(num_adapter);
-        int feetPosition = num_adapter.getPosition(""+user.getFeet());
-        s_h_feet.setSelection(feetPosition);
-        feet = user.getFeet();
 
         s_h_inches = (Spinner)view.findViewById(R.id.s_inches);
         s_h_inches.setOnItemSelectedListener(this);
         s_h_inches.setAdapter(num_adapter);
-        int inchPosition = num_adapter.getPosition(""+user.getInches());
-        s_h_inches.setSelection(inchPosition);
-        inches = user.getInches();
 
 
-        weight  =user.getWeight();
-        String w= ""+weight;
-        int w1Pos, w2Pos, w3Pos;
-        if(w.length() == 3){
-            w1Pos = num_adapter.getPosition(w.substring(0,1));
-            w2Pos = num_adapter.getPosition(w.substring(1,2));
-            w3Pos = num_adapter.getPosition(w.substring(2,3));
-        }else if (w.length()==2){
-            w1Pos = num_adapter.getPosition("0");
-            w2Pos = num_adapter.getPosition(w.substring(0,1));
-            w3Pos = num_adapter.getPosition(w.substring(1,2));
-        }else{
-            w1Pos = num_adapter.getPosition("0");
-            w2Pos = num_adapter.getPosition("0");
-            w3Pos = num_adapter.getPosition(w.substring(0,1));
-        }
+
 
         s_weight1 = (Spinner)view.findViewById(R.id.s_weight1);
         s_weight1.setOnItemSelectedListener(this);
-        s_weight1.setAdapter(num_adapter);
-        s_weight1.setSelection(w1Pos);
 
         s_weight2 = (Spinner)view.findViewById(R.id.s_weight2);
         s_weight2.setOnItemSelectedListener(this);
-        s_weight2.setAdapter(num_adapter);
-        s_weight2.setSelection(w2Pos);
+
 
         s_weight3 = (Spinner)view.findViewById(R.id.s_weight3);
         s_weight3.setOnItemSelectedListener(this);
-        s_weight3.setAdapter(num_adapter);
-        s_weight3.setSelection(w3Pos);
 
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -169,13 +132,59 @@ public class ChangeProfileFragment extends Fragment
 
         s_sex = (Spinner)view.findViewById(R.id.s_sex);
         s_sex.setOnItemSelectedListener(this);
-        s_sex.setAdapter(gender_adapter);
-        int genderPosition = num_adapter.getPosition(user.getSex());
-        s_sex.setSelection(genderPosition);
-        sex = user.getSex();
 
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
+
+        if(getArguments() != null){
+            user = getArguments().getParcelable("user");
+            name = user.getName();
+            etName.setText(name);
+            city = user.getCity();
+            etCity.setText(city);
+            state = user.getState();
+            etState.setText(state);
+            age = user.getAge();
+            etAge.setText(""+age);
+            int feetPosition = num_adapter.getPosition(""+user.getFeet());
+            s_h_feet.setSelection(feetPosition);
+            feet = user.getFeet();
+            int inchPosition = num_adapter.getPosition(""+user.getInches());
+            s_h_inches.setSelection(inchPosition);
+            inches = user.getInches();
+            weight  =user.getWeight();
+            String w= ""+weight;
+            int w1Pos, w2Pos, w3Pos;
+            if(w.length() == 3){
+                w1Pos = num_adapter.getPosition(w.substring(0,1));
+                w2Pos = num_adapter.getPosition(w.substring(1,2));
+                w3Pos = num_adapter.getPosition(w.substring(2,3));
+            }else if (w.length()==2){
+                w1Pos = num_adapter.getPosition("0");
+                w2Pos = num_adapter.getPosition(w.substring(0,1));
+                w3Pos = num_adapter.getPosition(w.substring(1,2));
+            }else{
+                w1Pos = num_adapter.getPosition("0");
+                w2Pos = num_adapter.getPosition("0");
+                w3Pos = num_adapter.getPosition(w.substring(0,1));
+            }
+
+            s_weight1.setAdapter(num_adapter);
+            s_weight1.setSelection(w1Pos);
+            s_weight2.setAdapter(num_adapter);
+            s_weight2.setSelection(w2Pos);
+            s_weight3.setAdapter(num_adapter);
+            s_weight3.setSelection(w3Pos);
+
+            sex = user.getSex();
+            int genderPosition = gender_adapter.getPosition(sex);
+            s_sex.setAdapter(gender_adapter);
+            s_sex.setSelection(genderPosition);
+
+        }
+
+        //byte[] imageByte = getArguments().getByteArray("image");
+        //profile_image = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
 
         return view;
     }
@@ -398,6 +407,10 @@ public class ChangeProfileFragment extends Fragment
     }
 
 
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
+    }
 
 
 }

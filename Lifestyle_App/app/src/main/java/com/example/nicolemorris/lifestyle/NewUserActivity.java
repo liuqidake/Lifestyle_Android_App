@@ -43,6 +43,9 @@ public class NewUserActivity extends AppCompatActivity
         if (savedInstanceState != null) {
             creation_step = savedInstanceState.getInt("STEP");
         } else {
+            if(isTablet()){
+                creation_step = 5;
+            }
             setView();
         }
     }
@@ -168,10 +171,12 @@ public class NewUserActivity extends AppCompatActivity
         else if (creation_step == 5) {
             //Edit details
             ChangeProfileFragment fragment = new ChangeProfileFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("user", user);
-            //bundle.putByteArray("image", convertImageToByteArray(profileImage));
-            fragment.setArguments(bundle);
+            if(!isTablet()){
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("user", user);
+                //bundle.putByteArray("image", convertImageToByteArray(profileImage));
+                fragment.setArguments(bundle);
+            }
 
             fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
@@ -268,6 +273,11 @@ public class NewUserActivity extends AppCompatActivity
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
+    }
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 
 }
