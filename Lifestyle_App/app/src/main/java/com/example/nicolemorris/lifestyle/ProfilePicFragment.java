@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 public class
 ProfilePicFragment extends Fragment
         implements View.OnClickListener {
@@ -25,6 +28,8 @@ ProfilePicFragment extends Fragment
     ProfilePicOnDataPass mDataPasser;
     ImageView mIvPic;
     Bitmap image;
+
+
 
 
     //Callback interface
@@ -114,4 +119,5 @@ ProfilePicFragment extends Fragment
             }
         }
     }
+
 }
