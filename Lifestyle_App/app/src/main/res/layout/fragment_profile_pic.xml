@@ -45,13 +45,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:src="@drawable/no_pic_yet"
         app:layout_constraintBottom_toTopOf="@+id/b_next"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_take_pic"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/button_take_pic" />
 
     <Button
         android:id="@+id/b_next"

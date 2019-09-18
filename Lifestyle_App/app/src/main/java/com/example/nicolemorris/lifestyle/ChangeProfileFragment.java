@@ -2,6 +2,7 @@ package com.example.nicolemorris.lifestyle;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.Calendar;
 public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    EditText etName, etCity, etState;
+    EditText etName, etCity, etState, etAge;
     Spinner s_h_feet,s_h_inches,s_weight1, s_weight2, s_weight3,s_sex;
     Calendar date;
     String[] dataToPass;
@@ -35,6 +36,7 @@ public class ChangeProfileFragment extends Fragment
 
 
     User user;
+    Bitmap profile_image;
     ChangeProfileOnDataPass userDataPasser;
 
     DatePickerDialog picker;
@@ -60,6 +62,9 @@ public class ChangeProfileFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_profile, container, false);
         user = getArguments().getParcelable("user");
+        //byte[] imageByte = getArguments().getByteArray("image");
+        //profile_image = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+
         etName = view.findViewById(R.id.et_name);
         name = user.getName();
         etName.setText(name);
@@ -75,31 +80,46 @@ public class ChangeProfileFragment extends Fragment
         state = user.getState();
         etState.setText(state);
 
+        etAge = view.findViewById(R.id.et_age);
+        age = user.getAge();
+        etAge.setText(""+age);
+
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
+
 
         s_h_feet  = (Spinner)view.findViewById(R.id.s_feet);
         s_h_feet.setOnItemSelectedListener(this);
         s_h_feet.setAdapter(num_adapter);
+        int feetPosition = num_adapter.getPosition(""+user.getFeet());
+        s_h_feet.setSelection(feetPosition);
         feet = user.getFeet();
-
 
         s_h_inches = (Spinner)view.findViewById(R.id.s_inches);
         s_h_inches.setOnItemSelectedListener(this);
         s_h_inches.setAdapter(num_adapter);
+        int inchPosition = num_adapter.getPosition(""+user.getInches());
+        s_h_inches.setSelection(inchPosition);
         inches = user.getInches();
 
         s_weight1 = (Spinner)view.findViewById(R.id.s_weight1);
         s_weight1.setOnItemSelectedListener(this);
         s_weight1.setAdapter(num_adapter);
+        int w1Position = num_adapter.getPosition((user.getWeight()+"").substring(0, 1));
+        s_weight1.setSelection(w1Position);
 
         s_weight2 = (Spinner)view.findViewById(R.id.s_weight2);
         s_weight2.setOnItemSelectedListener(this);
         s_weight2.setAdapter(num_adapter);
+        int w2Position = num_adapter.getPosition((user.getWeight()+"").substring(1, 2));
+        s_weight2.setSelection(w2Position);
 
         s_weight3 = (Spinner)view.findViewById(R.id.s_weight3);
         s_weight3.setOnItemSelectedListener(this);
         s_weight3.setAdapter(num_adapter);
+        int w3Position = num_adapter.getPosition((user.getWeight()+"").substring(2));
+        s_weight3.setSelection(w3Position);
+
         weight = user.getWeight();
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -108,6 +128,8 @@ public class ChangeProfileFragment extends Fragment
         s_sex = (Spinner)view.findViewById(R.id.s_sex);
         s_sex.setOnItemSelectedListener(this);
         s_sex.setAdapter(gender_adapter);
+        int genderPosition = num_adapter.getPosition(user.getSex());
+        s_sex.setSelection(genderPosition);
         sex = user.getSex();
 
         bSave = view.findViewById(R.id.b_save);
@@ -166,6 +188,11 @@ public class ChangeProfileFragment extends Fragment
 
                 if(name.equals("") || city.equals("") || state.equals("")){
                     Toast.makeText(getContext(), "You have empty fields!", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+                if(date == null){
+                    age = user.getAge();
                 }
 
                 if(newFeet!=0) feet = newFeet;
@@ -173,14 +200,6 @@ public class ChangeProfileFragment extends Fragment
                 newWeight = Integer.parseInt(w1+w2+w3);
                 if(newWeight != 0) weight = newWeight;
                 user = new User(name, age, feet, inches, city, state, weight, sex);
-                System.out.println(user.getName());
-                System.out.println(user.getAge());
-                System.out.println(user.getFeet());
-                System.out.println(user.getInches());
-                System.out.println(user.getCity());
-                System.out.println(user.getState());
-                System.out.println(user.getWeight());
-                System.out.println(user.getSex());
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }

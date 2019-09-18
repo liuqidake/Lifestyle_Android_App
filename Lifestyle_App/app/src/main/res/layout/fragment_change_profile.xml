@@ -17,9 +17,39 @@
         android:layout_marginRight="8dp"
         android:gravity="center_vertical"
         android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+        app:layout_constraintEnd_toStartOf="@+id/b_edit_pic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="2"
+        android:gravity="center_vertical"
+        android:text="Age"
+        app:layout_constraintEnd_toStartOf="@+id/b_birthday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b_edit_pic" />
+
+    <Button
+        android:id="@+id/b_birthday"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@color/mediumBlue"
+        android:text="Use Birthday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b_edit_pic" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -31,53 +61,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name">
 
-        <TextView
-            android:id="@+id/tv_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Birthday"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toStartOf="@+id/et_age"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_name" />
-
-        <EditText
-            android:id="@+id/et_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:text="Age"
-            android:layout_weight="2"
-            app:layout_constraintEnd_toStartOf="@+id/b_birthday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_birthday"
-            app:layout_constraintTop_toBottomOf="@+id/et_name" />
-
         <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/pickers.html#DatePicker-->
-        <Button
-            android:id="@+id/b_birthday"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="Pick Date"
-            app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/et_age"
-            app:layout_constraintTop_toTopOf="@+id/tv_birthday" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout10"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -85,12 +77,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/b_location"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/b_edit_pic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/b_birthday">
 
         <EditText
             android:id="@+id/tv_city_hc"
@@ -98,11 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="City:"
-            app:layout_constraintEnd_toStartOf="@+id/tv_state_hc"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
+            android:text="City:" />
 
         <EditText
             android:id="@+id/tv_state_hc"
@@ -110,23 +96,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="State:"
-            app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_city_hc"
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
+            android:text="State:" />
     </LinearLayout>
 
     <Button
         android:id="@+id/b_location"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/mediumBlue"
         android:text="Use current location"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout10"
+        app:layout_constraintTop_toBottomOf="@+id/b_birthday" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
@@ -134,59 +121,43 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
 
         <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
             android:id="@+id/s_feet"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:gravity="center_vertical"
-            android:layout_weight="2"
-            app:layout_constraintEnd_toStartOf="@+id/tv_feet"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/tv_feet"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="feet"
-            android:layout_weight="2"
-            app:layout_constraintEnd_toStartOf="@+id/s_inches"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/s_feet" />
+            android:text="feet" />
 
         <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
             android:id="@+id/s_inches"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_weight="2"
-            app:layout_constraintEnd_toStartOf="@+id/tv_inches"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_feet"/>
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/tv_inches"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="inches"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/s_inches"/>
+            android:text="inches" />
     </LinearLayout>
 
     <LinearLayout
@@ -195,13 +166,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <!--To finish implementing: https://developer.android.com/guide/topics/ui/controls/spinner-->
         <Spinner
@@ -210,9 +181,7 @@
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+            android:layout_marginTop="8dp" />
 
         <Spinner
             android:id="@+id/s_weight2"
@@ -220,9 +189,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/s_weight1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+            android:layout_marginTop="8dp" />
 
         <Spinner
             android:id="@+id/s_weight3"
@@ -230,9 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/s_weight2"
-            app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/tv_weight"
@@ -242,12 +207,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="center_vertical"
-            android:text="pounds"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/s_weight"
-            app:layout_constraintTop_toBottomOf="@+id/s_feet" />
+            android:text="pounds" />
     </LinearLayout>
 
     <LinearLayout
@@ -256,13 +216,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="@+id/b_edit_pic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <TextView
             android:id="@+id/tv_sex"
@@ -273,12 +235,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center_vertical"
-            android:text="Sex:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/s_sex"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/s_weight" />
+            android:text="Sex:" />
 
         <Spinner
             android:id="@+id/s_sex"
@@ -286,49 +243,35 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text="Sex:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_sex"
-            app:layout_constraintTop_toBottomOf="@+id/s_weight" />
+            android:text="Sex:" />
     </LinearLayout>
 
     <Button
         android:id="@+id/b_edit_pic"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@color/mediumBlue"
         android:text="Change Picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_name"
-        app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
-
-    <ImageView
-        android:id="@+id/iv_profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@drawable/pic_profile_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/b_save"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/mediumBlue"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
 </android.support.constraint.ConstraintLayout>

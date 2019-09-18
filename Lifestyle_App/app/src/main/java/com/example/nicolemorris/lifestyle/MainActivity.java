@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
@@ -34,13 +35,14 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-    //User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
+//    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
     User u;
     String username;
     int user_choice;
     double height_inches = 72;
     double weight_pounds = 105;
     boolean hasGoal = false;
+    boolean isFirstChoice;
 
     ReviewFragment pf;
     GoalsFragment gf;
@@ -49,13 +51,14 @@ public class MainActivity extends AppCompatActivity
     WeatherFragment wf;
     HelpFragment hf;
     ChangeProfileFragment cpf;
+    HeaderFragment hef;
 
     int goal, act_level, goal_amount;
 
     //variables for find-a-hike
     LocationManager locationManager;
-    private static final int REQUEST_LOCATION=1;
-    String latitude,longitude;
+    private static final int REQUEST_LOCATION = 1;
+    String latitude, longitude;
 
     //Add user or update user
     List<User> users;
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     String fileName = "user_profile";
     String folder = "profile_images/";
 
+    String city = "default city";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        isFirstChoice = true;
 
         if (u == null) {
             Intent messageIntent = new Intent(this, NewUserActivity.class);
@@ -134,10 +139,14 @@ public class MainActivity extends AppCompatActivity
 
     private void changeFragments(){
 
+        boolean addHeader = true;
+
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
 
         if (user_choice == 1){
+
+            isFirstChoice = false;
 
             //Launch profile information
             pf = new ReviewFragment();
@@ -150,6 +159,7 @@ public class MainActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2,pf,"Profile");
 
         } else if (user_choice == 2){
+            isFirstChoice = false;
             if(u.checkGoal() && hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
@@ -166,13 +176,14 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (user_choice == 3){
-
+            isFirstChoice = false;
             bf = new BmiFragment();
 
             //Send data to it
             Bundle sentData = new Bundle();
+            height_inches = (u.getFeet() * 12) + u.getInches();
             sentData.putDouble("HEIGHT",height_inches);
-            sentData.putDouble("WEIGHT",weight_pounds);
+            sentData.putDouble("WEIGHT",u.getWeight());
             bf.setArguments(sentData);
 
             //Launch bmi
@@ -181,21 +192,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 4){
 
+            isFirstChoice = false;
             findHikeAround();
 
         } else if (user_choice == 5){
 
-            double lat = Double.parseDouble(latitude);
-            double longi = Double.parseDouble(longitude);
-            Geocoder geocoder = new Geocoder(this);
-            String city = "default city";
-            try {
-                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
-                city = addresses.get(0).getLocality();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //String city = "Salt Lake City";
+            locateForWeather();
+
+            isFirstChoice = false;
+
             wf = new WeatherFragment();
             Bundle sentData = new Bundle();
             sentData.putString("city",city);
@@ -204,11 +209,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 6){
 
+            if(isTablet()){
+                addHeader = false;
+            }
             //Launch help
             hf = new HelpFragment();
             fTrans.replace(R.id.fl_frag_ph_2,hf,"Help");
 
         } else if (user_choice == 7) {
+            isFirstChoice = false;
             cpf = new ChangeProfileFragment();
             //Put this into a bundle
             Bundle fragmentBundle = new Bundle();
@@ -219,9 +228,84 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        fTrans.replace(R.id.fl_frag_ph_1,new HeaderFragment(),"Header");
+        if(addHeader){
+            hef = new HeaderFragment();
+            Bundle sentData = new Bundle();
+            sentData.putInt("CHOICE",user_choice);
+            hef.setArguments(sentData);
+            fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
+        } else {
+            if(!isFirstChoice){
+                fTrans.remove(hef);
+            }
+        }
+
         fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
         fTrans.commit();
+    }
+
+    public void locateForWeather(){
+
+        locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //Check gps is enable or not
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            //Enable gps
+            OnGPS();
+        }
+        else
+        {
+            //Get latitude and longitude
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
+            }else{
+                Geocoder geocoder = new Geocoder(this);
+
+                Location LocationGps= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+                List<Address> addresses = null;
+                if (LocationGps !=null)
+                {
+                    try {
+                        addresses = geocoder.getFromLocation(LocationGps.getLatitude(), LocationGps.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if (LocationNetwork !=null)
+                {
+                    try {
+                        addresses = geocoder.getFromLocation(LocationNetwork.getLatitude(), LocationNetwork.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if (LocationPassive !=null)
+                {
+                    try {
+                        addresses = geocoder.getFromLocation(LocationPassive.getLatitude(), LocationPassive.getLongitude(), 1);
+                        city = addresses.get(0).getLocality();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    city = "Salt Lake City";
+                    Log.d("failLoc","fail to locate you for weather, using SLC");
+                }
+            }
+
+//            Geocoder geocoder = new Geocoder(this);
+//            try {
+//                List<Address> addresses = geocoder.getFromLocation(lat, longi, 1);
+//                city = addresses.get(0).getLocality();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+
     }
 
     private void findHikeAround(){
@@ -415,6 +499,11 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
+    }
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }
 

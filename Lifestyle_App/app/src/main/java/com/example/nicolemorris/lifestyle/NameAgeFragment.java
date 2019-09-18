@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -22,6 +23,7 @@ public class NameAgeFragment extends Fragment implements View.OnClickListener{
     Calendar date;
     NameAgeOnDataPass mDataPasser;
     DatePickerDialog picker;
+    TextView tvBirthday;
 
     //Callback interface
     public interface NameAgeOnDataPass{
@@ -48,6 +50,7 @@ public class NameAgeFragment extends Fragment implements View.OnClickListener{
         bDate.setOnClickListener(this);
 
         tname = view.findViewById(R.id.et_name);
+        tvBirthday = view.findViewById(R.id.tv_birthday_d);
 
         bNext = view.findViewById(R.id.b_next);
         bNext.setOnClickListener(this);
@@ -71,18 +74,23 @@ public class NameAgeFragment extends Fragment implements View.OnClickListener{
                                 Calendar c = Calendar.getInstance();
                                 c.set(year, monthOfYear, dayOfMonth);
                                 date = c;
+                                String b_day = Integer.toString(view.getMonth()) + "/" + Integer.toString(view.getDayOfMonth()) + "/" + Integer.toString(view.getYear());
+                                tvBirthday.setText(b_day);
                             }
                         }, year, month, day);
                 picker.show();
+
                 break;
             }
             case R.id.b_next: {
                 name = tname.getText().toString().trim();
                 if(name.equals("")){
                     Toast.makeText(getContext(), "Please input your name", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 if(date == null){
                     Toast.makeText(getContext(), "Please choose your birth date", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 mDataPasser.onNameAgeDataPass(date,name);
                 break;

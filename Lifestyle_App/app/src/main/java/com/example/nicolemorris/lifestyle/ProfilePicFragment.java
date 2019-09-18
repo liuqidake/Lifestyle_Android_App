@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -65,13 +66,26 @@ ProfilePicFragment extends Fragment
             if(data == null){
                 Toast.makeText(getContext(), "Unable to upload image", Toast.LENGTH_SHORT).show();
             }else{
-                Bundle extras = data.getExtras();
-                System.out.println("extrrrrrrrrrrrrrrrrrrrrra :"+extras==null);
-                image = (Bitmap) extras.get("data");
                 mIvPic = (ImageView) getActivity().findViewById(R.id.iv_profile);
-                mIvPic.setImageBitmap(image);
+                Bundle extras = data.getExtras();
+                if(extras != null){
+                    System.out.println("extrrrrrrrrrrrrrrrrrrrrra :"+extras==null);
+                    image = (Bitmap) extras.get("data");
+                    mIvPic.setImageBitmap(image);
+                }else {
+                    try {
+                        Uri imageFilePath = data.getData();
+                        image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageFilePath);
+                        mIvPic.setImageBitmap(image);
+                    }catch(Exception e){
+                        Toast.makeText(getActivity(), "Not able to get the image from gallery", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
 
+        }else{
+            System.out.println("result is not ok");
         }
     }
 
@@ -85,10 +99,10 @@ ProfilePicFragment extends Fragment
                 break;
             }
             case R.id.button_select_pic:{
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                // Launching the Intent
+                startActivityForResult(intent,PICK_IMAGE);
                 break;
             }
             case R.id.button_take_pic: {
