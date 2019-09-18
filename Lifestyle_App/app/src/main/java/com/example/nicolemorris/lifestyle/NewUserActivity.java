@@ -184,7 +184,7 @@ public class NewUserActivity extends AppCompatActivity
         }
         else if (creation_step == 6) {
 
-            updateUserProfile(user);
+            //updateUserProfile(user);
 
             Intent userIntent = new Intent(this, MainActivity.class);
             //User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
