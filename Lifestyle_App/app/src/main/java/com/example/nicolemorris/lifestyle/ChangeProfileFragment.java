@@ -121,25 +121,39 @@ public class ChangeProfileFragment extends Fragment
         s_h_inches.setSelection(inchPosition);
         inches = user.getInches();
 
+
+        weight  =user.getWeight();
+        String w= ""+weight;
+        int w1Pos, w2Pos, w3Pos;
+        if(w.length() == 3){
+            w1Pos = num_adapter.getPosition(w.substring(0,1));
+            w2Pos = num_adapter.getPosition(w.substring(1,2));
+            w3Pos = num_adapter.getPosition(w.substring(2,3));
+        }else if (w.length()==2){
+            w1Pos = num_adapter.getPosition("0");
+            w2Pos = num_adapter.getPosition(w.substring(0,1));
+            w3Pos = num_adapter.getPosition(w.substring(1,2));
+        }else{
+            w1Pos = num_adapter.getPosition("0");
+            w2Pos = num_adapter.getPosition("0");
+            w3Pos = num_adapter.getPosition(w.substring(0,1));
+        }
+
         s_weight1 = (Spinner)view.findViewById(R.id.s_weight1);
         s_weight1.setOnItemSelectedListener(this);
         s_weight1.setAdapter(num_adapter);
-        int w1Position = num_adapter.getPosition((user.getWeight()+"").substring(0, 1));
-        s_weight1.setSelection(w1Position);
+        s_weight1.setSelection(w1Pos);
 
         s_weight2 = (Spinner)view.findViewById(R.id.s_weight2);
         s_weight2.setOnItemSelectedListener(this);
         s_weight2.setAdapter(num_adapter);
-        int w2Position = num_adapter.getPosition((user.getWeight()+"").substring(1, 2));
-        s_weight2.setSelection(w2Position);
+        s_weight2.setSelection(w2Pos);
 
         s_weight3 = (Spinner)view.findViewById(R.id.s_weight3);
         s_weight3.setOnItemSelectedListener(this);
         s_weight3.setAdapter(num_adapter);
-        int w3Position = num_adapter.getPosition((user.getWeight()+"").substring(2));
-        s_weight3.setSelection(w3Position);
+        s_weight3.setSelection(w3Pos);
 
-        weight = user.getWeight();
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
