@@ -195,6 +195,8 @@ public class NewUserActivity extends AppCompatActivity
                 updateUserProfile(user);
             }
 
+            //updateUserProfile(user);
+
             Intent userIntent = new Intent(this, MainActivity.class);
             //User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
             userIntent.putExtra("user", user);

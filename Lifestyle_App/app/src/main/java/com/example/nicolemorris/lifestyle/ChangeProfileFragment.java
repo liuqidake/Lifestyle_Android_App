@@ -29,8 +29,12 @@ import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
 
 public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -56,6 +60,11 @@ public class ChangeProfileFragment extends Fragment
     LocationManager locationManager;
     private static final int REQUEST_LOCATION = 1;
     Double latitude, longitude;
+
+    FileOutputStream out;
+    FileInputStream in;
+
+    String fileName = "user_profile";
 
     public interface ChangeProfileOnDataPass{
         public void onChangeProfileDataPass(User user);
@@ -239,6 +248,7 @@ public class ChangeProfileFragment extends Fragment
                 newWeight = Integer.parseInt(w1+w2+w3);
                 if(newWeight != 0) weight = newWeight;
                 user = new User(name, age, feet, inches, city, state, weight, sex);
+                updateUserProfile(user);
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
@@ -362,5 +372,40 @@ public class ChangeProfileFragment extends Fragment
         return getResources().getBoolean(R.bool.isTablet);
     }
 
+
+    private void updateUserProfile(User user){
+        try {
+            in = getActivity().openFileInput(fileName);
+            String temp = "";
+            Scanner sc = new Scanner((InputStream)in);
+            while(sc.hasNextLine()){
+                String next = sc.nextLine();
+                String currName = next.substring(0, next.indexOf(","));
+                if(user.getName().equals(currName)){
+                    temp += serializeUser(user);
+                    if(sc.hasNextLine()){
+                        temp+="\n";
+                    }
+                }else{
+                    temp += next;
+                    if(sc.hasNextLine()){
+                        temp+="\n";
+                    }
+                }
+            }
+            out = getActivity().openFileOutput(fileName, Context.MODE_PRIVATE);
+            out.write(temp.getBytes());
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String serializeUser(User user){
+        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
+                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+"\n";
+        return content;
+    }
 
 }
