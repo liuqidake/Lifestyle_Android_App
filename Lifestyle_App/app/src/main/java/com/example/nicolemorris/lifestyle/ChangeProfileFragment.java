@@ -247,9 +247,15 @@ public class ChangeProfileFragment extends Fragment
                 if(newInches != 0) inches = newInches;
                 newWeight = Integer.parseInt(w1+w2+w3);
                 if(newWeight != 0) weight = newWeight;
-                String oldName = user.getName();
-                user = new User(name, age, feet, inches, city, state, weight, sex);
-                updateUserProfile(user, oldName);
+                if(user != null){
+                    String oldName = user.getName();
+                    user = new User(name, age, feet, inches, city, state, weight, sex);
+                    updateUserProfile(user, oldName);
+                } else {
+                    user = new User(name, age, feet, inches, city, state, weight, sex);
+                    saveUserProfile(user);
+                }
+
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
@@ -406,6 +412,18 @@ public class ChangeProfileFragment extends Fragment
     boolean isTablet()
     {
         return getResources().getBoolean(R.bool.isTablet);
+    }
+
+    private void saveUserProfile(User user){
+        try {
+            out = getActivity().openFileOutput(fileName, Context.MODE_APPEND);
+            String fileContents = serializeUser(user);
+            out.write(fileContents.getBytes());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
