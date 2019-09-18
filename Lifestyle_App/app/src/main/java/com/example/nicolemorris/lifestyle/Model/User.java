@@ -100,6 +100,9 @@ public class User implements Parcelable {
     public Integer getGoal() {return this.goal;}
     public Integer getAct_level() {return this.act_level;}
     public Integer getWeight_amt() {return this.weight_amt;}
+    public int getHeight(){
+        return 12*feet + inches;
+    }
 
     @Override
     public int describeContents() {
