@@ -104,19 +104,17 @@ public class ChangeProfileFragment extends Fragment
         s_h_inches.setOnItemSelectedListener(this);
         s_h_inches.setAdapter(num_adapter);
 
-
-
-
         s_weight1 = (Spinner)view.findViewById(R.id.s_weight1);
         s_weight1.setOnItemSelectedListener(this);
+        s_weight1.setAdapter(num_adapter);
 
         s_weight2 = (Spinner)view.findViewById(R.id.s_weight2);
         s_weight2.setOnItemSelectedListener(this);
-
+        s_weight2.setAdapter(num_adapter);
 
         s_weight3 = (Spinner)view.findViewById(R.id.s_weight3);
         s_weight3.setOnItemSelectedListener(this);
-
+        s_weight3.setAdapter(num_adapter);
 
         ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
@@ -162,11 +160,9 @@ public class ChangeProfileFragment extends Fragment
                 w3Pos = num_adapter.getPosition(w.substring(0,1));
             }
 
-            s_weight1.setAdapter(num_adapter);
+
             s_weight1.setSelection(w1Pos);
-            s_weight2.setAdapter(num_adapter);
             s_weight2.setSelection(w2Pos);
-            s_weight3.setAdapter(num_adapter);
             s_weight3.setSelection(w3Pos);
             int genderPosition = num_adapter.getPosition(user.getSex());
             s_sex.setSelection(genderPosition);
@@ -234,7 +230,8 @@ public class ChangeProfileFragment extends Fragment
                 }
 
                 if(date == null){
-                    age = user.getAge();
+//                    age = user.getAge();
+                    age = Integer.parseInt(etAge.getText().toString());
                 }
 
                 if(newFeet!=0) feet = newFeet;
