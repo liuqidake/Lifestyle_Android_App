@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,8 +123,8 @@ public class WeatherFragment extends Fragment implements LoaderManager.LoaderCal
                 e.printStackTrace();
             }
             if(mWeatherData!=null) {
-                System.out.println("Rain = " + mWeatherData.getRain().getAmount());
-                String rain = (mWeatherData.getRain().getTime()==null)?"Low":mWeatherData.getRain().getTime();
+                // rain,snow,clouds are all null. use humidity form the only not null variable getCurrentCondition to predict rain
+                String rain = (mWeatherData.getCurrentCondition().getHumidity()<90)?"Low":"high";
                 mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) +  "\u00B0 C");
                 mTvHum.setText("" + rain);
             }

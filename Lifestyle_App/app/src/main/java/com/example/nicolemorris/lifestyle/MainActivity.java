@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity
                 Bundle sentData = new Bundle();
                 sentData.putInt("Goal",u.getGoal());
                 sentData.putInt("Act_Level",u.getAct_level());
-                sentData.putInt("Amount", u.getGoal());
+                sentData.putInt("Amount", u.getWeight_amt());
                 gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {
@@ -201,8 +201,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 5){
 
-            locateForWeather();
-
+            //locateForWeather();
+            city = "Houston";
             isFirstChoice = false;
 
             wf = new WeatherFragment();

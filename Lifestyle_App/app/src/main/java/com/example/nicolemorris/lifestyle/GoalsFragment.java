@@ -55,7 +55,11 @@ public class GoalsFragment extends Fragment
         tvGoalHC = view.findViewById(R.id.tv_goal_hc);
 
         tvCalAmt = view.findViewById(R.id.tv_cal_amt_d);
-        tvCalAmt.setText(Long.toString(Math.round(calcCalories())));
+        Long cal = Math.round(calcCalories());
+        if(cal<1000){ //200 for male 1000 for female
+            Toast.makeText(getContext(), "not enough calories take in. Maybe reset your goal.", Toast.LENGTH_SHORT).show();
+        }
+        tvCalAmt.setText(cal.toString());
 
         tvGoalAmt = view.findViewById(R.id.tv_goal_amt_d);
         tvGoalAmt.setText(Integer.toString(weight_amt));
