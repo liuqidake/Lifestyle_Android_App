@@ -189,15 +189,12 @@ public class NewUserActivity extends AppCompatActivity
         }
         else if (creation_step == 6) {
 
-<<<<<<< HEAD
             if(isTablet()){
                 saveUserProfile(user);
             } else {
                 updateUserProfile(user);
             }
 
-=======
->>>>>>> 15b99d4d1c1e63607858b133e556fd57d3390e40
             //updateUserProfile(user);
 
             Intent userIntent = new Intent(this, MainActivity.class);
