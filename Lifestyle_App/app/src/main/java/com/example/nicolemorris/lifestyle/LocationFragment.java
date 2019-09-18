@@ -88,9 +88,11 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
             }
             case R.id.b_next:{
                 //NEED TO ADD LOCATION TO PASS FOR STORAGE :)
+                state = stateText.getText().toString();
+                city = cityText.getText().toString();
                 location[0] = state;
                 location[1] = city;
-                if(location.equals("")){
+                if(state.equals("") || city.equals("")){
                     Toast.makeText(getContext(), "Please specify your location", Toast.LENGTH_SHORT).show();
                 }
                 mDataPasser.onLocationDataPass(location);

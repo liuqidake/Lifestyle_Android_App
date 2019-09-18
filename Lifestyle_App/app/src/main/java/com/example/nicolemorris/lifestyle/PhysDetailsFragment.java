@@ -16,6 +16,7 @@ public class PhysDetailsFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     Spinner s_h_feet,s_h_inches,s_w_1,s_w_2,s_w_3,s_sex;
+    String w1, w2, w3;
     String[] dataToPass;
     PhysOnDataPass mDataPasser;
     Button nextButton;
@@ -101,7 +102,15 @@ public class PhysDetailsFragment extends Fragment
                 break;
             }
             case R.id.s_weight1: {
-                dataToPass[2] = (String)parent.getItemAtPosition(pos);
+                w1 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight2: {
+                w2 = (String)parent.getItemAtPosition(pos);
+                break;
+            }
+            case R.id.s_weight3: {
+                w3 = (String)parent.getItemAtPosition(pos);
                 break;
             }
             case R.id.s_sex: {
@@ -126,7 +135,7 @@ public class PhysDetailsFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_next: {
-
+                dataToPass[2] = w1+w2+w3;
                 //NEED TO ADD HEIGHT, WEIGHT, SEX TO PASS FOR STORAGE :)
                 mDataPasser.onPhysDataPass(dataToPass);
                 break;

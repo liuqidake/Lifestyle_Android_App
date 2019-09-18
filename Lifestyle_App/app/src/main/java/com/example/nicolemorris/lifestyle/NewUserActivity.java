@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -32,6 +33,7 @@ public class NewUserActivity extends AppCompatActivity
     FileInputStream in;
 
     String fileName = "user_profile";
+    String folder = "profile.images";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +170,7 @@ public class NewUserActivity extends AppCompatActivity
             ChangeProfileFragment fragment = new ChangeProfileFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
+            //bundle.putByteArray("image", convertImageToByteArray(profileImage));
             fragment.setArguments(bundle);
 
             fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
@@ -237,18 +240,17 @@ public class NewUserActivity extends AppCompatActivity
         }
     }
 
-//    private void saveProfileImage(Bitmap profileImage){
+//    private String saveProfileImage(){
 //        ContextWrapper cw = new ContextWrapper(this);
-//        // path to /data/data/yourapp/app_data/imageDir
 //        File directory = cw.getDir(folder, Context.MODE_PRIVATE);
 //        // Create imageDir
-//        File mypath=new File(directory,username+".jpg");
+//        File mypath=new File(directory,user.getName()+".jpg");
 //
 //        FileOutputStream fos = null;
 //        try {
 //            fos = new FileOutputStream(mypath);
 //            // Use the compress method on the BitMap object to write image to the OutputStream
-//            profileImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//            profileImage.compress(Bitmap.CompressFormat.PNG, 50, fos);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        } finally {
@@ -258,6 +260,14 @@ public class NewUserActivity extends AppCompatActivity
 //                e.printStackTrace();
 //            }
 //        }
+//
+//        return directory.getAbsolutePath();
 //    }
+
+    private byte[] convertImageToByteArray(Bitmap image){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
 
 }
