@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity
                     city = "Salt Lake City";
                     Log.d("failLoc","fail to locate you for weather, using SLC");
                 }
+//                city = "Houston"; //For testing (currently pooring rain (tropical storm)
             }
 
 //            Geocoder geocoder = new Geocoder(this);

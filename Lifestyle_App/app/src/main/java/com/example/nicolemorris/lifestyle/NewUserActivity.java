@@ -122,7 +122,12 @@ public class NewUserActivity extends AppCompatActivity
 
         TitleFragment tf = new TitleFragment();
         Bundle sentData = new Bundle();
-        sentData.putInt("STEP",creation_step);
+        if(isTablet()){
+            sentData.putInt("STEP",0);
+        } else {
+            sentData.putInt("STEP",creation_step);
+        }
+
         tf.setArguments(sentData);
         fTrans.replace(R.id.fl_frag_ph_1, tf, "Title");
 
