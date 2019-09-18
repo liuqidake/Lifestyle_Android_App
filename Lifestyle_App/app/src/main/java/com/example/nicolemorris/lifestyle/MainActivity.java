@@ -168,9 +168,7 @@ public class MainActivity extends AppCompatActivity
                 //Launch fitness goals
                 gf = new GoalsFragment();
                 Bundle sentData = new Bundle();
-                sentData.putInt("Goal",u.getGoal());
-                sentData.putInt("Act_Level",u.getAct_level());
-                sentData.putInt("Amount", u.getGoal());
+                sentData.putParcelable("user", u);
                 gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
             } else {

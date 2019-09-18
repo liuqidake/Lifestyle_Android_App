@@ -1,7 +1,6 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,18 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.nicolemorris.lifestyle.Model.User;
 
 public class GoalsFragment extends Fragment
         implements View.OnClickListener {
 
+    User u;
     GoalsOnDataPass mDataPasser;
     Button bChangeGoal;
     TextView tvCalAmt, tvGoalTxt, tvGoalAmt, tvGoalHC;
-    int user_weight = 72; //Weight of user
-    int user_height = 175; //Height of user
-    boolean userIsMale = true; //Male or female
-    int user_age = 27; //Age of user
+//    int user_weight = 72; //Weight of user
+//    int user_height = 175; //Height of user
+//    boolean userIsMale = true; //Male or female
+//    int user_age = 27; //Age of user
     int goal; //0 = lose weight, 1 = maintain weight, 2 = gain weight
     int act_level; //0 = sedentary, 1 = light, 2 = moderate, 3 = very, 4 = extremely
     int weight_amt; //If goal to lose or gain weight, amount to lose or gain
@@ -46,10 +47,14 @@ public class GoalsFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_goals, container, false);
 
+        u = getArguments().getParcelable("user");
         //Get arguments
-        goal = getArguments().getInt("Goal");
-        act_level = getArguments().getInt("Act_Level");
-        weight_amt = getArguments().getInt("Amount");
+//        goal = getArguments().getInt("Goal");
+//        act_level = getArguments().getInt("Act_Level");
+//        weight_amt = getArguments().getInt("Amount");
+        goal = u.getGoal();
+        act_level = u.getAct_level();
+        weight_amt = u.getWeight_amt();
 
         tvGoalTxt = view.findViewById(R.id.tv_goal_txt_d);
         tvGoalHC = view.findViewById(R.id.tv_goal_hc);
@@ -114,10 +119,10 @@ public class GoalsFragment extends Fragment
     private double calcBMR(){
         double bmr = 0.0;
 
-        if(userIsMale){
-            bmr = 66 + (6.3 * user_weight) + (12.9 * user_height) - (6.8 * user_age);
+        if(u.getSex().equals("Male")){
+            bmr = 66 + (6.3 * u.getWeight()) + (12.9 * u.getHeight()) - (6.8 * u.getAge());
         } else {
-            bmr = 655 + (4.3 * user_weight) + (4.7 * user_height) - (4.7 * user_age);
+            bmr = 655 + (4.3 * u.getWeight()) + (4.7 * u.getHeight()) - (4.7 * u.getAge());
         }
         return bmr;
     }
@@ -145,5 +150,6 @@ public class GoalsFragment extends Fragment
             return bmr * 1.9;
         }
     }
+
 
 }
