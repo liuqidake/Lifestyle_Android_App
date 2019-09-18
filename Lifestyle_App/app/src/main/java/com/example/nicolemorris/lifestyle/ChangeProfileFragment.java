@@ -247,8 +247,9 @@ public class ChangeProfileFragment extends Fragment
                 if(newInches != 0) inches = newInches;
                 newWeight = Integer.parseInt(w1+w2+w3);
                 if(newWeight != 0) weight = newWeight;
+                String oldName = user.getName();
                 user = new User(name, age, feet, inches, city, state, weight, sex);
-                updateUserProfile(user);
+                updateUserProfile(user, oldName);
                 userDataPasser.onChangeProfileDataPass(user);
                 break;
             }
@@ -367,7 +368,7 @@ public class ChangeProfileFragment extends Fragment
         alertDialog.show();
     }
 
-    private void updateUserProfile(User user){
+    private void updateUserProfile(User user, String oldName){
         try {
             in = getActivity().openFileInput(fileName);
             String temp = "";
@@ -375,7 +376,7 @@ public class ChangeProfileFragment extends Fragment
             while(sc.hasNextLine()){
                 String next = sc.nextLine();
                 String currName = next.substring(0, next.indexOf(","));
-                if(user.getName().equals(currName)){
+                if(oldName.equals(currName)){
                     temp += serializeUser(user);
                     if(sc.hasNextLine()){
                         temp+="\n";
