@@ -199,8 +199,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 5){
 
-            locateForWeather();
-
+            //locateForWeather();
+            city = "Houston";
             isFirstChoice = false;
 
             wf = new WeatherFragment();
