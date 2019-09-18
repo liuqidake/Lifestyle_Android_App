@@ -122,8 +122,9 @@ public class WeatherFragment extends Fragment implements LoaderManager.LoaderCal
                 e.printStackTrace();
             }
             if(mWeatherData!=null) {
-                String rain = (mWeatherData.getRain().getTime()==null)?"Not gonna rain today":mWeatherData.getRain().getTime();
-                mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) + " C");
+                System.out.println("Rain = " + mWeatherData.getRain().getAmount());
+                String rain = (mWeatherData.getRain().getTime()==null)?"Low":mWeatherData.getRain().getTime();
+                mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) +  "\u00B0 C");
                 mTvHum.setText("" + rain);
             }
         }

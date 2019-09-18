@@ -59,7 +59,7 @@ public class ReviewFragment extends Fragment
         height.setText(Integer.toString(u.getFeet()) + " feet " + Integer.toString(u.getInches()) + " inches");
 
         weight = view.findViewById(R.id.tv_weight_d);
-        weight.setText(Integer.toString(u.getWeight()) + "pounds");
+        weight.setText(Integer.toString(u.getWeight()) + " pounds");
 
         sex = view.findViewById(R.id.tv_sex_d);
         sex.setText(u.getSex());
