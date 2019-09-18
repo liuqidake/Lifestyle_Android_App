@@ -1,10 +1,21 @@
 package com.example.nicolemorris.lifestyle;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +30,7 @@ import android.widget.Toast;
 import com.example.nicolemorris.lifestyle.Model.User;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -27,7 +39,7 @@ public class ChangeProfileFragment extends Fragment
     Spinner s_h_feet,s_h_inches,s_weight1, s_weight2, s_weight3,s_sex;
     Calendar date;
     String[] dataToPass;
-    Button bSave, bDate;
+    Button bSave, bDate,bLocation;
 
     String w1="",w2="",w3="";
 
@@ -40,6 +52,10 @@ public class ChangeProfileFragment extends Fragment
     ChangeProfileOnDataPass userDataPasser;
 
     DatePickerDialog picker;
+
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION = 1;
+    Double latitude, longitude;
 
     public interface ChangeProfileOnDataPass{
         public void onChangeProfileDataPass(User user);
@@ -71,6 +87,9 @@ public class ChangeProfileFragment extends Fragment
 
         bDate = view.findViewById(R.id.b_birthday);
         bDate.setOnClickListener(this);
+
+        bLocation = view.findViewById(R.id.b_location);
+        bLocation.setOnClickListener(this);
 
         etCity = view.findViewById(R.id.tv_city_hc);
         city = user.getCity();
@@ -221,12 +240,101 @@ public class ChangeProfileFragment extends Fragment
                                 if (today.get(Calendar.DAY_OF_YEAR) < date.get(Calendar.DAY_OF_YEAR)) {
                                     age--;
                                 }
+                                etAge.setText(""+age);
                             }
                         }, year, month, day);
                 picker.show();
                 break;
             }
+            case R.id.b_location:{
+                findLocation();
+                Geocoder g = new Geocoder(getContext());
+                try {
+                    List<Address> addresses = g.getFromLocation(latitude, longitude, 1);
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
+                    etCity.setText(city);
+                    etState.setText(state);
+                }catch(Exception e){
+                    Toast.makeText(getActivity(), "Can't Get Your Location", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
         }
+    }
+
+    private void findLocation(){
+        locationManager=(LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        //Check gps is enable or not
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            //Enable gps
+            OnGPS();
+        }
+        else
+        {
+            //Get latitude and longitude and open map based on the location
+            getLocation();
+        }
+    }
+
+    private void getLocation() {
+
+        //Check Permissions again
+
+        if (ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+
+                Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+        else
+        {
+            Location LocationGps= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+            if (LocationGps !=null)
+            {
+                latitude=LocationGps.getLatitude();
+                longitude=LocationGps.getLongitude();
+            }
+            else if (LocationNetwork !=null)
+            {
+                latitude=LocationNetwork.getLatitude();
+                longitude=LocationNetwork.getLongitude();
+            }
+            else if (LocationPassive !=null)
+            {
+                latitude=LocationPassive.getLatitude();
+                longitude=LocationPassive.getLongitude();
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "Can't Get Your Location", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void OnGPS() {
+
+        final AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 
 

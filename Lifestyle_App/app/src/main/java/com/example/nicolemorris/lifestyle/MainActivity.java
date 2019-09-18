@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         u = readUserProfile();
+//        if(u!=null)
+//        {
+//            Bitmap profile_image = BitmapFactory.decodeFile("/data/data/com.example.nicolemorris.lifestyle/profile.images/"+u.getName()+".jpg");
+//        }
 
         System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
