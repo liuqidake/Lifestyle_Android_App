@@ -83,7 +83,7 @@ public class ChangeGoalFragment extends Fragment
             }
             case R.id.s_amount: {
                 weight_amt = parent.getSelectedItemPosition() + 1;
-                if(weight_amt>2){
+                if( weight_amt>2){
                     Toast.makeText(getContext(), "amount over 2 pounds!", Toast.LENGTH_SHORT).show();
                     break;
                 }

@@ -3,6 +3,7 @@ package com.example.nicolemorris.lifestyle;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class GoalsFragment extends Fragment
 
         tvCalAmt = view.findViewById(R.id.tv_cal_amt_d);
         Long cal = Math.round(calcCalories());
-        if(cal<1000){ //200 for male 1000 for female
+        if(cal<200 || (cal<1000 && u.getSex().equals("Female"))){ //200 for male 1000 for female
             Toast.makeText(getContext(), "not enough calories take in. Maybe reset your goal.", Toast.LENGTH_SHORT).show();
         }
         tvCalAmt.setText(cal.toString());
