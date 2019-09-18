@@ -71,16 +71,16 @@ public class GoalsFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_change_goal: {
-                String cal = tvCalAmt.getText().toString().trim();
-                String goal = tvGoalAmt.getText().toString().trim();
-                if(cal.equals("")){
-                    Toast.makeText(getContext(), "Please input how many calories to eat today", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if(goal == null){
-                    Toast.makeText(getContext(), "Please choose your goal", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+//                String cal = tvCalAmt.getText().toString().trim();
+//                String goal = tvGoalAmt.getText().toString().trim();
+//                if(cal.equals("")){
+//                    Toast.makeText(getContext(), "Please input how many calories to eat today", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
+//                if(goal == null){
+//                    Toast.makeText(getContext(), "Please choose your goal", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
                 mDataPasser.onGoalsDataPass();
                 break;
             }
