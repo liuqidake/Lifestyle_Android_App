@@ -3,9 +3,11 @@ package com.example.nicolemorris.lifestyle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 
@@ -13,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -22,8 +25,7 @@ public class NewUserActivity extends AppCompatActivity
         ReviewFragment.ReviewOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass{
 
     int creation_step = 0;
-    String name, city, state, sex;
-    Bitmap profileImage;
+    String name, city, state, sex, profile_image;
     int feet, inches, weight;
     int age;
 
@@ -92,8 +94,8 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
-    public void onProfilePicDataPass(Bitmap image) {
-        profileImage = image;
+    public void onProfilePicDataPass(String image) {
+        profile_image = image;
         creation_step = 4;
         setView();
 
@@ -150,18 +152,17 @@ public class NewUserActivity extends AppCompatActivity
             creation_step++;
 
         } else if (creation_step == 3) {
-            //Pass username to profile picture fragment
-
             //Profile Picture
-            fTrans.replace(R.id.fl_frag_ph_2, new ProfilePicFragment(), "Location");
+            ProfilePicFragment fragment = new ProfilePicFragment();
+            //fragment.setArguments(bundle);
+            fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
 
          }
         else if (creation_step == 4) {
             //Intent userIntent = new Intent(this, MainActivity.class);
-            user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim());
-            System.out.println(user.getFeet());
-            System.out.println(user.getWeight());
+            user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim(), profile_image);
+            System.out.println(user.getUri());
             saveUserProfile(user);
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
@@ -195,8 +196,6 @@ public class NewUserActivity extends AppCompatActivity
                 updateUserProfile(user);
             }
 
-            //updateUserProfile(user);
-
             Intent userIntent = new Intent(this, MainActivity.class);
             //User user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight.trim(), sex.trim());
             userIntent.putExtra("user", user);
@@ -209,7 +208,7 @@ public class NewUserActivity extends AppCompatActivity
 
     public String serializeUser(User user){
         String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
-                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+"\n";
+                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+","+user.getUri()+"\n";
         return content;
     }
 
@@ -280,11 +279,11 @@ public class NewUserActivity extends AppCompatActivity
 //        return directory.getAbsolutePath();
 //    }
 
-    private byte[] convertImageToByteArray(Bitmap image){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
+//    private byte[] convertImageToByteArray(Bitmap image){
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        return stream.toByteArray();
+//    }
 
     boolean isTablet()
     {

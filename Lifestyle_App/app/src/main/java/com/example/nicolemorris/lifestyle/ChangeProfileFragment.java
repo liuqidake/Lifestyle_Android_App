@@ -11,6 +11,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -49,10 +50,10 @@ public class ChangeProfileFragment extends Fragment
 
     String name, city, state, sex;
     int feet, inches, age, newFeet, newInches, weight, newWeight;
+    String image_uri;
 
 
     User user;
-    Bitmap profile_image;
     ChangeProfileOnDataPass userDataPasser;
 
     DatePickerDialog picker;
@@ -177,6 +178,7 @@ public class ChangeProfileFragment extends Fragment
             int genderPosition = gender_adapter.getPosition(sex);
             s_sex.setSelection(genderPosition);
 
+            image_uri = user.getUri();
         }
 
         //byte[] imageByte = getArguments().getByteArray("image");
@@ -249,10 +251,10 @@ public class ChangeProfileFragment extends Fragment
                 if(newWeight != 0) weight = newWeight;
                 if(user != null){
                     String oldName = user.getName();
-                    user = new User(name, age, feet, inches, city, state, weight, sex);
+                    user = new User(name, age, feet, inches, city, state, weight, sex, image_uri);
                     updateUserProfile(user, oldName);
                 } else {
-                    user = new User(name, age, feet, inches, city, state, weight, sex);
+                    user = new User(name, age, feet, inches, city, state, weight, sex, image_uri);
                     saveUserProfile(user);
                 }
 

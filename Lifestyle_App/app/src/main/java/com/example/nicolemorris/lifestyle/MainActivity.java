@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
 
-//    User u = new User("Andrew Android", 24, 5,8,"Lehi","Utah",160,"Male");
     User u;
     String username;
     int user_choice;
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity
     FileInputStream in;
     String fileName = "user_profile";
     String folder = "profile_images/";
-
     String city = "default city";
 
     @Override
@@ -81,10 +80,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         u = readUserProfile();
-//        if(u!=null)
-//        {
-//            Bitmap profile_image = BitmapFactory.decodeFile("/data/data/com.example.nicolemorris.lifestyle/profile.images/"+u.getName()+".jpg");
-//        }
+
 
         System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
@@ -98,12 +94,10 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(messageIntent);
 
         } else if (user_choice != 0){
-
             changeFragments();
-
         } else {
-
             Intent messageIntent = new Intent(this, HomeActivity.class);
+            messageIntent.putExtra("uri", u.getUri());
             this.startActivity(messageIntent);
         }
 
@@ -234,6 +228,7 @@ public class MainActivity extends AppCompatActivity
             hef = new HeaderFragment();
             Bundle sentData = new Bundle();
             sentData.putInt("CHOICE",user_choice);
+            sentData.putString("uri", u.getUri());
             hef.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
         } else {
@@ -494,7 +489,7 @@ public class MainActivity extends AppCompatActivity
             if(sc.hasNextLine()){
                 userInfo = sc.nextLine();
                 String[] info = userInfo.split(",");
-                User user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7]);
+                User user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], info[8]);
                 return user;
             }
             return null;
@@ -503,6 +498,7 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
 
     boolean isTablet()
     {

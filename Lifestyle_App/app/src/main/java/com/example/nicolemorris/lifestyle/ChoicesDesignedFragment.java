@@ -15,6 +15,7 @@ public class ChoicesDesignedFragment extends Fragment
 
     OnChoiceDataPass mDataPasser;
     ImageButton profile_data, goals, bmi, hikes, weather, help, pic;
+    String image_uri;
 
     //Callback interface
     public interface OnChoiceDataPass{
@@ -45,6 +46,11 @@ public class ChoicesDesignedFragment extends Fragment
         hikes = view.findViewById(R.id.ib_hike);
         weather = view.findViewById(R.id.ib_weather);
         help = view.findViewById(R.id.ib_help);
+        pic = view.findViewById(R.id.ib_choose_profile);
+
+        image_uri = getArguments().getString("uri");
+        Uri profile_image = Uri.parse(image_uri);
+        pic.setImageURI(profile_image);
 
         //Set listeners
         profile_data.setOnClickListener(this);
