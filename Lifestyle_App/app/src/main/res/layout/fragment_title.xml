@@ -18,7 +18,7 @@
         android:text="Lifestyle"
         android:textColor="@color/darkBlue"
         android:textSize="150dp"
-        app:fontFamily="@font/bigelow_rules"
+        app:fontFamily="@font/bigelowrules"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
