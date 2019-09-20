@@ -1,6 +1,7 @@
 package com.example.nicolemorris.lifestyle.Model;
 
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,11 +12,12 @@ public class User implements Parcelable {
     Integer goal; //0 = lose weight, 1 = maintain weight, 2 = gain weight
     Integer act_level; //0 = sedentary, 1 = light, 2 = moderate, 3 = very, 4 = extremely
     Integer weight_amt; //If goal to lose or gain weight, amount to lose or gain
+    String uri;
 
     public User(){
 
     }
-    public User(String name, int age, int feet, int inches, String city, String state, int weight, String sex){
+    public User(String name, int age, int feet, int inches, String city, String state, int weight, String sex, String uri){
         this.name = name;
         this.age = age;
         this.city = city;
@@ -25,6 +27,7 @@ public class User implements Parcelable {
         this.weight = weight;
         this.sex = sex;
         this.hasGoal = false;
+        this.uri = uri;
     }
 
     public void setGoal(int goal, int act_level, int weight_amt){
@@ -44,6 +47,7 @@ public class User implements Parcelable {
         dest.writeInt(inches);
         dest.writeInt(weight);
         dest.writeString(sex);
+        dest.writeString(uri);
         if(goal != null){
             dest.writeInt(goal);
         }
@@ -64,6 +68,7 @@ public class User implements Parcelable {
         inches = in.readInt();
         weight = in.readInt();
         sex = in.readString();
+        uri = in.readString();
         System.out.println(in.dataSize());
         if(in.dataSize() > 0){
             hasGoal = true;
@@ -103,11 +108,13 @@ public class User implements Parcelable {
     public int getHeight(){
         return 12*feet + inches;
     }
+    public String getUri() { return this.uri;}
 
     @Override
     public int describeContents() {
         return 0;
     }
+
 
 
 }

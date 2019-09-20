@@ -1,11 +1,14 @@
 package com.example.nicolemorris.lifestyle;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,8 +18,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class
 ProfilePicFragment extends Fragment
@@ -27,14 +33,17 @@ ProfilePicFragment extends Fragment
     Button bTakePic,bSelectPic,bNext;
     ProfilePicOnDataPass mDataPasser;
     ImageView mIvPic;
-    Bitmap image;
+    String image;
+    String name;
+
+    FileOutputStream out;
 
 
 
 
     //Callback interface
     public interface ProfilePicOnDataPass{
-        public void onProfilePicDataPass(Bitmap image);
+        public void onProfilePicDataPass(String image);
     }
 
     @Override
@@ -61,6 +70,8 @@ ProfilePicFragment extends Fragment
         bSelectPic = view.findViewById(R.id.button_select_pic);
         bSelectPic.setOnClickListener(this);
 
+        //name = getArguments().getString("username");
+
         return view;
     }
 
@@ -74,14 +85,16 @@ ProfilePicFragment extends Fragment
                 mIvPic = (ImageView) getActivity().findViewById(R.id.iv_profile);
                 Bundle extras = data.getExtras();
                 if(extras != null){
-                    System.out.println("extrrrrrrrrrrrrrrrrrrrrra :"+extras==null);
-                    image = (Bitmap) extras.get("data");
-                    mIvPic.setImageBitmap(image);
+                    Uri profile_image = getImageUri((Bitmap)extras.get("data"));
+                    image = profile_image.toString();
+                    mIvPic.setImageURI(profile_image);
                 }else {
                     try {
-                        Uri imageFilePath = data.getData();
-                        image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageFilePath);
-                        mIvPic.setImageBitmap(image);
+                        Uri profile_image = data.getData();
+                        image = profile_image.toString();
+                        System.out.println("uri is "+image);
+                        //image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageFilePath);
+                        mIvPic.setImageURI(profile_image);
                     }catch(Exception e){
                         Toast.makeText(getActivity(), "Not able to get the image from gallery", Toast.LENGTH_SHORT).show();
                     }
@@ -97,7 +110,6 @@ ProfilePicFragment extends Fragment
     @Override
     public void onClick(View view){
         switch(view.getId()){
-
             case R.id.b_next: {
                 //NEED TO ADD DATE TO PASS FOR STORAGE :)
                 mDataPasser.onProfilePicDataPass(image);
@@ -106,7 +118,6 @@ ProfilePicFragment extends Fragment
             case R.id.button_select_pic:{
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                // Launching the Intent
                 startActivityForResult(intent,PICK_IMAGE);
                 break;
             }
@@ -119,5 +130,49 @@ ProfilePicFragment extends Fragment
             }
         }
     }
+
+//    private Uri convertBitmaptoUri(Bitmap image){
+//        Uri tempUri = getImageUri(getApplicationContext(), photo);
+//        File finalFile = new File(getRealPathFromURI(tempUri));
+//    }
+
+    public Uri getImageUri(Bitmap image) {
+        try {
+            File f = new File(getContext().getCacheDir(), "temp");
+            f.createNewFile();
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+
+            return Uri.fromFile(f);
+        }catch(Exception e){
+            Toast.makeText(getActivity(), "Unable to get Image", Toast.LENGTH_SHORT).show();
+            return  null;
+        }
+    }
+
+
+//
+//    private void saveProfileImage(Uri image){
+//        try{
+//            String file = name;
+//            out = getActivity().openFileOutput(file, Context.MODE_PRIVATE);
+//            image.
+//            ObjectOutputStream os = new ObjectOutputStream(out);
+//            os.writeObject(this);
+//            os.close();
+//            out.close();
+//        } catch(Exception e){
+//            System.out.println(e);
+//            Toast.makeText(getActivity(), "Cannot save profile image", Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
 
 }

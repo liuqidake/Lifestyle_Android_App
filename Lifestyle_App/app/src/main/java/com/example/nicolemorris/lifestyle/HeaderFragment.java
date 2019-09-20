@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class HeaderFragment extends Fragment {
 
     int user_choice;
+    Uri profile_image;
     TextView tvHeaderTitle;
+    ImageButton imageBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,6 +26,11 @@ public class HeaderFragment extends Fragment {
 
         user_choice = getArguments().getInt("CHOICE");
         tvHeaderTitle = view.findViewById(R.id.tv_header_title);
+
+        String image_uri = getArguments().getString("uri");
+        profile_image = Uri.parse(image_uri);
+        imageBtn = view.findViewById(R.id.ib_profile);
+        imageBtn.setImageURI(profile_image);
         setHeaderTitle();
 
         return view;
@@ -56,5 +64,7 @@ public class HeaderFragment extends Fragment {
 
         }
     }
+
+
 
 }
