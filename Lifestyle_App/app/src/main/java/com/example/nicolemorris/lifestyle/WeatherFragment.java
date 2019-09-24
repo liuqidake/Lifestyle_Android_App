@@ -23,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -123,12 +125,9 @@ public class WeatherFragment extends Fragment implements LoaderManager.LoaderCal
                 e.printStackTrace();
             }
             if(mWeatherData!=null) {
-                // rain,snow,clouds are all null. use humidity form the only not null variable getCurrentCondition to predict rain
-                Log.d("testGetRain",mWeatherData.getRain().getTime());
-                Log.d("des",mWeatherData.getCurrentCondition().getDescr());
-                String rain = (mWeatherData.getCurrentCondition().getHumidity()<90)?"Low":"high";
+                String weatherKeyWord = mWeatherData.getWeather().getmDescription();
                 mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) +  "\u00B0 C");
-                mTvHum.setText("" + rain);
+                mTvHum.setText("" + weatherKeyWord);
             }
         }
     }
@@ -147,7 +146,7 @@ class WeatherData {
     private Rain mRain = new Rain();
     private Snow mSnow = new Snow();
     private Clouds mClouds = new Clouds();
-
+    private Weather mWeather = new Weather();
 
     public  class CurrentCondition {
         private long mWeatherId;
@@ -222,15 +221,15 @@ class WeatherData {
 
     }
 
-//    public class Weather{
-//        private int mId;
-//        private  String mMain;
-//        private  String mDescription;
-//        private  String mIcon;
-//
-//        public String getmDescription(){return mDescription;}
-//        public void setmDescription(String description){mDescription = description;}
-//    }
+    public class Weather{
+        private int mId;
+        private  String mMain;
+        private  String mDescription;
+        private  String mIcon;
+
+        public String getmDescription(){return mDescription;}
+        public void setmDescription(String description){mDescription = description;}
+    }
 
     public class Wind {
         private double mSpeed;
@@ -303,6 +302,9 @@ class WeatherData {
     public CurrentCondition getCurrentCondition(){
         return mCurrentCondition;
     }
+
+    public Weather getWeather(){return mWeather;}
+
 
     public void setTemperature(Temperature temperature){
         mTemperature = temperature;
@@ -389,8 +391,9 @@ class JSONWeatherUtils {
         WeatherData.CurrentCondition currentCondition = weatherData.getCurrentCondition();
         JSONObject jsonMain = jsonObject.getJSONObject("main");
 
-        JSONObject jsonWeather = jsonObject.getJSONObject("weather");
-        currentCondition.setDescr(jsonWeather.getString("description"));
+        WeatherData.Weather weather = weatherData.getWeather();
+        JSONObject jsonWeather = jsonObject.getJSONArray("weather").getJSONObject(0);
+        weather.setmDescription(jsonWeather.getString("description"));
 
         currentCondition.setHumidity(jsonMain.getInt("humidity"));
         currentCondition.setPressure(jsonMain.getInt("pressure"));
