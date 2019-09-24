@@ -89,7 +89,7 @@ public class NewUserActivity extends AppCompatActivity
     public void onLocationDataPass(String[] location) {
         state = location[0];
         city = location[1];
-        creation_step = 3;
+        creation_step = 8;
         setView();
     }
 
