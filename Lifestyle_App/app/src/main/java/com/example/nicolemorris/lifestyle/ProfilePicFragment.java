@@ -1,16 +1,24 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,9 +101,11 @@ ProfilePicFragment extends Fragment
                         Uri profile_image = data.getData();
                         image = profile_image.toString();
                         System.out.println("uri is "+image);
+                        //System.out.print("real path "+getPath(getContext(), profile_image));
                         //image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageFilePath);
                         mIvPic.setImageURI(profile_image);
                     }catch(Exception e){
+                        System.out.println(e);
                         Toast.makeText(getActivity(), "Not able to get the image from gallery", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -116,9 +126,11 @@ ProfilePicFragment extends Fragment
                 break;
             }
             case R.id.button_select_pic:{
-                Intent intent = new Intent(Intent.ACTION_PICK);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.setType("image/*");
-                startActivityForResult(intent,PICK_IMAGE);
+                if(intent.resolveActivity(getActivity().getPackageManager())!=null){
+                    startActivityForResult(intent, PICK_IMAGE);
+                }
                 break;
             }
             case R.id.button_take_pic: {
@@ -157,22 +169,126 @@ ProfilePicFragment extends Fragment
         }
     }
 
-
+//    private String getRealPathFromURI(Uri uri) {
+//        String result;
+//        String [] proj={MediaStore.Images.Media.DATA};
+//        Cursor cursor = getContext().getContentResolver().query(uri, proj, null, null, null);
+//        if (cursor == null) { // Source is Dropbox or other similar local file path
+//            result = uri.getPath();
+//        } else {
+//            cursor.moveToFirst();
+//            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+//            result = cursor.getString(idx);
+//            cursor.close();
+//        }
+//        return result;
+//    }
 //
-//    private void saveProfileImage(Uri image){
-//        try{
-//            String file = name;
-//            out = getActivity().openFileOutput(file, Context.MODE_PRIVATE);
-//            image.
-//            ObjectOutputStream os = new ObjectOutputStream(out);
-//            os.writeObject(this);
-//            os.close();
-//            out.close();
-//        } catch(Exception e){
-//            System.out.println(e);
-//            Toast.makeText(getActivity(), "Cannot save profile image", Toast.LENGTH_SHORT).show();
+//    @SuppressLint("NewApi")
+//    public static String getPath(Context context, Uri uri) {
+//
+//        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+//        if (ContextCompat.checkSelfPermission(getContext(),
+//                Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            ActivityCompat.requestPermissions(getActivity(),
+//                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
 //        }
 //
+//        // DocumentProvider
+//        else if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+//
+//                final String docId = DocumentsContract.getDocumentId(uri);
+//                final String[] split = docId.split(":");
+//                final String type = split[0];
+//
+//                Uri contentUri = null;
+//                if ("image".equals(type)) {
+//                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+//                } else if ("video".equals(type)) {
+//                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+//                } else if ("audio".equals(type)) {
+//                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+//                }
+//
+//                final String selection = "_id=?";
+//                final String[] selectionArgs = new String[] {
+//                        split[1]
+//                };
+//
+//                return getDataColumn(context, contentUri, selection, selectionArgs);
+//
+//        }
+//        // MediaStore (and general)
+//        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+//            return getDataColumn(context, uri, null, null);
+//        }
+//        // File
+//        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+//            return uri.getPath();
+//        }
+//
+//        return null;
+//    }
+//
+//    /**
+//     * Get the value of the data column for this Uri. This is useful for
+//     * MediaStore Uris, and other file-based ContentProviders.
+//     *
+//     * @param context The context.
+//     * @param uri The Uri to query.
+//     * @param selection (Optional) Filter used in the query.
+//     * @param selectionArgs (Optional) Selection arguments used in the query.
+//     * @return The value of the _data column, which is typically a file path.
+//     */
+//    public static String getDataColumn(Context context, Uri uri, String selection,
+//                                       String[] selectionArgs) {
+//
+//        Cursor cursor = null;
+//        final String column = "_data";
+//        final String[] projection = {
+//                column
+//        };
+//
+//        try {
+//            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+//                    null);
+//            if (cursor != null && cursor.moveToFirst()) {
+//                final int column_index = cursor.getColumnIndexOrThrow(column);
+//                return cursor.getString(column_index);
+//            }
+//        } finally {
+//            if (cursor != null)
+//                cursor.close();
+//        }
+//        return null;
+//    }
+//
+//
+//    /**
+//     * @param uri The Uri to check.
+//     * @return Whether the Uri authority is ExternalStorageProvider.
+//     */
+//    public static boolean isExternalStorageDocument(Uri uri) {
+//        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+//    }
+//
+//    /**
+//     * @param uri The Uri to check.
+//     * @return Whether the Uri authority is DownloadsProvider.
+//     */
+//    public static boolean isDownloadsDocument(Uri uri) {
+//        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+//    }
+//
+//    /**
+//     * @param uri The Uri to check.
+//     * @return Whether the Uri authority is MediaProvider.
+//     */
+//    public static boolean isMediaDocument(Uri uri) {
+//        return "com.android.providers.media.documents".equals(uri.getAuthority());
 //    }
 
 }

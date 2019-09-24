@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.io.File;
+
 public class ChoicesDesignedFragment extends Fragment
         implements View.OnClickListener {
 
@@ -50,6 +52,7 @@ public class ChoicesDesignedFragment extends Fragment
 
         image_uri = getArguments().getString("uri");
         Uri profile_image = Uri.parse(image_uri);
+        //Uri profile_image = Uri.fromFile(new File(image_uri));
         pic.setImageURI(profile_image);
 
         //Set listeners
