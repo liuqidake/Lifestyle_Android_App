@@ -265,7 +265,7 @@ public class ChangeProfileFragment extends Fragment
                     saveUserProfile(user);
                 }
 
-                userDataPasser.onChangeProfileDataPass(user,1);
+                userDataPasser.onChangeProfileDataPass(user,9);
                 break;
             }
             case R.id.b_birthday:{
