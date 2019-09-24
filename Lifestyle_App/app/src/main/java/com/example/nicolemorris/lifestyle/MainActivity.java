@@ -489,7 +489,13 @@ public class MainActivity extends AppCompatActivity
             if(sc.hasNextLine()){
                 userInfo = sc.nextLine();
                 String[] info = userInfo.split(",");
-                User user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], info[8]);
+                User user;
+                if(info.length == 8){
+                    user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], "NoPic");
+                } else {
+                    user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], info[8]);
+                }
+
                 return user;
             }
             return null;
