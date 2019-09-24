@@ -109,6 +109,7 @@ public class User implements Parcelable {
         return 12*feet + inches;
     }
     public String getUri() { return this.uri;}
+    public void setUri(String uri) {this.uri = uri;}
 
     @Override
     public int describeContents() {

@@ -34,7 +34,8 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
         implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
-        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass, ChangeProfileFragment.ChangeProfileOnDataPass {
+        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass,
+        ChangeProfileFragment.ChangeProfileOnDataPass, ProfilePicFragment.ProfilePicOnDataPass {
 
     User u;
     String username;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     HelpFragment hf;
     ChangeProfileFragment cpf;
     HeaderFragment hef;
+    ProfilePicFragment ppf;
 
     int goal, act_level, goal_amount;
 
@@ -131,8 +133,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChangeProfileDataPass(User user){
+    public void onChangeProfileDataPass(User user, int choice){
         u = user;
+        user_choice = choice;
+        changeFragments();
+    }
+
+    @Override
+    public void onProfilePicDataPass(String image){
+        u.setUri(image);
+        user_choice = 9;
+        changeFragments();
     }
 
     private void changeFragments(){
@@ -142,7 +153,7 @@ public class MainActivity extends AppCompatActivity
         //Find each frame layout, replace with corresponding fragment
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
 
-        if (user_choice == 1){
+        if (user_choice == 9){
 
             isFirstChoice = false;
 
@@ -222,6 +233,12 @@ public class MainActivity extends AppCompatActivity
 
             fTrans.replace(R.id.fl_frag_ph_2,cpf,"Profile");
 
+        } else if (user_choice == 8){
+            ppf = new ProfilePicFragment();
+            Bundle sentData = new Bundle();
+            sentData.putParcelable("user",u);
+            ppf.setArguments(sentData);
+            fTrans.replace(R.id.fl_frag_ph_2,ppf,"Profile");
         }
 
         if(addHeader){

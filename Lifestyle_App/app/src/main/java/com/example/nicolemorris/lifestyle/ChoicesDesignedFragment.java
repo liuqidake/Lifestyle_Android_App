@@ -70,7 +70,7 @@ public class ChoicesDesignedFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_profile: {
-                mDataPasser.onChoiceDataPass(1);
+                mDataPasser.onChoiceDataPass(9);
                 break;
             }
 

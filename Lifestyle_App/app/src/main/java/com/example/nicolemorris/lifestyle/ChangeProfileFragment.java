@@ -44,7 +44,7 @@ public class ChangeProfileFragment extends Fragment
     Spinner s_h_feet,s_h_inches,s_weight1, s_weight2, s_weight3,s_sex;
     Calendar date;
     String[] dataToPass;
-    Button bSave, bDate,bLocation;
+    Button bSave, bDate,bLocation,bPic;
 
     String w1="",w2="",w3="";
 
@@ -68,7 +68,7 @@ public class ChangeProfileFragment extends Fragment
     String fileName = "user_profile";
 
     public interface ChangeProfileOnDataPass{
-        public void onChangeProfileDataPass(User user);
+        public void onChangeProfileDataPass(User user, int choice);
     }
 
     @Override
@@ -89,6 +89,9 @@ public class ChangeProfileFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_change_profile, container, false);
 
         etName = view.findViewById(R.id.et_name);
+
+        bPic = view.findViewById(R.id.b_edit_pic);
+        bPic.setOnClickListener(this);
 
         bDate = view.findViewById(R.id.b_birthday);
         bDate.setOnClickListener(this);
@@ -230,6 +233,10 @@ public class ChangeProfileFragment extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.b_edit_pic: {
+                userDataPasser.onChangeProfileDataPass(user,8);
+                break;
+            }
             case R.id.b_save: {
                 name = etName.getText().toString().trim();
                 city = etCity.getText().toString();
@@ -258,7 +265,7 @@ public class ChangeProfileFragment extends Fragment
                     saveUserProfile(user);
                 }
 
-                userDataPasser.onChangeProfileDataPass(user);
+                userDataPasser.onChangeProfileDataPass(user,1);
                 break;
             }
             case R.id.b_birthday:{

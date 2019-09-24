@@ -102,9 +102,9 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChangeProfileDataPass(User newUser) {
+    public void onChangeProfileDataPass(User newUser, int choice) {
         user = newUser;
-        creation_step = 6;
+        creation_step = choice;
         setView();
     }
 
@@ -151,7 +151,7 @@ public class NewUserActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2, new LocationFragment(), "Location");
             creation_step++;
 
-        } else if (creation_step == 3) {
+        } else if (creation_step == 8) {
             //Profile Picture
             ProfilePicFragment fragment = new ProfilePicFragment();
             //fragment.setArguments(bundle);
@@ -187,8 +187,7 @@ public class NewUserActivity extends AppCompatActivity
             fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
             creation_step++;
 
-        }
-        else if (creation_step == 6) {
+        } else if (creation_step == 9) {
 
             if(isTablet()){
                 saveUserProfile(user);
