@@ -50,6 +50,8 @@ public class GoalsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_goals, container, false);
 
         u = getArguments().getParcelable("user");
+
+        Log.d("userPassed",u.toString());
         //Get arguments
 //        goal = getArguments().getInt("Goal");
 //        act_level = getArguments().getInt("Act_Level");

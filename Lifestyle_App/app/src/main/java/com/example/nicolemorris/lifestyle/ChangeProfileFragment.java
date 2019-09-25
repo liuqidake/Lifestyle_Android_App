@@ -108,7 +108,6 @@ public class ChangeProfileFragment extends Fragment
         ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
 
-
         s_h_feet  = (Spinner)view.findViewById(R.id.s_feet);
         s_h_feet.setOnItemSelectedListener(this);
         s_h_feet.setAdapter(num_adapter);
@@ -141,6 +140,11 @@ public class ChangeProfileFragment extends Fragment
 
         if(getArguments() != null){
             user = getArguments().getParcelable("user");
+
+            if(user==null){
+                Toast.makeText(getActivity(), "user is null?", Toast.LENGTH_SHORT).show();
+            }
+
             name = user.getName();
             etName.setText(name);
             city = user.getCity();
@@ -157,6 +161,15 @@ public class ChangeProfileFragment extends Fragment
             inches = user.getInches();
             weight  =user.getWeight();
             String w= ""+weight;
+
+            if(feetPosition==0 && inchPosition==0){
+                Toast.makeText(getActivity(), "Have you entered your height?", Toast.LENGTH_SHORT).show();
+            }
+
+            if(w.equals("000")){
+                Toast.makeText(getActivity(), "Have you entered your weight?", Toast.LENGTH_SHORT).show();
+            }
+
             int w1Pos, w2Pos, w3Pos;
             if(w.length() == 3){
                 w1Pos = num_adapter.getPosition(w.substring(0,1));
@@ -171,8 +184,6 @@ public class ChangeProfileFragment extends Fragment
                 w2Pos = num_adapter.getPosition("0");
                 w3Pos = num_adapter.getPosition(w.substring(0,1));
             }
-
-
             s_weight1.setSelection(w1Pos);
             s_weight2.setSelection(w2Pos);
             s_weight3.setSelection(w3Pos);
@@ -182,6 +193,8 @@ public class ChangeProfileFragment extends Fragment
             s_sex.setSelection(genderPosition);
 
             image_uri = user.getUri();
+        }else{
+            Toast.makeText(getActivity(), "Have you entered your profile?", Toast.LENGTH_SHORT).show();
         }
 
         //byte[] imageByte = getArguments().getByteArray("image");
@@ -415,6 +428,9 @@ public class ChangeProfileFragment extends Fragment
     public String serializeUser(User user){
         String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
                 user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+"\n";
+        if(content==null){
+            Toast.makeText(getActivity(), "user data is null", Toast.LENGTH_SHORT).show();
+        }
         return content;
     }
 
