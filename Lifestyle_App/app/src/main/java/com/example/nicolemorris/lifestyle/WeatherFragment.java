@@ -142,39 +142,13 @@ public class WeatherFragment extends Fragment implements LoaderManager.LoaderCal
 class WeatherData {
     private CurrentCondition mCurrentCondition = new CurrentCondition();
     private Temperature mTemperature = new Temperature();
-    private Wind mWind = new Wind();
-    private Rain mRain = new Rain();
-    private Snow mSnow = new Snow();
-    private Clouds mClouds = new Clouds();
     private Weather mWeather = new Weather();
 
     public  class CurrentCondition {
-        private long mWeatherId;
-        private String mCondition;
-        private String mDescr;
         private String mIcon;
-
         private double mPressure;
         private double mHumidity;
 
-        public long getWeatherId() {
-            return mWeatherId;
-        }
-        public void setWeatherId(long weatherId) {
-            mWeatherId = weatherId;
-        }
-        public String getCondition() {
-            return mCondition;
-        }
-        public void setCondition(String condition) {
-            mCondition = condition;
-        }
-        public String getDescr() {
-            return mDescr;
-        }
-        public void setDescr(String descr) {
-            mDescr = descr;
-        }
         public String getIcon() {
             return mIcon;
         }
@@ -222,76 +196,10 @@ class WeatherData {
     }
 
     public class Weather{
-        private int mId;
-        private  String mMain;
         private  String mDescription;
-        private  String mIcon;
 
         public String getmDescription(){return mDescription;}
         public void setmDescription(String description){mDescription = description;}
-    }
-
-    public class Wind {
-        private double mSpeed;
-        private double mDeg;
-        public double getSpeed() {
-            return mSpeed;
-        }
-        public void setSpeed(double speed) {
-            mSpeed = speed;
-        }
-        public double getDeg() {
-            return mDeg;
-        }
-        public void setDeg(double deg) {
-            mDeg = deg;
-        }
-    }
-
-    public class Rain {
-        private String mTime;
-        private double mAmount;
-        public String getTime() {
-            return mTime;
-        }
-        public void setTime(String time) {
-            mTime = time;
-        }
-        public double getAmount() {
-            return mAmount;
-        }
-        public void setAmount(double amount) {
-            mAmount = amount;
-        }
-    }
-
-    public class Snow {
-        private String mTime;
-        private double mAmount;
-        public String getTime() {
-            return mTime;
-        }
-        public void setTime(String time) {
-            mTime = time;
-        }
-        public double getAmount() {
-            return mAmount;
-        }
-        public void setAmount(double amount) {
-            mAmount = amount;
-        }
-    }
-
-    public class Clouds {
-        private long mPerc;
-
-        public long getPerc() {
-            return mPerc;
-        }
-
-        public void setPerc(long perc) {
-            mPerc = perc;
-        }
     }
 
     //Setters and Getters
@@ -305,40 +213,11 @@ class WeatherData {
 
     public Weather getWeather(){return mWeather;}
 
-
     public void setTemperature(Temperature temperature){
         mTemperature = temperature;
     }
     public Temperature getTemperature(){
         return mTemperature;
-    }
-
-    public void setWind(Wind wind){
-        mWind = wind;
-    }
-    public Wind getWind(){
-        return mWind;
-    }
-
-    public void setRain(Rain rain){
-        mRain = rain;
-    }
-    public Rain getRain(){
-        return mRain;
-    }
-
-    public void setSnow(Snow snow){
-        mSnow = snow;
-    }
-    public Snow getSnow(){
-        return mSnow;
-    }
-
-    public void setClouds(Clouds clouds){
-        mClouds = clouds;
-    }
-    public Clouds getClouds(){
-        return mClouds;
     }
 }
 
@@ -401,8 +280,6 @@ class JSONWeatherUtils {
 
         //Get the temperature, wind and cloud data.
         WeatherData.Temperature temperature = weatherData.getTemperature();
-        WeatherData.Wind wind = weatherData.getWind();
-        WeatherData.Clouds clouds = weatherData.getClouds();
         temperature.setMaxTemp(jsonMain.getDouble("temp_max"));
         temperature.setMinTemp(jsonMain.getDouble("temp_min"));
         temperature.setTemp(jsonMain.getDouble("temp"));
@@ -411,3 +288,4 @@ class JSONWeatherUtils {
         return weatherData;
     }
 }
+
