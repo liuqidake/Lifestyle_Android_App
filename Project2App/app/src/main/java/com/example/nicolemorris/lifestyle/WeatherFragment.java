@@ -1,9 +1,19 @@
 package com.example.nicolemorris.lifestyle;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +36,18 @@ import java.util.Scanner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherFragment extends Fragment implements LoaderManager.LoaderCallbacks<String> {
+public class WeatherFragment extends Fragment{
 
     private TextView mTvTemp;
     private TextView mTvHum;
     private WeatherData mWeatherData;
+
+    private WeatherViewModel mWeatherViewModel;
+    String location;
+
+    public WeatherFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,101 +59,37 @@ public class WeatherFragment extends Fragment implements LoaderManager.LoaderCal
         mTvTemp = view.findViewById(R.id.tv_temp_d);
         mTvHum = view.findViewById(R.id.tv_rain_d);
 
-        String inputLocation = getArguments().getString("city");
-        loadWeatherData(inputLocation);
+        //Create the view model
+        mWeatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
 
-        LoaderManager.getInstance(this).initLoader(SEARCH_LOADER, null, this);
+        //Set the observer
+        mWeatherViewModel.getData().observe(this,weatherObserver);
+
+        location = getArguments().getString("city");
+        loadWeatherData(location);
 
         return view;
     }
 
-    //Uniquely identify loader
-    private static final int SEARCH_LOADER = 11;
-
-    //Uniquely identify string you passed in
-    public static final String URL_STRING = "query";
-
-    private void loadWeatherData(String location){
-        Bundle searchQueryBundle = new Bundle();
-        searchQueryBundle.putString(URL_STRING,location);
-        LoaderManager loaderManager = LoaderManager.getInstance(this);
-        Loader<String> searchLoader = loaderManager.getLoader(SEARCH_LOADER);
-        if(searchLoader==null){
-            loaderManager.initLoader(SEARCH_LOADER,searchQueryBundle,this);
-        }
-        else{
-            loaderManager.restartLoader(SEARCH_LOADER,searchQueryBundle,this);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    @NonNull
-    @Override
-    public Loader<String> onCreateLoader(int i, @Nullable final Bundle bundle) {
-        return new AsyncTaskLoader<String>(getActivity()) { // changed from this to getActivity()
-            private String mLoaderData;
-
-            @Override
-            protected void onStartLoading() {
-                if(bundle==null){
-                    return;
-                }
-                if(mLoaderData!=null){
-                    //Cache data for onPause instead of loading all over again
-                    //Other config changes are handled automatically
-                    deliverResult(mLoaderData);
-                }
-                else {
-                    forceLoad();
-                }
-            }
-
-            @Override
-            public String loadInBackground() {
-                String location = bundle.getString(URL_STRING);
-                URL weatherDataURL = NetworkUtils.buildURLFromString(location);
-                String jsonWeatherData = null;
-                try{
-                    jsonWeatherData = NetworkUtils.getDataFromURL(weatherDataURL);
-                    return jsonWeatherData;
-                }catch(Exception e){
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            @Override
-            public void deliverResult(String data) {
-                mLoaderData = data;
-                super.deliverResult(data);
-            }
-        };
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<String> loader, String jsonWeatherData) {
-        if (jsonWeatherData!=null){
-            try {
-                mWeatherData = JSONWeatherUtils.getWeatherData(jsonWeatherData);
-            }
-            catch(JSONException e){
-                e.printStackTrace();
-            }
-            if(mWeatherData!=null) {
-                // rain,snow,clouds are all null. use humidity form the only not null variable getCurrentCondition to predict rain
-                Log.d("testGetRain",mWeatherData.getRain().getTime());
-                Log.d("des",mWeatherData.getCurrentCondition().getDescr());
+    //create an observer that watches the LiveData<WeatherData> object
+    final Observer<WeatherData> weatherObserver  = new Observer<WeatherData>() {
+        @Override
+        public void onChanged(@Nullable final WeatherData weatherData) {
+            // Update the UI if this data variable changes
+            if(weatherData!=null) {
+                mWeatherData = weatherData;
                 String rain = (mWeatherData.getCurrentCondition().getHumidity()<90)?"Low":"high";
                 mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) +  "\u00B0 C");
                 mTvHum.setText("" + rain);
             }
         }
+    };
+
+    void loadWeatherData(String location){
+        //pass the location in to the view model
+        mWeatherViewModel.setLocation(location);
     }
 
-    @Override
-    public void onLoaderReset(@NonNull Loader<String> loader) {
-
-    }
 
 }
 
@@ -338,6 +291,7 @@ class WeatherData {
     public Clouds getClouds(){
         return mClouds;
     }
+
 }
 
 class NetworkUtils {
@@ -388,10 +342,6 @@ class JSONWeatherUtils {
 
         WeatherData.CurrentCondition currentCondition = weatherData.getCurrentCondition();
         JSONObject jsonMain = jsonObject.getJSONObject("main");
-
-        JSONObject jsonWeather = jsonObject.getJSONObject("weather");
-        currentCondition.setDescr(jsonWeather.getString("description"));
-
         currentCondition.setHumidity(jsonMain.getInt("humidity"));
         currentCondition.setPressure(jsonMain.getInt("pressure"));
         weatherData.setCurrentCondition(currentCondition);
@@ -406,5 +356,71 @@ class JSONWeatherUtils {
         weatherData.setTemperature(temperature);
 
         return weatherData;
+    }
+}
+
+ class WeatherViewModel extends AndroidViewModel {
+     private MutableLiveData<WeatherData> jsonData;
+     private WeatherRepository mWeatherRepository;
+
+     public WeatherViewModel(Application application){
+         super(application);
+         mWeatherRepository = new WeatherRepository(application);
+         jsonData = mWeatherRepository.getData();
+     }
+     public void setLocation(String location){
+         mWeatherRepository.setLocation(location);
+     }
+
+     public LiveData<WeatherData> getData(){
+         return jsonData;
+     }
+}
+
+class WeatherRepository {
+
+    private final MutableLiveData<WeatherData> jsonData = new MutableLiveData<>();
+    private String mLocation;
+
+    WeatherRepository(Application application){
+        loadData();
+    }
+
+    public void setLocation(String location){
+        this.mLocation = location;
+        loadData();
+    }
+
+    public MutableLiveData<WeatherData> getData() {
+        return jsonData;
+    }
+
+    private void loadData(){
+        new AsyncTask<String,Void,String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String location = strings[0];
+
+                URL weatherDataURL = NetworkUtils.buildURLFromString(location);
+                String retrievedJsonData = null;
+                try {
+                    retrievedJsonData = NetworkUtils.getDataFromURL(weatherDataURL);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return retrievedJsonData;
+            }
+
+            @Override
+            protected void onPostExecute(String jsonWeatherData) {
+                try {
+                    jsonData.setValue(JSONWeatherUtils.getWeatherData(jsonWeatherData));
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+        }.execute(this.mLocation);
     }
 }
