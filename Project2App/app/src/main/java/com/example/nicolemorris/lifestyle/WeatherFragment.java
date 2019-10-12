@@ -382,13 +382,17 @@ class WeatherRepository {
     private final MutableLiveData<WeatherData> jsonData = new MutableLiveData<>();
     private String mLocation;
 
+
     WeatherRepository(Application application){
-        loadData();
+
+        //loadData();
     }
 
     public void setLocation(String location){
-        this.mLocation = location;
-        loadData();
+        mLocation = location;
+        if (mLocation != null) { // keeps crashing without this if check!!!!!
+            loadData();
+        }
     }
 
     public MutableLiveData<WeatherData> getData() {
@@ -396,12 +400,11 @@ class WeatherRepository {
     }
 
     private void loadData(){
-        new AsyncTask<String,Void,String>(){
+        new AsyncTask<Void,Void,String>(){
             @Override
-            protected String doInBackground(String... strings) {
-                String location = strings[0];
+            protected String doInBackground(Void... voids) {
 
-                URL weatherDataURL = NetworkUtils.buildURLFromString(location);
+                URL weatherDataURL = NetworkUtils.buildURLFromString(mLocation);
                 String retrievedJsonData = null;
                 try {
                     retrievedJsonData = NetworkUtils.getDataFromURL(weatherDataURL);
@@ -421,6 +424,6 @@ class WeatherRepository {
                 }
 
             }
-        }.execute(this.mLocation);
+        }.execute();
     }
 }
