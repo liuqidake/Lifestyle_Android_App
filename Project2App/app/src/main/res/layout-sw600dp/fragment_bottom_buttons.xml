@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
+    android:id="@+id/bot_buttons"
     tools:context=".BottomButtons">
 
     <ImageButton
-        android:id="@+id/b_profile"
+        android:id="@+id/ib_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -18,7 +19,7 @@
         android:src="@drawable/icon_profile" />
 
     <ImageButton
-        android:id="@+id/b_goals"
+        android:id="@+id/ib_goals"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -27,7 +28,7 @@
         android:src="@drawable/icon_goals" />
 
     <ImageButton
-        android:id="@+id/b_bmi"
+        android:id="@+id/ib_bmi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -36,7 +37,7 @@
         android:src="@drawable/icon_bmi" />
 
     <ImageButton
-        android:id="@+id/b_hikes"
+        android:id="@+id/ib_hikes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -45,7 +46,7 @@
         android:src="@drawable/icon_hikes" />
 
     <ImageButton
-        android:id="@+id/b_weather"
+        android:id="@+id/ib_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -54,7 +55,7 @@
         android:src="@drawable/icon_weather" />
 
     <ImageButton
-        android:id="@+id/b_help"
+        android:id="@+id/ib_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

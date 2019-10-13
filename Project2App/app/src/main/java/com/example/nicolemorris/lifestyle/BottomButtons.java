@@ -39,11 +39,11 @@ public class BottomButtons extends Fragment
 
         //Store buttons
         profile_data = view.findViewById(R.id.ib_profile);
-        goals = view.findViewById(R.id.b_goals);
-        bmi = view.findViewById(R.id.b_bmi);
-        hikes = view.findViewById(R.id.b_hikes);
-        weather = view.findViewById(R.id.b_weather);
-        help = view.findViewById(R.id.b_help);
+        goals = view.findViewById(R.id.ib_goals);
+        bmi = view.findViewById(R.id.ib_bmi);
+        hikes = view.findViewById(R.id.ib_hikes);
+        weather = view.findViewById(R.id.ib_weather);
+        help = view.findViewById(R.id.ib_help);
 
         //Set listeners
         profile_data.setOnClickListener(this);
@@ -60,32 +60,32 @@ public class BottomButtons extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.b_profile: {
+            case R.id.ib_profile: {
                 mDataPasser.onBottomDataPass(9);
                 break;
             }
 
-            case R.id.b_goals: {
+            case R.id.ib_goals: {
                 mDataPasser.onBottomDataPass(2);
                 break;
             }
 
-            case R.id.b_bmi: {
+            case R.id.ib_bmi: {
                 mDataPasser.onBottomDataPass(3);
                 break;
             }
 
-            case R.id.b_hikes: {
+            case R.id.ib_hikes: {
                 mDataPasser.onBottomDataPass(4);
                 break;
             }
 
-            case R.id.b_weather: {
+            case R.id.ib_weather: {
                 mDataPasser.onBottomDataPass(5);
                 break;
             }
 
-            case R.id.b_help: {
+            case R.id.ib_help: {
                 mDataPasser.onBottomDataPass(6);
                 break;
             }
