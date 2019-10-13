@@ -12,9 +12,14 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -52,7 +58,7 @@ public class ChangeProfileFragment extends Fragment
 
 
     User user;
-    ChangeProfileOnDataPass userDataPasser;
+    //ChangeProfileOnDataPass userDataPasser;
 
     DatePickerDialog picker;
 
@@ -65,20 +71,25 @@ public class ChangeProfileFragment extends Fragment
 
     String fileName = "user_profile";
 
+    UserViewModel mUserViewModel;
+
+    ArrayAdapter<CharSequence> num_adapter;
+    ArrayAdapter<CharSequence> gender_adapter;
+
     public interface ChangeProfileOnDataPass{
         public void onChangeProfileDataPass(User user, int choice);
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        try{
-            userDataPasser = (ChangeProfileOnDataPass) context;
-        }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() + " must implement ChangeProfileOnDataPass");
-        }
-    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        try{
+//            userDataPasser = (ChangeProfileOnDataPass) context;
+//        }catch(ClassCastException e){
+//            throw new ClassCastException(context.toString() + " must implement ChangeProfileOnDataPass");
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,7 +114,7 @@ public class ChangeProfileFragment extends Fragment
 
         etAge = view.findViewById(R.id.et_age);
 
-        ArrayAdapter<CharSequence> num_adapter = ArrayAdapter.createFromResource(getActivity(),
+        num_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.number_array, android.R.layout.simple_spinner_item);
 
 
@@ -127,7 +138,7 @@ public class ChangeProfileFragment extends Fragment
         s_weight3.setOnItemSelectedListener(this);
         s_weight3.setAdapter(num_adapter);
 
-        ArrayAdapter<CharSequence> gender_adapter = ArrayAdapter.createFromResource(getActivity(),
+        gender_adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
 
         s_sex = (Spinner)view.findViewById(R.id.s_sex);
@@ -137,56 +148,69 @@ public class ChangeProfileFragment extends Fragment
         bSave = view.findViewById(R.id.b_save);
         bSave.setOnClickListener(this);
 
-        if(getArguments() != null){
-            user = getArguments().getParcelable("user");
-            name = user.getName();
-            etName.setText(name);
-            city = user.getCity();
-            etCity.setText(city);
-            state = user.getState();
-            etState.setText(state);
-            age = user.getAge();
-            etAge.setText(""+age);
-            int feetPosition = num_adapter.getPosition(""+user.getFeet());
-            s_h_feet.setSelection(feetPosition);
-            feet = user.getFeet();
-            int inchPosition = num_adapter.getPosition(""+user.getInches());
-            s_h_inches.setSelection(inchPosition);
-            inches = user.getInches();
-            weight  =user.getWeight();
-            String w= ""+weight;
-            int w1Pos, w2Pos, w3Pos;
-            if(w.length() == 3){
-                w1Pos = num_adapter.getPosition(w.substring(0,1));
-                w2Pos = num_adapter.getPosition(w.substring(1,2));
-                w3Pos = num_adapter.getPosition(w.substring(2,3));
-            }else if (w.length()==2){
-                w1Pos = num_adapter.getPosition("0");
-                w2Pos = num_adapter.getPosition(w.substring(0,1));
-                w3Pos = num_adapter.getPosition(w.substring(1,2));
-            }else{
-                w1Pos = num_adapter.getPosition("0");
-                w2Pos = num_adapter.getPosition("0");
-                w3Pos = num_adapter.getPosition(w.substring(0,1));
-            }
+        //Create the view model
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
+        //Set the observer
+        mUserViewModel.getData().observe(this,userObserver);
 
-            s_weight1.setSelection(w1Pos);
-            s_weight2.setSelection(w2Pos);
-            s_weight3.setSelection(w3Pos);
-
-            sex = user.getSex();
-            int genderPosition = gender_adapter.getPosition(sex);
-            s_sex.setSelection(genderPosition);
-
-            image_uri = user.getUri();
-        }
 
         //byte[] imageByte = getArguments().getByteArray("image");
         //profile_image = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
 
         return view;
     }
+
+    final Observer<User> userObserver  = new Observer<User>() {
+        @Override
+        public void onChanged(@Nullable final User userData) {
+            // Update the UI if this data variable changes
+            if(userData!=null) {
+                    user = userData;
+                    name = user.getName();
+                    etName.setText(name);
+                    city = user.getCity();
+                    etCity.setText(city);
+                    state = user.getState();
+                    etState.setText(state);
+                    age = user.getAge();
+                    etAge.setText(""+age);
+                    int feetPosition = num_adapter.getPosition(""+user.getFeet());
+                    s_h_feet.setSelection(feetPosition);
+                    feet = user.getFeet();
+                    int inchPosition = num_adapter.getPosition(""+user.getInches());
+                    s_h_inches.setSelection(inchPosition);
+                    inches = user.getInches();
+                    weight  =user.getWeight();
+                    String w= ""+weight;
+                    int w1Pos, w2Pos, w3Pos;
+                    if(w.length() == 3){
+                        w1Pos = num_adapter.getPosition(w.substring(0,1));
+                        w2Pos = num_adapter.getPosition(w.substring(1,2));
+                        w3Pos = num_adapter.getPosition(w.substring(2,3));
+                    }else if (w.length()==2){
+                        w1Pos = num_adapter.getPosition("0");
+                        w2Pos = num_adapter.getPosition(w.substring(0,1));
+                        w3Pos = num_adapter.getPosition(w.substring(1,2));
+                    }else{
+                        w1Pos = num_adapter.getPosition("0");
+                        w2Pos = num_adapter.getPosition("0");
+                        w3Pos = num_adapter.getPosition(w.substring(0,1));
+                    }
+
+
+                    s_weight1.setSelection(w1Pos);
+                    s_weight2.setSelection(w2Pos);
+                    s_weight3.setSelection(w3Pos);
+
+                    sex = user.getSex();
+                    int genderPosition = gender_adapter.getPosition(sex);
+                    s_sex.setSelection(genderPosition);
+
+                    image_uri = user.getUri();
+            }
+        }
+    };
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
@@ -232,7 +256,12 @@ public class ChangeProfileFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.b_edit_pic: {
-                userDataPasser.onChangeProfileDataPass(user,8);
+                //userDataPasser.onChangeProfileDataPass(user,8);
+
+
+
+
+
                 break;
             }
             case R.id.b_save: {
@@ -263,7 +292,14 @@ public class ChangeProfileFragment extends Fragment
                     saveUserProfile(user);
                 }
 
-                userDataPasser.onChangeProfileDataPass(user,9);
+                //userDataPasser.onChangeProfileDataPass(user,9);
+
+
+
+
+
+
+
                 break;
             }
             case R.id.b_birthday:{

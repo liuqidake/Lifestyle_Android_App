@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+
 import java.util.Calendar;
 
 public class NameAgeFragment extends Fragment implements View.OnClickListener{

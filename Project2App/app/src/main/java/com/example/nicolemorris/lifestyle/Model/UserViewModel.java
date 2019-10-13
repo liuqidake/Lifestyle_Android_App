@@ -1,6 +1,7 @@
 package com.example.nicolemorris.lifestyle.Model;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -15,9 +16,10 @@ public class UserViewModel extends AndroidViewModel {
         mUserRepo = new UserRepo(application);
         jsonData = mUserRepo.getData();
     }
-    public void seUser(User user){
-        mUserRepo.setUser(user);
+    public void setContext(Context context){
+        mUserRepo.setmContext(context);
     }
+
 
     public LiveData<User> getData(){
         return jsonData;

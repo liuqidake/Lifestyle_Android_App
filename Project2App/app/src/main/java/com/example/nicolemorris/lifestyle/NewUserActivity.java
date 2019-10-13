@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nicolemorris.lifestyle.Model.User;
+import com.example.nicolemorris.lifestyle.Model.UserRepo;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -158,7 +159,7 @@ public class NewUserActivity extends AppCompatActivity
             //Intent userIntent = new Intent(this, MainActivity.class);
             user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim(), profile_image);
             System.out.println(user.getUri());
-            saveUserProfile(user);
+            UserRepo.saveUserProfile(getBaseContext(),user);
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
             ReviewFragment fragment = new ReviewFragment();
@@ -185,9 +186,9 @@ public class NewUserActivity extends AppCompatActivity
         } else if (creation_step == 9) {
 
             if(isTablet()){
-                saveUserProfile(user);
+                UserRepo.saveUserProfile(getBaseContext(), user);
             } else {
-                updateUserProfile(user);
+                UserRepo.updateUserProfile(getBaseContext(),user);
             }
 
             Intent userIntent = new Intent(this, MainActivity.class);
@@ -200,54 +201,53 @@ public class NewUserActivity extends AppCompatActivity
         fTrans.commit();
     }
 
-    public String serializeUser(User user){
-        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
-                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+","+user.getUri()+"\n";
-        return content;
-    }
+//    public String serializeUser(User user){
+//        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
+//                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+","+user.getUri()+"\n";
+//        return content;
+//    }
+//
+//
+//    private void saveUserProfile(User user){
+//        try {
+//            out = openFileOutput(fileName, MODE_APPEND);
+//            String fileContents = serializeUser(user);
+//            out.write(fileContents.getBytes());
+//            out.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-
-    private void saveUserProfile(User user){
-        try {
-            out = openFileOutput(fileName, MODE_APPEND);
-            String fileContents = serializeUser(user);
-            out.write(fileContents.getBytes());
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    private void updateUserProfile(User user){
-        try {
-            in = openFileInput(fileName);
-            String temp = "";
-            Scanner sc = new Scanner((InputStream)in);
-            while(sc.hasNextLine()){
-                String next = sc.nextLine();
-                String currName = next.substring(0, next.indexOf(","));
-                if(user.getName().equals(currName)){
-                    temp += serializeUser(user);
-                    if(sc.hasNextLine()){
-                        temp+="\n";
-                    }
-                }else{
-                    temp += next;
-                    if(sc.hasNextLine()){
-                        temp+="\n";
-                    }
-                }
-            }
-            out = openFileOutput(fileName, Context.MODE_PRIVATE);
-            out.write(temp.getBytes());
-            out.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private void updateUserProfile(User user){
+//        try {
+//            in = openFileInput(fileName);
+//            String temp = "";
+//            Scanner sc = new Scanner((InputStream)in);
+//            while(sc.hasNextLine()){
+//                String next = sc.nextLine();
+//                String currName = next.substring(0, next.indexOf(","));
+//                if(user.getName().equals(currName)){
+//                    temp += serializeUser(user);
+//                    if(sc.hasNextLine()){
+//                        temp+="\n";
+//                    }
+//                }else{
+//                    temp += next;
+//                    if(sc.hasNextLine()){
+//                        temp+="\n";
+//                    }
+//                }
+//            }
+//            out = openFileOutput(fileName, Context.MODE_PRIVATE);
+//            out.write(temp.getBytes());
+//            out.close();
+//            in.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 //    private String saveProfileImage(){
 //        ContextWrapper cw = new ContextWrapper(this);

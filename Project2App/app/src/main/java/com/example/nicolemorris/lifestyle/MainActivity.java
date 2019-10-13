@@ -14,14 +14,22 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.nicolemorris.lifestyle.Model.ChoiceViewModel;
 import com.example.nicolemorris.lifestyle.Model.User;
+import com.example.nicolemorris.lifestyle.Model.UserRepo;
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,8 +40,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
-        ChangeGoalFragment.ChangeGoalOnDataPass, GoalsFragment.GoalsOnDataPass,
+        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass, GoalsFragment.GoalsOnDataPass,
         ChangeProfileFragment.ChangeProfileOnDataPass, ProfilePicFragment.ProfilePicOnDataPass {
 
     User u;
@@ -41,11 +48,17 @@ public class MainActivity extends AppCompatActivity
     int user_choice;
     double height_inches = 72;
     double weight_pounds = 105;
-    boolean hasGoal = false;
+    public static boolean hasGoal = false;
     boolean isFirstChoice;
+
+//    public void setUser_choice (int input) {
+//        user_choice= input;
+//    }
 
     ReviewFragment pf;
     GoalsFragment gf;
+
+
     ChangeGoalFragment cgf;
     BmiFragment bf;
     WeatherFragment wf;
@@ -71,6 +84,15 @@ public class MainActivity extends AppCompatActivity
     String folder = "profile_images/";
     String city = "default city";
 
+
+    UserViewModel mUserViewModel;
+
+    ChoiceViewModel mChoiceViewModel;
+
+    int choice;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +102,7 @@ public class MainActivity extends AppCompatActivity
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
-        u = readUserProfile();
+        u = UserRepo.readUserProfile(getBaseContext());
 
 
         System.out.println("user choice"+user_choice);
@@ -95,6 +117,7 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(messageIntent);
 
         } else if (user_choice != 0){
+            Toast.makeText(getBaseContext(), "user_choice-oncreate" + user_choice, Toast.LENGTH_SHORT).show();
             changeFragments();
         } else {
             Intent messageIntent = new Intent(this, HomeActivity.class);
@@ -102,6 +125,52 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(messageIntent);
         }
 
+//        //Create the view model
+//        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+//
+//        //Set the observer
+//        mUserViewModel.getData().observe(this,userObserver);
+//
+//
+//        //Create the view model
+//        mChoiceViewModel = ViewModelProviders.of(this).get(ChoiceViewModel.class);
+//
+//        //Set the observer
+//        mChoiceViewModel.getData().observe(this,choiceObserver);
+
+    }
+
+
+    final Observer<User> userObserver  = new Observer<User>() {
+        @Override
+        public void onChanged(@Nullable final User userData) {
+        if (userData == null) {
+            createNewUser();
+        } else if (user_choice != 0){
+            changeFragments();
+        } else {
+            goHome();
+        }
+        }
+    };
+
+    final Observer<Integer> choiceObserver  = new Observer<Integer>() {
+        @Override
+        public void onChanged(@Nullable final Integer choice) {
+            if(choice!=null)
+                user_choice = choice;
+
+        }
+    };
+
+    public void createNewUser(){
+        Intent messageIntent = new Intent(this, NewUserActivity.class);
+        this.startActivity(messageIntent);
+    }
+
+    public void goHome(){
+        Intent messageIntent = new Intent(this, HomeActivity.class);
+        this.startActivity(messageIntent);
     }
 
     @Override
@@ -135,12 +204,12 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onChangeGoalDataPass(int g, int l, int a){
-        hasGoal = true;
-        u.setGoal(g,l,a);
-        changeFragments();
-    }
+//    @Override
+//    public void onChangeGoalDataPass(int g, int l, int a){
+//        hasGoal = true;
+//        u.setGoal(g,l,a);
+//        changeFragments();
+//    }
 
     @Override
     public void onGoalsDataPass(){
@@ -168,7 +237,7 @@ public class MainActivity extends AppCompatActivity
         changeFragments();
     }
 
-    private void changeFragments(){
+    public void changeFragments(){
 
         boolean addHeader = true;
 
@@ -191,6 +260,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 2){
             isFirstChoice = false;
+            u.setHasGoal(true);
             if(u.checkGoal() && hasGoal){
                 //Launch fitness goals
                 gf = new GoalsFragment();
@@ -198,6 +268,7 @@ public class MainActivity extends AppCompatActivity
                 sentData.putParcelable("user", u);
                 gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
+
             } else {
                 //Launch change fitness goals
                 cgf = new ChangeGoalFragment();

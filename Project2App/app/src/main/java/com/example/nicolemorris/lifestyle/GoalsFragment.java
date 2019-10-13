@@ -51,12 +51,14 @@ public class GoalsFragment extends Fragment
 
         u = getArguments().getParcelable("user");
         //Get arguments
-//        goal = getArguments().getInt("Goal");
-//        act_level = getArguments().getInt("Act_Level");
-//        weight_amt = getArguments().getInt("Amount");
-        goal = u.getGoal();
-        act_level = u.getAct_level();
-        weight_amt = u.getWeight_amt();
+        goal = getArguments().getInt("Goal");
+        act_level = getArguments().getInt("Act_Level");
+        weight_amt = getArguments().getInt("Amount");
+
+
+//        goal = u.getGoal();
+//        act_level = u.getAct_level();
+//        weight_amt = u.getWeight_amt();
 
         tvGoalTxt = view.findViewById(R.id.tv_goal_txt_d);
         tvGoalHC = view.findViewById(R.id.tv_goal_hc);

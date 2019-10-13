@@ -2,7 +2,12 @@ package com.example.nicolemorris.lifestyle;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +15,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nicolemorris.lifestyle.Model.User;
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
 
 public class ReviewFragment extends Fragment
         implements View.OnClickListener {
+
+    UserViewModel mUserViewModel;
 
     User u;
     Button bEditProfile;
@@ -41,6 +49,13 @@ public class ReviewFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_review, container, false);
 
+
+        //Create the view model
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        //Set the observer
+        mUserViewModel.getData().observe(this,userObserver);
+
         u = getArguments().getParcelable("user");
 
         name = view.findViewById(R.id.tv_name_d);
@@ -68,6 +83,42 @@ public class ReviewFragment extends Fragment
         bEditProfile.setOnClickListener(this);
 
         return view;
+    }
+
+    final Observer<User> userObserver  = new Observer<User>() {
+        @Override
+        public void onChanged(@Nullable final User u) {
+            // Update the UI if this data variable changes
+            if(u!=null) {
+               setFields(u);
+            }
+        }
+    };
+
+    public void setFields(User u){
+        name = getActivity().findViewById(R.id.tv_name_d);
+        name.setText(u.getName());
+
+        age = getActivity().findViewById(R.id.tv_age_d);
+        age.setText(Integer.toString(u.getAge()));
+
+        city = getActivity().findViewById(R.id.tv_city_d);
+        city.setText(u.getCity());
+
+        state = getActivity().findViewById(R.id.tv_state_d);
+        state.setText(u.getState());
+
+        height = getActivity().findViewById(R.id.tv_height_d);
+        height.setText(Integer.toString(u.getFeet()) + " feet " + Integer.toString(u.getInches()) + " inches");
+
+        weight = getActivity().findViewById(R.id.tv_weight_d);
+        weight.setText(Integer.toString(u.getWeight()) + " pounds");
+
+        sex = getActivity().findViewById(R.id.tv_sex_d);
+        sex.setText(u.getSex());
+
+        bEditProfile = getActivity().findViewById(R.id.b_edit_profile);
+        bEditProfile.setOnClickListener(this);
     }
 
     @Override

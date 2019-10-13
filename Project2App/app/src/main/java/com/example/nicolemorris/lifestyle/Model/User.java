@@ -110,6 +110,7 @@ public class User implements Parcelable {
     }
     public String getUri() { return this.uri;}
     public void setUri(String uri) {this.uri = uri;}
+    public void setHasGoal (boolean b) {this.hasGoal = b;}
 
     @Override
     public int describeContents() {
