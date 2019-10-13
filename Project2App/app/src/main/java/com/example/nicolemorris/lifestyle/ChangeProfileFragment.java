@@ -79,7 +79,7 @@ public class ChangeProfileFragment extends Fragment
     public interface ChangeProfileOnDataPass{
         public void onChangeProfileDataPass(User user, int choice);
     }
-//
+
 //    @Override
 //    public void onAttach(Context context) {
 //        super.onAttach(context);
@@ -262,6 +262,7 @@ public class ChangeProfileFragment extends Fragment
 
 
 
+
                 break;
             }
             case R.id.b_save: {
@@ -293,10 +294,6 @@ public class ChangeProfileFragment extends Fragment
                 }
 
                 //userDataPasser.onChangeProfileDataPass(user,9);
-
-
-
-
 
 
 

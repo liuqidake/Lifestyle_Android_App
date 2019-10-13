@@ -2,28 +2,17 @@ package com.example.nicolemorris.lifestyle;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
-import com.example.nicolemorris.lifestyle.Model.ChoiceViewModel;
 
 public class BottomButtons extends Fragment
         implements View.OnClickListener {
 
     OnBottomDataPass mDataPasser;
     ImageButton profile_data, goals, bmi, hikes, weather, help;
-
-    ChoiceViewModel mChoiceViewModel;
-
-    int mChoice;
 
     //Callback interface
     public interface OnBottomDataPass{
@@ -49,12 +38,12 @@ public class BottomButtons extends Fragment
         View view = inflater.inflate(R.layout.fragment_bottom_buttons, container, false);
 
         //Store buttons
-        profile_data = view.findViewById(R.id.b_profile);
-        goals = view.findViewById(R.id.b_goals);
-        bmi = view.findViewById(R.id.b_bmi);
-        hikes = view.findViewById(R.id.b_hikes);
-        weather = view.findViewById(R.id.b_weather);
-        help = view.findViewById(R.id.b_help);
+        profile_data = view.findViewById(R.id.ib_profile);
+        goals = view.findViewById(R.id.ib_goals);
+        bmi = view.findViewById(R.id.ib_bmi);
+        hikes = view.findViewById(R.id.ib_hikes);
+        weather = view.findViewById(R.id.ib_weather);
+        help = view.findViewById(R.id.ib_help);
 
         //Set listeners
         profile_data.setOnClickListener(this);
@@ -71,82 +60,37 @@ public class BottomButtons extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.b_profile: {
+            case R.id.ib_profile: {
                 mDataPasser.onBottomDataPass(9);
-                mChoice = 9;
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
-
                 break;
             }
 
-            case R.id.b_goals: {
+            case R.id.ib_goals: {
                 mDataPasser.onBottomDataPass(2);
-                mChoice = 2;
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
-
                 break;
             }
 
-            case R.id.b_bmi: {
+            case R.id.ib_bmi: {
                 mDataPasser.onBottomDataPass(3);
-                mChoice = 3;
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
-
                 break;
             }
 
-            case R.id.b_hikes: {
+            case R.id.ib_hikes: {
                 mDataPasser.onBottomDataPass(4);
-                mChoice = 4;
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
-
-
                 break;
             }
 
-            case R.id.b_weather: {
+            case R.id.ib_weather: {
                 mDataPasser.onBottomDataPass(5);
-                mChoice = 5;
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
-
-
                 break;
             }
 
-            case R.id.b_help: {
+            case R.id.ib_help: {
                 mDataPasser.onBottomDataPass(6);
-                mChoice = 6;
-
-
-
-                // call database, save mChoice into ChoiceViewModel
-
-
                 break;
             }
 
 
         }
     }
-
 }

@@ -165,6 +165,7 @@ public class ChangeGoalFragment extends Fragment
                 gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
                 fTrans.commit();
+
                 break;
             }
         }
