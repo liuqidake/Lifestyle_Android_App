@@ -38,7 +38,7 @@ public class BottomButtons extends Fragment
         View view = inflater.inflate(R.layout.fragment_bottom_buttons, container, false);
 
         //Store buttons
-        profile_data = view.findViewById(R.id.b_profile);
+        profile_data = view.findViewById(R.id.ib_profile);
         goals = view.findViewById(R.id.b_goals);
         bmi = view.findViewById(R.id.b_bmi);
         hikes = view.findViewById(R.id.b_hikes);
