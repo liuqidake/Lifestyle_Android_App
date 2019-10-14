@@ -98,22 +98,22 @@ public class ChoicesDesignedTest {
     //Click Hikes Button (Leaves app)
 
     //Click Weather Button (Displays WeatherFragment,BottomButtonsFragment)
-    @Test
-    public void clickWeatherButton(){
-
-        //Click BMI Button
-        onView((withId(R.id.ib_weather))).perform(click());
-
-        //Displays ReviewFragment
-        onView((withId(R.id.frag_weather))).check(matches(isDisplayed()));
-
-        //Displays BottomButtonsFragment
-        onView((withId(R.id.bot_buttons))).check(matches(isDisplayed()));
-
-        //Displays Header
-        onView((withId(R.id.frag_header))).check(matches(isDisplayed()));
-
-    }
+//    @Test
+//    public void clickWeatherButton(){
+//
+//        //Click BMI Button
+//        onView((withId(R.id.ib_weather))).perform(click());
+//
+//        //Displays ReviewFragment
+//        onView((withId(R.id.frag_weather))).check(matches(isDisplayed()));
+//
+//        //Displays BottomButtonsFragment
+//        onView((withId(R.id.bot_buttons))).check(matches(isDisplayed()));
+//
+//        //Displays Header
+//        onView((withId(R.id.frag_header))).check(matches(isDisplayed()));
+//
+//    }
 
     //Click Help Button (Displays HelpFragment)
     @Test

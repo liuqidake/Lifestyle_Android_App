@@ -42,7 +42,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_age_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_age_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,9 +60,9 @@
                 android:text="Bob Snow"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_age_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_age_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_name_hc"
+                app:layout_constraintStart_toEndOf="@+id/tv_name_hc_revf"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
         </LinearLayout>

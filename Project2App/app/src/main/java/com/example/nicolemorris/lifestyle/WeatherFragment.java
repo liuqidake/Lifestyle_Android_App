@@ -53,7 +53,7 @@ public class WeatherFragment extends Fragment{
         mTvHum = view.findViewById(R.id.tv_rain_d);
 
         //Create the view model
-        mWeatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
+        mWeatherViewModel = ViewModelProviders.of(getActivity()).get(WeatherViewModel.class);
 
         //Set the observer
         mWeatherViewModel.getData().observe(this,weatherObserver);
@@ -350,24 +350,6 @@ class JSONWeatherUtils {
 
         return weatherData;
     }
-}
-
- class WeatherViewModel extends AndroidViewModel {
-     private MutableLiveData<WeatherData> jsonData;
-     private WeatherRepository mWeatherRepository;
-
-     public WeatherViewModel(Application application){
-         super(application);
-         mWeatherRepository = new WeatherRepository(application);
-         jsonData = mWeatherRepository.getData();
-     }
-     public void setLocation(String location){
-         mWeatherRepository.setLocation(location);
-     }
-
-     public LiveData<WeatherData> getData(){
-         return jsonData;
-     }
 }
 
 class WeatherRepository {

@@ -276,7 +276,7 @@ public class ChangeProfileFragment extends Fragment
                 }
 
                 if(date == null){
-//                    age = user.getAge();
+                    age = user.getAge();
                     age = Integer.parseInt(etAge.getText().toString());
                 }
 
@@ -293,7 +293,7 @@ public class ChangeProfileFragment extends Fragment
                     saveUserProfile(user);
                 }
 
-                //userDataPasser.onChangeProfileDataPass(user,9);
+//                userDataPasser.onChangeProfileDataPass(user,9);
 
 
 
