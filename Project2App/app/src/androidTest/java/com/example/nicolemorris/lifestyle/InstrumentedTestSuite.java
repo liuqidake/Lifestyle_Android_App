@@ -5,5 +5,5 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({BottomButtonsTest.class,
-        ChoicesDesignedTest.class, ReviewFragment.class})
+        ChoicesDesignedTest.class, ReviewFragmentTest.class})
 public class InstrumentedTestSuite {}
