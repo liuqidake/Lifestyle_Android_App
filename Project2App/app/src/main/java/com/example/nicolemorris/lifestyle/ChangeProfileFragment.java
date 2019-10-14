@@ -108,9 +108,9 @@ public class ChangeProfileFragment extends Fragment
         bLocation = view.findViewById(R.id.b_location);
         bLocation.setOnClickListener(this);
 
-        etCity = view.findViewById(R.id.tv_city_hc);
+        etCity = view.findViewById(R.id.tv_city_hc_revf);
 
-        etState = view.findViewById(R.id.tv_state_hc);
+        etState = view.findViewById(R.id.tv_state_hc_revf);
 
         etAge = view.findViewById(R.id.et_age);
 

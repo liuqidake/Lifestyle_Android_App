@@ -58,28 +58,28 @@ public class ReviewFragment extends Fragment
 
         u = getArguments().getParcelable("user");
 
-        name = view.findViewById(R.id.tv_name_d);
+        name = view.findViewById(R.id.tv_name_d_revf);
         name.setText(u.getName());
 
-        age = view.findViewById(R.id.tv_age_d);
+        age = view.findViewById(R.id.tv_age_d_revf);
         age.setText(Integer.toString(u.getAge()));
 
-        city = view.findViewById(R.id.tv_city_d);
+        city = view.findViewById(R.id.tv_city_d_revf);
         city.setText(u.getCity());
 
-        state = view.findViewById(R.id.tv_state_d);
+        state = view.findViewById(R.id.tv_state_d_revf);
         state.setText(u.getState());
 
-        height = view.findViewById(R.id.tv_height_d);
+        height = view.findViewById(R.id.tv_height_d_revf);
         height.setText(Integer.toString(u.getFeet()) + " feet " + Integer.toString(u.getInches()) + " inches");
 
-        weight = view.findViewById(R.id.tv_weight_d);
+        weight = view.findViewById(R.id.tv_weight_d_revf);
         weight.setText(Integer.toString(u.getWeight()) + " pounds");
 
-        sex = view.findViewById(R.id.tv_sex_d);
+        sex = view.findViewById(R.id.tv_sex_d_revf);
         sex.setText(u.getSex());
 
-        bEditProfile = view.findViewById(R.id.b_edit_profile);
+        bEditProfile = view.findViewById(R.id.b_edit_profile_revf);
         bEditProfile.setOnClickListener(this);
 
         return view;
@@ -96,35 +96,35 @@ public class ReviewFragment extends Fragment
     };
 
     public void setFields(User u){
-        name = getActivity().findViewById(R.id.tv_name_d);
+        name = getActivity().findViewById(R.id.tv_name_d_revf);
         name.setText(u.getName());
 
-        age = getActivity().findViewById(R.id.tv_age_d);
+        age = getActivity().findViewById(R.id.tv_age_d_revf);
         age.setText(Integer.toString(u.getAge()));
 
-        city = getActivity().findViewById(R.id.tv_city_d);
+        city = getActivity().findViewById(R.id.tv_city_d_revf);
         city.setText(u.getCity());
 
-        state = getActivity().findViewById(R.id.tv_state_d);
+        state = getActivity().findViewById(R.id.tv_state_d_revf);
         state.setText(u.getState());
 
-        height = getActivity().findViewById(R.id.tv_height_d);
+        height = getActivity().findViewById(R.id.tv_height_d_revf);
         height.setText(Integer.toString(u.getFeet()) + " feet " + Integer.toString(u.getInches()) + " inches");
 
-        weight = getActivity().findViewById(R.id.tv_weight_d);
+        weight = getActivity().findViewById(R.id.tv_weight_d_revf);
         weight.setText(Integer.toString(u.getWeight()) + " pounds");
 
-        sex = getActivity().findViewById(R.id.tv_sex_d);
+        sex = getActivity().findViewById(R.id.tv_sex_d_revf);
         sex.setText(u.getSex());
 
-        bEditProfile = getActivity().findViewById(R.id.b_edit_profile);
+        bEditProfile = getActivity().findViewById(R.id.b_edit_profile_revf);
         bEditProfile.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view){
         switch(view.getId()){
-            case R.id.b_edit_profile:{
+            case R.id.b_edit_profile_revf:{
                 mDataPasser.onReviewDataPass();
                 break;
             }

@@ -5,9 +5,11 @@ import android.content.Intent;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -17,6 +19,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.not;
 
+@RunWith(AndroidJUnit4.class)
 public class ChoicesDesignedTest {
 
     private String uri = "No Pic";
@@ -95,22 +98,22 @@ public class ChoicesDesignedTest {
     //Click Hikes Button (Leaves app)
 
     //Click Weather Button (Displays WeatherFragment,BottomButtonsFragment)
-    @Test
-    public void clickWeatherButton(){
-
-        //Click BMI Button
-        onView((withId(R.id.ib_weather))).perform(click());
-
-        //Displays ReviewFragment
-        onView((withId(R.id.frag_weather))).check(matches(isDisplayed()));
-
-        //Displays BottomButtonsFragment
-        onView((withId(R.id.bot_buttons))).check(matches(isDisplayed()));
-
-        //Displays Header
-        onView((withId(R.id.frag_header))).check(matches(isDisplayed()));
-
-    }
+//    @Test
+//    public void clickWeatherButton(){
+//
+//        //Click BMI Button
+//        onView((withId(R.id.ib_weather))).perform(click());
+//
+//        //Displays ReviewFragment
+//        onView((withId(R.id.frag_weather))).check(matches(isDisplayed()));
+//
+//        //Displays BottomButtonsFragment
+//        onView((withId(R.id.bot_buttons))).check(matches(isDisplayed()));
+//
+//        //Displays Header
+//        onView((withId(R.id.frag_header))).check(matches(isDisplayed()));
+//
+//    }
 
     //Click Help Button (Displays HelpFragment)
     @Test

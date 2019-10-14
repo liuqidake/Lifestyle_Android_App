@@ -51,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_weight_hc"
+                android:id="@+id/tv_weight_hc_revf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Amount"

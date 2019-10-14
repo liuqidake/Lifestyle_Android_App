@@ -8,7 +8,7 @@
     tools:context=".ReviewFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/vll_rev_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -17,19 +17,20 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/b_edit_profile"
+        app:layout_constraintBottom_toTopOf="@+id/b_edit_profile_revf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/hll_1_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_name_hc"
+                android:id="@+id/tv_name_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -46,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_name_d"
+                android:id="@+id/tv_name_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -67,13 +68,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_2_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_age_hc"
+                android:id="@+id/tv_age_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -84,12 +86,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_city_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_city_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_age_d"
+                android:id="@+id/tv_age_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -101,20 +103,21 @@
                 android:text="26"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_city_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_city_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_age_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_age_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_d_revf" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_3_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_city_hc"
+                android:id="@+id/tv_city_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -125,12 +128,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_state_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_state_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_age_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_city_d"
+                android:id="@+id/tv_city_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -142,20 +145,21 @@
                 android:text="Salt Lake City"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_state_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_state_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_city_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_age_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_city_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_age_d_revf" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_4_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_state_hc"
+                android:id="@+id/tv_state_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -166,12 +170,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_height_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_height_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_city_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_city_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_state_d"
+                android:id="@+id/tv_state_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -183,20 +187,21 @@
                 android:text="Utah"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_height_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_height_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_state_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_city_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_state_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_city_d_revf" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_5_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_height_hc"
+                android:id="@+id/tv_height_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -207,12 +212,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_weight_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_weight_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_state_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_state_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_height_d"
+                android:id="@+id/tv_height_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -224,20 +229,21 @@
                 android:text="6 feet 0 inches"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_weight_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_weight_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_height_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_state_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_height_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_state_d_revf" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_6_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_weight_hc"
+                android:id="@+id/tv_weight_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -248,12 +254,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_sex_hc"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sex_hc_revf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_height_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_height_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_weight_d"
+                android:id="@+id/tv_weight_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -265,20 +271,21 @@
                 android:text="175 pounds"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_sex_d"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sex_d_revf"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_weight_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_height_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_weight_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_height_d_revf" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hll_7_rev_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_sex_hc"
+                android:id="@+id/tv_sex_hc_revf"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -292,10 +299,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_weight_hc_revf" />
 
             <TextView
-                android:id="@+id/tv_sex_d"
+                android:id="@+id/tv_sex_d_revf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -310,13 +317,13 @@
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_profile"
-                app:layout_constraintStart_toEndOf="@+id/tv_sex_hc"
-                app:layout_constraintTop_toBottomOf="@+id/tv_weight_d" />
+                app:layout_constraintStart_toEndOf="@+id/tv_sex_hc_revf"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weight_d_revf" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/b_edit_profile"
+        android:id="@+id/b_edit_profile_revf"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="200dp"
         android:layout_height="50dp"
