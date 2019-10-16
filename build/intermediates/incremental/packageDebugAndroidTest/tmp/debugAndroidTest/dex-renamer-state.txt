@@ -1,0 +1,4 @@
+#Wed Oct 16 09:10:25 MDT 2019
+base.0=/Users/nicolemorris/Lifestyle_Android_App/Project2App/app/build/intermediates/transforms/dexMerger/androidTest/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
