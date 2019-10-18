@@ -12,7 +12,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
@@ -26,10 +28,12 @@ import androidx.lifecycle.ViewModelProviders;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.nicolemorris.lifestyle.Model.ChoiceViewModel;
+//import com.example.nicolemorris.lifestyle.Model.ChoiceViewModel;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.Room.DataBase;
+import com.example.nicolemorris.lifestyle.Room.UserTable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,8 +44,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass, GoalsFragment.GoalsOnDataPass,
-        ChangeProfileFragment.ChangeProfileOnDataPass, ProfilePicFragment.ProfilePicOnDataPass {
+        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
+        ProfilePicFragment.ProfilePicOnDataPass {
 
     User u;
     String username;
@@ -51,9 +55,12 @@ public class MainActivity extends AppCompatActivity
     public static boolean hasGoal = false;
     boolean isFirstChoice;
 
-//    public void setUser_choice (int input) {
-//        user_choice= input;
-//    }
+
+    public static DataBase db;
+
+    public void setUser_choice (int input) {
+        user_choice= input;
+    }
 
     ReviewFragment pf;
     GoalsFragment gf;
@@ -84,10 +91,9 @@ public class MainActivity extends AppCompatActivity
     String folder = "profile_images/";
     String city = "default city";
 
-
     UserViewModel mUserViewModel;
 
-    ChoiceViewModel mChoiceViewModel;
+    //ChoiceViewModel mChoiceViewModel;
 
     int choice;
 
@@ -101,6 +107,8 @@ public class MainActivity extends AppCompatActivity
         if(getIntent().getExtras()!= null){
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
+
+        db = DataBase.getInstance(getBaseContext());
 
         u = UserRepo.readUserProfile(getBaseContext());
 
@@ -124,6 +132,8 @@ public class MainActivity extends AppCompatActivity
             messageIntent.putExtra("uri", u.getUri());
             this.startActivity(messageIntent);
         }
+
+
 
 //        //Create the view model
 //        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
@@ -211,11 +221,11 @@ public class MainActivity extends AppCompatActivity
 //        changeFragments();
 //    }
 
-    @Override
-    public void onGoalsDataPass(){
-        hasGoal = false;
-        changeFragments();
-    }
+//    @Override
+//    public void onGoalsDataPass(){
+//        hasGoal = false;
+//        changeFragments();
+//    }
 
     @Override
     public void onReviewDataPass(){
@@ -223,12 +233,12 @@ public class MainActivity extends AppCompatActivity
         changeFragments();
     }
 
-    @Override
-    public void onChangeProfileDataPass(User user, int choice){
-        u = user;
-        user_choice = choice;
-        changeFragments();
-    }
+//    @Override
+//    public void onChangeProfileDataPass(User user, int choice){
+//        u = user;
+//        user_choice = choice;
+//        changeFragments();
+//    }
 
     @Override
     public void onProfilePicDataPass(String image){

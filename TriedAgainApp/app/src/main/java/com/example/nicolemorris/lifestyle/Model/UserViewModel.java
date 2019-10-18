@@ -25,5 +25,4 @@ public class UserViewModel extends AndroidViewModel {
         return jsonData;
     }
 
-
 }
