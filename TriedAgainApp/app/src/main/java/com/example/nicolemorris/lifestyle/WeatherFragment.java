@@ -13,10 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.nicolemorris.lifestyle.Room.WeatherDataTable;
+import com.google.gson.Gson;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -74,11 +79,13 @@ public class WeatherFragment extends Fragment{
                 String rain = (mWeatherData.getCurrentCondition().getHumidity()<90)?"Low":"high";
                 mTvTemp.setText("" + Math.round(mWeatherData.getTemperature().getTemp() - 273.15) +  "\u00B0 C");
                 mTvHum.setText("" + rain);
+                WeatherRepository.saveDataToDB(mWeatherData);
             }
         }
     };
 
     void loadWeatherData(String location){
+
         //pass the location in to the view model
         mWeatherViewModel.setLocation(location);
     }
@@ -355,7 +362,7 @@ class JSONWeatherUtils {
 class WeatherRepository {
 
     private final MutableLiveData<WeatherData> jsonData = new MutableLiveData<>();
-    private String mLocation;
+    static private String mLocation;
 
 
     WeatherRepository(Application application){
@@ -401,4 +408,34 @@ class WeatherRepository {
             }
         }.execute();
     }
+
+    public static void saveDataToDB(WeatherData wd){
+        Log.e("WeatherRepository", "WeatherData " + wd.getCurrentCondition().getDescr() );
+
+
+        new AsyncTask<WeatherData, Void, Void>() {
+            @Override
+            protected Void doInBackground(WeatherData... wds) {
+                String weatherDataJson = null;
+
+                weatherDataJson = WeatherRepository.weatherData2String(wds[0]);
+                Log.e("ProfileRepo", "userJson " + wds[0].getCurrentCondition().getDescr());
+
+
+                WeatherDataTable wdt = new WeatherDataTable(mLocation, weatherDataJson);
+                Log.e("ProfileRepo", "PT: " + wdt.getWeatherJson());
+
+                MainActivity.db.weatherDao().insertWeatherDataTable(wdt);
+                return null;
+            }
+        }.execute(wd);
+    }
+
+    public static String weatherData2String(WeatherData wd) {
+        String ret;
+        Gson gson = new Gson();
+        ret = gson.toJson(wd);
+        return ret;
+    }
+
 }

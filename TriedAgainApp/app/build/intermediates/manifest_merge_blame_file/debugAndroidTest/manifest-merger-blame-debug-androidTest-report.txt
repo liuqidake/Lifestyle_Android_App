@@ -3,35 +3,35 @@
 3    package="com.example.nicolemorris.lifestyle.test" >
 4
 5    <uses-sdk
-5-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:5:5-74
+5-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:5:5-74
 6        android:minSdkVersion="15"
-6-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:5:15-41
+6-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:5:42-71
+7-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:11:5-15:84
+9-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:11:5-15:84
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:11:22-76
+10-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:11:22-76
 11        android:functionalTest="false"
-11-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:14:22-52
+11-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:13:22-53
+12-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:13:22-53
 13        android:label="Tests for com.example.nicolemorris.lifestyle"
-13-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:15:22-82
+13-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:15:22-82
 14        android:targetPackage="com.example.nicolemorris.lifestyle" />
-14-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:12:22-80
+14-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:12:22-80
 15
 16    <uses-permission android:name="android.permission.REORDER_TASKS" />
 16-->[androidx.test:core:1.2.0] /Users/huizhou/.gradle/caches/transforms-2/files-2.1/ff25c04162ff943dff3292e200c3e8d4/core-1.2.0/AndroidManifest.xml:24:5-72
 16-->[androidx.test:core:1.2.0] /Users/huizhou/.gradle/caches/transforms-2/files-2.1/ff25c04162ff943dff3292e200c3e8d4/core-1.2.0/AndroidManifest.xml:24:22-69
 17
 18    <application android:debuggable="true" >
-18-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:7:5-9:19
-18-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:7:18-43
+18-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:7:5-9:19
+18-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:7:18-43
 19        <uses-library android:name="android.test.runner" />
-19-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:8:9-60
-19-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6785947529390583478.xml:8:23-57
+19-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:8:9-60
+19-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6310808762002854424.xml:8:23-57
 20
 21        <activity
 21-->[androidx.test:core:1.2.0] /Users/huizhou/.gradle/caches/transforms-2/files-2.1/ff25c04162ff943dff3292e200c3e8d4/core-1.2.0/AndroidManifest.xml:27:9-33:20
