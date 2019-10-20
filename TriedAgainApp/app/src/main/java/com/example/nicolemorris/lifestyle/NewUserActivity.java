@@ -160,6 +160,7 @@ public class NewUserActivity extends AppCompatActivity
             user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim(), profile_image);
             System.out.println(user.getUri());
             UserRepo.saveUserProfile(getBaseContext(),user);
+            saveUserProfile(user);
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
             ReviewFragment fragment = new ReviewFragment();
@@ -201,24 +202,24 @@ public class NewUserActivity extends AppCompatActivity
         fTrans.commit();
     }
 
-//    public String serializeUser(User user){
-//        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
-//                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+","+user.getUri()+"\n";
-//        return content;
-//    }
-//
-//
-//    private void saveUserProfile(User user){
-//        try {
-//            out = openFileOutput(fileName, MODE_APPEND);
-//            String fileContents = serializeUser(user);
-//            out.write(fileContents.getBytes());
-//            out.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public String serializeUser(User user){
+        String content = user.getName()+","+user.getAge()+","+user.getFeet()+","+
+                user.getInches()+","+user.getCity()+","+user.getState()+","+user.getWeight()+","+user.getSex()+","+user.getUri()+"\n";
+        return content;
+    }
+
+
+    private void saveUserProfile(User user){
+        try {
+            out = openFileOutput(fileName, MODE_APPEND);
+            String fileContents = serializeUser(user);
+            out.write(fileContents.getBytes());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 //    private void updateUserProfile(User user){
 //        try {
