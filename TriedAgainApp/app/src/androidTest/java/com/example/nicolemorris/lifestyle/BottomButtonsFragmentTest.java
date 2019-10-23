@@ -1,12 +1,12 @@
 package com.example.nicolemorris.lifestyle;
 
-import org.junit.Before;
+import com.example.nicolemorris.lifestyle.Activities.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.espresso.ViewAssertion;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -18,7 +18,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.not;
 
 @RunWith(AndroidJUnit4.class)
-public class BottomButtonsTest {
+public class BottomButtonsFragmentTest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule

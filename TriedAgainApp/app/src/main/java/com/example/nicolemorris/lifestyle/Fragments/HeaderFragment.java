@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.nicolemorris.lifestyle.R;
 
 public class HeaderFragment extends Fragment {
 

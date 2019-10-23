@@ -1,8 +1,7 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -10,8 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.nicolemorris.lifestyle.Activities.MainActivity;
+import com.example.nicolemorris.lifestyle.R;
 import com.example.nicolemorris.lifestyle.Room.WeatherDataTable;
 import com.google.gson.Gson;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.IOException;

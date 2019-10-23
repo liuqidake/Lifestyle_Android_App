@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -36,7 +36,7 @@ import android.widget.Toast;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
-import com.example.nicolemorris.lifestyle.Room.UserTable;
+import com.example.nicolemorris.lifestyle.R;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,8 +44,6 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
-
-import static com.example.nicolemorris.lifestyle.MainActivity.db;
 
 public class ChangeProfileFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {

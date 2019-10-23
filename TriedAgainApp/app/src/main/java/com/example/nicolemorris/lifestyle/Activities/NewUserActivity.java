@@ -1,19 +1,24 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nicolemorris.lifestyle.Fragments.ChangeProfileFragment;
+import com.example.nicolemorris.lifestyle.Fragments.LocationFragment;
+import com.example.nicolemorris.lifestyle.Fragments.NameAgeFragment;
+import com.example.nicolemorris.lifestyle.Fragments.PhysDetailsFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ProfilePicFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ReviewFragment;
+import com.example.nicolemorris.lifestyle.Fragments.TitleFragment;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
+import com.example.nicolemorris.lifestyle.R;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.Calendar;
-import java.util.Scanner;
 
 public class NewUserActivity extends AppCompatActivity
         implements NameAgeFragment.NameAgeOnDataPass, PhysDetailsFragment.PhysOnDataPass,

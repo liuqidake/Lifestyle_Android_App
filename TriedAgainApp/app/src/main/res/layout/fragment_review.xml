@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/frag_rev"
-    tools:context=".ReviewFragment">
+    tools:context=".Fragments.ReviewFragment">
 
     <LinearLayout
         android:id="@+id/vll_rev_frag"

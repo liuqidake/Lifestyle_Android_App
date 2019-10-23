@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.nicolemorris.lifestyle.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

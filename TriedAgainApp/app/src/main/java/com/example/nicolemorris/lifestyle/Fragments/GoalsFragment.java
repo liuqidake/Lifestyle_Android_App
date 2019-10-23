@@ -1,7 +1,5 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.User;
-import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
-import com.example.nicolemorris.lifestyle.Room.UserTable;
-import com.google.android.gms.common.UserRecoverableException;
-
-import java.util.List;
-
-import static com.example.nicolemorris.lifestyle.MainActivity.db;
+import com.example.nicolemorris.lifestyle.R;
 
 public class GoalsFragment extends Fragment
         implements View.OnClickListener {

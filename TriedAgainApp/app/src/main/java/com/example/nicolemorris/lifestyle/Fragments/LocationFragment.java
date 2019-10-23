@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.Manifest;
 import android.content.Context;
@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.R;
 
 import java.util.List;
 import java.util.Locale;

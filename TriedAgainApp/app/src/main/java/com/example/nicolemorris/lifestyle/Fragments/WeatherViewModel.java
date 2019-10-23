@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 
 import android.app.Application;

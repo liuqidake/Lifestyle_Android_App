@@ -1,7 +1,5 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,9 +18,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nicolemorris.lifestyle.Activities.MainActivity;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.R;
 
 public class ChangeGoalFragment extends Fragment
         implements AdapterView.OnItemSelectedListener, View.OnClickListener {

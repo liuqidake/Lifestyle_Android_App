@@ -4,18 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.nicolemorris.lifestyle.MainActivity;
 import com.example.nicolemorris.lifestyle.Room.UserTable;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Scanner;
 
 import androidx.lifecycle.MutableLiveData;
 
-import static com.example.nicolemorris.lifestyle.MainActivity.db;
+import static com.example.nicolemorris.lifestyle.Activities.MainActivity.db;
 
 public class UserRepo {
     private final MutableLiveData<User> jsonData = new MutableLiveData<User>();

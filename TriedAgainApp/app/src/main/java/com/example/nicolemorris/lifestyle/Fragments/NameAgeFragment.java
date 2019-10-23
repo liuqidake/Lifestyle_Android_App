@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.R;
 
 import java.util.Calendar;
 

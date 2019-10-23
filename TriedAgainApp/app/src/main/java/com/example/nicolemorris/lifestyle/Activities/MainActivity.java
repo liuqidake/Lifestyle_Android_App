@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -12,9 +12,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
@@ -23,17 +21,26 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.widget.Toast;
 
 //import com.example.nicolemorris.lifestyle.Model.ChoiceViewModel;
+import com.example.nicolemorris.lifestyle.Fragments.BmiFragment;
+import com.example.nicolemorris.lifestyle.Fragments.BottomButtonsFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ChangeGoalFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ChangeProfileFragment;
+import com.example.nicolemorris.lifestyle.Fragments.GoalsFragment;
+import com.example.nicolemorris.lifestyle.Fragments.HeaderFragment;
+import com.example.nicolemorris.lifestyle.Fragments.HelpFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ProfilePicFragment;
+import com.example.nicolemorris.lifestyle.Fragments.ReviewFragment;
+import com.example.nicolemorris.lifestyle.Fragments.WeatherFragment;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.R;
 import com.example.nicolemorris.lifestyle.Room.DataBase;
-import com.example.nicolemorris.lifestyle.Room.UserTable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +51,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomButtons.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
+        implements BottomButtonsFragment.OnBottomDataPass, ReviewFragment.ReviewOnDataPass,
         ProfilePicFragment.ProfilePicOnDataPass {
 
     User u;
@@ -356,7 +363,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        fTrans.replace(R.id.fl_frag_ph_3,new BottomButtons(),"Choices");
+        fTrans.replace(R.id.fl_frag_ph_3,new BottomButtonsFragment(),"Choices");
         fTrans.commit();
     }
 

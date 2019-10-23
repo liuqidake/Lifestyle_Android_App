@@ -1,9 +1,12 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Activities;
 
 import android.content.Intent;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.nicolemorris.lifestyle.Fragments.ChoicesDesignedFragment;
+import com.example.nicolemorris.lifestyle.R;
 
 public class HomeActivity extends AppCompatActivity
         implements ChoicesDesignedFragment.OnChoiceDataPass {

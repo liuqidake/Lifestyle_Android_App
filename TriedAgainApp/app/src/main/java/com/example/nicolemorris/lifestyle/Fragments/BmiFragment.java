@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+import com.example.nicolemorris.lifestyle.R;
 
 
 public class BmiFragment extends Fragment {

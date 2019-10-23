@@ -1,4 +1,4 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.nicolemorris.lifestyle.Adapter.ProfileListAdapter;
 import com.example.nicolemorris.lifestyle.Model.ListofProfileAndName;
 import com.example.nicolemorris.lifestyle.Model.ProfilePicAndName;
+import com.example.nicolemorris.lifestyle.R;
 
 import java.util.List;
 

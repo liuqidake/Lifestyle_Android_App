@@ -1,7 +1,6 @@
-package com.example.nicolemorris.lifestyle;
+package com.example.nicolemorris.lifestyle.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,15 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-public class ChoicesDesignedFragment extends Fragment
+import com.example.nicolemorris.lifestyle.R;
+
+public class BottomButtonsFragment extends Fragment
         implements View.OnClickListener {
 
-    OnChoiceDataPass mDataPasser;
-    ImageButton profile_data, goals, bmi, hikes, weather, help, pic;
-    Uri profile_image;
+    OnBottomDataPass mDataPasser;
+    ImageButton profile_data, goals, bmi, hikes, weather, help;
+
     //Callback interface
-    public interface OnChoiceDataPass{
-        public void onChoiceDataPass(int data);
+    public interface OnBottomDataPass{
+        public void onBottomDataPass(int data);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class ChoicesDesignedFragment extends Fragment
         super.onAttach(context);
 
         try{
-            mDataPasser = (OnChoiceDataPass) context;
+            mDataPasser = (OnBottomDataPass) context;
         }catch(ClassCastException e){
             throw new ClassCastException(context.toString() + " must implement OnDataPass");
         }
@@ -34,26 +35,17 @@ public class ChoicesDesignedFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_choices_designed, container, false);
+        View view = inflater.inflate(R.layout.fragment_bottom_buttons, container, false);
 
         //Store buttons
         profile_data = view.findViewById(R.id.ib_profile);
         goals = view.findViewById(R.id.ib_goals);
         bmi = view.findViewById(R.id.ib_bmi);
-        hikes = view.findViewById(R.id.ib_hike);
+        hikes = view.findViewById(R.id.ib_hikes);
         weather = view.findViewById(R.id.ib_weather);
         help = view.findViewById(R.id.ib_help);
-
-
-        String image_uri = getArguments().getString("uri");
-        if(!image_uri.equals("NoPic")){
-            profile_image = Uri.parse(image_uri);
-            //Uri profile_image = Uri.fromFile(new File(image_uri));
-            pic = view.findViewById(R.id.ib_choose_profile);
-            pic.setImageURI(profile_image);
-        }
-
 
         //Set listeners
         profile_data.setOnClickListener(this);
@@ -63,6 +55,7 @@ public class ChoicesDesignedFragment extends Fragment
         weather.setOnClickListener(this);
         help.setOnClickListener(this);
 
+        //Return view
         return view;
     }
 
@@ -70,32 +63,32 @@ public class ChoicesDesignedFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_profile: {
-                mDataPasser.onChoiceDataPass(9);
+                mDataPasser.onBottomDataPass(9);
                 break;
             }
 
             case R.id.ib_goals: {
-                mDataPasser.onChoiceDataPass(2);
+                mDataPasser.onBottomDataPass(2);
                 break;
             }
 
             case R.id.ib_bmi: {
-                mDataPasser.onChoiceDataPass(3);
+                mDataPasser.onBottomDataPass(3);
                 break;
             }
 
-            case R.id.ib_hike: {
-                mDataPasser.onChoiceDataPass(4);
+            case R.id.ib_hikes: {
+                mDataPasser.onBottomDataPass(4);
                 break;
             }
 
             case R.id.ib_weather: {
-                mDataPasser.onChoiceDataPass(5);
+                mDataPasser.onBottomDataPass(5);
                 break;
             }
 
             case R.id.ib_help: {
-                mDataPasser.onChoiceDataPass(6);
+                mDataPasser.onBottomDataPass(6);
                 break;
             }
 
