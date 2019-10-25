@@ -10,8 +10,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.TextView;
 
-import com.example.nicolemorris.lifestyle.Activities.MainActivity;
-
 public class StopGesture {
 
     private SensorManager mSensorManager;
@@ -22,7 +20,7 @@ public class StopGesture {
     private double now_x, now_y,now_z;
     TextView tv_z;
     StepCounter mStepCounter;
-    TwoStepGesture mTwoStepGesture;
+    StartGesture mStartGesture;
 
     public StopGesture(Context context, StepCounter stepCounter, TextView z){
         mContext = context;
@@ -53,18 +51,19 @@ public class StopGesture {
                     /*
                     SOUND NOTIFICATION
                     */
-//                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//                    Ringtone r = RingtoneManager.getRingtone(mContext, notification);
-//                    r.play();
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+                    r.play();
 
                     /*
                     STOP STEP COUNTER
                     */
+                    mSensorManager.unregisterListener(mStepCounter.getListener());
 
                     /*
                     START TWOSTEP GESTURE
                     */
-                    mTwoStepGesture = new TwoStepGesture(mContext, tv_z);
+                    mStartGesture = new StartGesture(mContext, tv_z);
 
                     /*
                     STOP LISTENER

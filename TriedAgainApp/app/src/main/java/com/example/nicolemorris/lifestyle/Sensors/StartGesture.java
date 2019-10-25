@@ -2,7 +2,6 @@ package com.example.nicolemorris.lifestyle.Sensors;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,11 +11,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Random;
-
-public class TwoStepGesture {
+public class StartGesture {
 
     private SensorManager mSensorManager;
     private Sensor mTwoSteps;
@@ -36,9 +31,9 @@ public class TwoStepGesture {
 
     StepCounter stepCounter;
     StopGesture stopGesture;
-    TwoStepGesture thisGesture;
+    StartGesture thisGesture;
 
-    public TwoStepGesture(Context context, TextView z){
+    public StartGesture(Context context, TextView z){
         mContext = context;
         tv_z = z;
         steps = 0;
@@ -76,9 +71,9 @@ public class TwoStepGesture {
                         /*
                         SOUND NOTIFICATION
                          */
-//                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//                        Ringtone r = RingtoneManager.getRingtone(mContext, notification);
-//                        r.play();
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+                        r.play();
 
                         /*
                         START STEP COUNTER

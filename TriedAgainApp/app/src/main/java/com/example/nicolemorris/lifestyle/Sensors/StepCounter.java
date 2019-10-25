@@ -56,5 +56,9 @@ boolean mFirstStep;
 
     };
 
+    public SensorEventListener getListener(){
+        return mListener;
+    }
+
 
 }
