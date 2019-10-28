@@ -30,7 +30,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.nicolemorris.lifestyle.MainActivity"
+            android:name="com.example.nicolemorris.lifestyle.Activities.MainActivity"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,10 +39,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.nicolemorris.lifestyle.NewUserActivity"
+            android:name="com.example.nicolemorris.lifestyle.Activities.NewUserActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.example.nicolemorris.lifestyle.HomeActivity" />
+        <activity android:name="com.example.nicolemorris.lifestyle.Activities.HomeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

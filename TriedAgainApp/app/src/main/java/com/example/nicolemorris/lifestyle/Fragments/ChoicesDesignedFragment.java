@@ -23,7 +23,7 @@ public class ChoicesDesignedFragment extends Fragment
 
     UserViewModel mUserViewModel;
     OnChoiceDataPass mDataPasser;
-    ImageButton profile_data, goals, bmi, hikes, weather, help, pic;
+    ImageButton profile_data, goals, bmi, hikes, weather, help, pic, step;
     Uri profile_image;
     //Callback interface
     public interface OnChoiceDataPass{
@@ -55,13 +55,13 @@ public class ChoicesDesignedFragment extends Fragment
         weather = view.findViewById(R.id.ib_weather);
         help = view.findViewById(R.id.ib_help);
 
+        step = view.findViewById(R.id.ib_steps);
         mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         //Set the observer
         mUserViewModel.getData().observe(this,userObserver);
 
 //        String image_uri = getArguments().getString("uri");
-
 
 
         //Set listeners
@@ -72,6 +72,8 @@ public class ChoicesDesignedFragment extends Fragment
         weather.setOnClickListener(this);
         help.setOnClickListener(this);
 
+        step.setOnClickListener(this);
+
         return view;
     }
 
@@ -79,7 +81,7 @@ public class ChoicesDesignedFragment extends Fragment
         @Override
         public void onChanged(@Nullable final User u) {
             // Update the UI if this data variable changes
-            if(u!=null) {
+            if(u!=null && u.getUri()!=null) {
                 if(!u.getUri().equals("NoPic")){
                     profile_image = Uri.parse(u.getUri());
                     //Uri profile_image = Uri.fromFile(new File(image_uri));
@@ -123,6 +125,10 @@ public class ChoicesDesignedFragment extends Fragment
                 break;
             }
 
+            case R.id.ib_steps: {
+                mDataPasser.onChoiceDataPass(10);
+                break;
+            }
 
         }
     }

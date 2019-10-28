@@ -29,13 +29,13 @@ public final class DataBase_Impl extends DataBase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `WeatherDataTable` (`did` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `location` TEXT NOT NULL, `weatherdata` TEXT NOT NULL)");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `UserTable` (`did` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `age` INTEGER NOT NULL, `feet` INTEGER NOT NULL, `inches` INTEGER NOT NULL, `weight` INTEGER NOT NULL, `name` TEXT, `city` TEXT, `state` TEXT, `sex` TEXT, `goal` INTEGER, `act_level` INTEGER, `weight_amt` INTEGER, `uri` TEXT)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `UserTable` (`did` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `age` INTEGER NOT NULL, `city` TEXT, `state` TEXT, `feet` INTEGER NOT NULL, `inches` INTEGER NOT NULL, `weight` INTEGER NOT NULL, `sex` TEXT, `hasGoal` INTEGER NOT NULL, `goal` INTEGER, `act_level` INTEGER, `weight_amt` INTEGER, `uri` TEXT, `stepTimeStamp` INTEGER NOT NULL, `dailySteps` INTEGER NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79ed7d7411a9c56a842ee047377b5482')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cbae57969a3d720a714d50abb68d40c2')");
       }
 
       @Override
@@ -93,20 +93,23 @@ public final class DataBase_Impl extends DataBase {
                   + " Expected:\n" + _infoWeatherDataTable + "\n"
                   + " Found:\n" + _existingWeatherDataTable);
         }
-        final HashMap<String, TableInfo.Column> _columnsUserTable = new HashMap<String, TableInfo.Column>(13);
+        final HashMap<String, TableInfo.Column> _columnsUserTable = new HashMap<String, TableInfo.Column>(16);
         _columnsUserTable.put("did", new TableInfo.Column("did", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("name", new TableInfo.Column("name", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("age", new TableInfo.Column("age", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("city", new TableInfo.Column("city", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("state", new TableInfo.Column("state", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("feet", new TableInfo.Column("feet", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("inches", new TableInfo.Column("inches", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("weight", new TableInfo.Column("weight", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserTable.put("name", new TableInfo.Column("name", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserTable.put("city", new TableInfo.Column("city", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserTable.put("state", new TableInfo.Column("state", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("sex", new TableInfo.Column("sex", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("hasGoal", new TableInfo.Column("hasGoal", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("goal", new TableInfo.Column("goal", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("act_level", new TableInfo.Column("act_level", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("weight_amt", new TableInfo.Column("weight_amt", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserTable.put("uri", new TableInfo.Column("uri", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("stepTimeStamp", new TableInfo.Column("stepTimeStamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserTable.put("dailySteps", new TableInfo.Column("dailySteps", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysUserTable = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesUserTable = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoUserTable = new TableInfo("UserTable", _columnsUserTable, _foreignKeysUserTable, _indicesUserTable);
@@ -118,7 +121,7 @@ public final class DataBase_Impl extends DataBase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "79ed7d7411a9c56a842ee047377b5482", "ef2aa74b216a9741cd60f0e5e4588d08");
+    }, "cbae57969a3d720a714d50abb68d40c2", "ba8cfd5a5e858a216d471611e51b062e");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

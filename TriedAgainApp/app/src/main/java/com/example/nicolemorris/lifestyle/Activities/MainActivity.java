@@ -36,6 +36,7 @@ import com.example.nicolemorris.lifestyle.Fragments.HeaderFragment;
 import com.example.nicolemorris.lifestyle.Fragments.HelpFragment;
 import com.example.nicolemorris.lifestyle.Fragments.ProfilePicFragment;
 import com.example.nicolemorris.lifestyle.Fragments.ReviewFragment;
+import com.example.nicolemorris.lifestyle.Fragments.StepCounterFragment;
 import com.example.nicolemorris.lifestyle.Fragments.WeatherFragment;
 import com.example.nicolemorris.lifestyle.Model.User;
 import com.example.nicolemorris.lifestyle.Model.UserRepo;
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity
     ChangeProfileFragment cpf;
     HeaderFragment hef;
     ProfilePicFragment ppf;
+
+    StepCounterFragment scf;
 
     int goal, act_level, goal_amount;
 
@@ -349,6 +352,10 @@ public class MainActivity extends AppCompatActivity
             sentData.putParcelable("user",u);
             ppf.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_2,ppf,"Profile");
+        }else if (user_choice == 10){
+            isFirstChoice = false;
+            scf = new StepCounterFragment();
+            fTrans.replace(R.id.fl_frag_ph_2,scf,"StepCounter");
         }
 
         if(addHeader){

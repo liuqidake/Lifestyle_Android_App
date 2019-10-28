@@ -14,7 +14,7 @@ public class BottomButtonsFragment extends Fragment
         implements View.OnClickListener {
 
     OnBottomDataPass mDataPasser;
-    ImageButton profile_data, goals, bmi, hikes, weather, help;
+    ImageButton profile_data, goals, bmi, hikes, weather, help,step;
 
     //Callback interface
     public interface OnBottomDataPass{
@@ -47,6 +47,8 @@ public class BottomButtonsFragment extends Fragment
         weather = view.findViewById(R.id.ib_weather);
         help = view.findViewById(R.id.ib_help);
 
+        step = view.findViewById(R.id.ib_steps);
+
         //Set listeners
         profile_data.setOnClickListener(this);
         goals.setOnClickListener(this);
@@ -55,6 +57,7 @@ public class BottomButtonsFragment extends Fragment
         weather.setOnClickListener(this);
         help.setOnClickListener(this);
 
+        step.setOnClickListener(this);
         //Return view
         return view;
     }
@@ -92,6 +95,10 @@ public class BottomButtonsFragment extends Fragment
                 break;
             }
 
+            case R.id.ib_steps: {
+                mDataPasser.onBottomDataPass(10);
+                break;
+            }
 
         }
     }

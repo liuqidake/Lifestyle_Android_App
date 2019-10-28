@@ -55,8 +55,8 @@
 31-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:13:9-44
 32        <activity
 32-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:21:9-29:20
-33            android:name="com.example.nicolemorris.lifestyle.MainActivity"
-33-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:22:13-41
+33            android:name="com.example.nicolemorris.lifestyle.Activities.MainActivity"
+33-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:22:13-52
 34            android:windowSoftInputMode="adjustResize" >
 34-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:23:13-55
 35            <intent-filter>
@@ -72,15 +72,15 @@
 40        </activity>
 41        <activity
 41-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:30:9-33:67
-42            android:name="com.example.nicolemorris.lifestyle.NewUserActivity"
-42-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:31:13-44
+42            android:name="com.example.nicolemorris.lifestyle.Activities.NewUserActivity"
+42-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:31:13-55
 43            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
 43-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:32:13-69
 44            android:windowSoftInputMode="adjustResize" />
 44-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:33:13-55
-45        <activity android:name="com.example.nicolemorris.lifestyle.HomeActivity" />
-45-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:34:9-59
-45-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:34:19-47
+45        <activity android:name="com.example.nicolemorris.lifestyle.Activities.HomeActivity" />
+45-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:34:9-70
+45-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:34:19-58
 46
 47        <meta-data
 47-->/Users/huizhou/6018/Lifestyle_Android_App/TriedAgainApp/app/src/main/AndroidManifest.xml:36:9-38:57

@@ -295,7 +295,7 @@ public class ChangeProfileFragment extends Fragment
                 if(user != null){
                     String oldName = user.getName();
                     user = new User(name, age, feet, inches, city, state, weight, sex, image_uri);
-                     updateUserProfile(user, oldName);
+                    updateUserProfile(user, oldName);
 
                     UserRepo.updateUserProfile(getContext(),user);
 

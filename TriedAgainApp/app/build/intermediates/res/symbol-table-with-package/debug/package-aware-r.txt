@@ -714,6 +714,7 @@ drawable icon_heart_small
 drawable icon_help
 drawable icon_hikes
 drawable icon_profile
+drawable icon_steps
 drawable icon_weather
 drawable no_pic_yet
 drawable notification_action_background
@@ -850,6 +851,7 @@ id ib_help
 id ib_hike
 id ib_hikes
 id ib_profile
+id ib_steps
 id ib_weather
 id icon
 id icon_group
@@ -952,6 +954,7 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textView1
+id textView10
 id textView2
 id textView3
 id textView4
@@ -959,6 +962,7 @@ id textView5
 id textView6
 id textView7
 id textView8
+id textView9
 id time
 id title
 id titleDividerNoCustom
@@ -1071,6 +1075,7 @@ layout fragment_profile_list
 layout fragment_profile_list_item
 layout fragment_profile_pic
 layout fragment_review
+layout fragment_step_counter
 layout fragment_title
 layout fragment_weather
 layout notification_action
