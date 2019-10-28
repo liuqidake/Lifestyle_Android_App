@@ -55,6 +55,15 @@
         android:src="@drawable/icon_weather" />
 
     <ImageButton
+        android:id="@+id/ib_steps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_weight="1"
+        android:src="@drawable/icon_steps" />
+
+    <ImageButton
         android:id="@+id/ib_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
