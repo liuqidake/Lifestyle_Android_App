@@ -30,8 +30,7 @@ public class User implements Parcelable {
         this.sex = sex;
         this.hasGoal = false;
         this.uri = uri;
-        this.stepTimeStamp = -1;
-        this.dailySteps = -1;
+        this.dailySteps = 0;
     }
 
     public User(String name, int age, int feet, int inches, String city, String state, int weight, String sex, String uri,

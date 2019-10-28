@@ -42,6 +42,7 @@ boolean mFirstStep;
             mSensorManager.registerListener(mListener,mStepCounter,SensorManager.SENSOR_DELAY_FASTEST);
         }
         mUserViewModel = userViewModel;
+        mUser = UserRepo.readUserProfile(mContext);
 
 
     }
@@ -61,44 +62,11 @@ boolean mFirstStep;
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
 
-            //Get current timestamp & steps
-            int newSteps = Math.round(sensorEvent.values[0]);
-
-            //If there is a timestamp (-1 is placeholder for none saved)
-            if(mUser.getStepTimeStamp() == -1 ||
-                    ///If change in timestamps is greater than a day
-                (TimeUnit.NANOSECONDS.toDays(sensorEvent.timestamp - mUser.getStepTimeStamp()) > 1)) {
-
-                //Save new daily steps
-                mUser.setDailySteps(newSteps);
-
-            } else {
-
-                //If same day, update steps to steps+newsteps
-                mUser.setDailySteps(mUser.getDailySteps() + newSteps);
-            }
-
-            //Save timestamp
-            mUser.setStepTimeStamp((sensorEvent.timestamp));
+            //Update data in database
+            mUser.setDailySteps(mUser.getDailySteps() + Math.round(sensorEvent.values[0]));
 
             UserRepo.updateUserProfile(mContext,mUser);
 
-
-            //UPDATE DATA IN DATABASE
-
-////            String.valueOf(sensorEvent.values[0])
-//            if(!mFirstStep) {
-//                for (int i = 0; i < sensorEvent.values.length; i++) {
-//                    System.out.println("sensorEvent.values[" + i + "] = " + sensorEvent.values[i]);
-//                }
-//                total_steps = last_steps - Math.round(sensorEvent.values[0]) + total_steps;
-//                tv_z.setText(String.valueOf(total_steps));
-////            System.out.println("Steps = " + sensorEvent.values[0]);
-//            } else {
-//                tv_z.setText(String.valueOf(total_steps));
-//            }
-//            last_steps = Math.round(sensorEvent.values[0]);
-//            mFirstStep = false;
         }
 
         @Override
