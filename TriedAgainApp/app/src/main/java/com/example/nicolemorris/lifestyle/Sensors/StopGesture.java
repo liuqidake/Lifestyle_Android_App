@@ -10,6 +10,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.TextView;
 
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+
 public class StopGesture {
 
     private SensorManager mSensorManager;
@@ -18,13 +20,13 @@ public class StopGesture {
 
     private double last_x, last_y, last_z;
     private double now_x, now_y,now_z;
-    TextView tv_z;
     StepCounter mStepCounter;
     StartGesture mStartGesture;
+    UserViewModel mUserViewModel;
 
-    public StopGesture(Context context, StepCounter stepCounter, TextView z){
+    public StopGesture(Context context, StepCounter stepCounter, UserViewModel userViewModel){
         mContext = context;
-        tv_z = z;
+        mUserViewModel = userViewModel;
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mStop = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         if(mStop!=null){
@@ -58,12 +60,14 @@ public class StopGesture {
                     /*
                     STOP STEP COUNTER
                     */
-                    mSensorManager.unregisterListener(mStepCounter.getListener());
+
+                    //Todo: FIX THIS
+//                    mSensorManager.unregisterListener(mStepCounter.getListener());
 
                     /*
-                    START TWOSTEP GESTURE
+                    START START GESTURE
                     */
-                    mStartGesture = new StartGesture(mContext, tv_z);
+                    mStartGesture = new StartGesture(mContext, mUserViewModel);
 
                     /*
                     STOP LISTENER

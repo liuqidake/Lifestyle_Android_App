@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {WeatherDataTable.class, UserTable.class}, version = 1, exportSchema = false)
+@Database(entities = {WeatherDataTable.class, UserTable.class}, version = 2, exportSchema = false)
 public abstract class DataBase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "LifeStyleDB";

@@ -13,6 +13,8 @@ public class User implements Parcelable {
     Integer act_level; //0 = sedentary, 1 = light, 2 = moderate, 3 = very, 4 = extremely
     Integer weight_amt; //If goal to lose or gain weight, amount to lose or gain
     String uri;
+    long stepTimeStamp;
+    int dailySteps;
 
     public User(){
 
@@ -28,6 +30,30 @@ public class User implements Parcelable {
         this.sex = sex;
         this.hasGoal = false;
         this.uri = uri;
+        this.stepTimeStamp = -1;
+        this.dailySteps = -1;
+    }
+
+    public User(String name, int age, int feet, int inches, String city, String state, int weight, String sex, String uri,
+                Integer goal, Integer act_level, Integer weight_amt, long stepTimeStamp, int dailySteps){
+        this.name = name;
+        this.age = age;
+        this.city = city;
+        this.state = state;
+        this.feet = feet;
+        this.inches = inches;
+        this.weight = weight;
+        this.sex = sex;
+        this.hasGoal = false;
+        this.uri = uri;
+        this.goal = goal;
+        if(goal != null){
+            this.hasGoal = true;
+        }
+        this.act_level = act_level;
+        this.weight_amt = weight_amt;
+        this.stepTimeStamp = stepTimeStamp;
+        this.dailySteps = dailySteps;
     }
 
     public void setGoal(int goal, int act_level, int weight_amt){
@@ -111,6 +137,10 @@ public class User implements Parcelable {
     public String getUri() { return this.uri;}
     public void setUri(String uri) {this.uri = uri;}
     public void setHasGoal (boolean b) {this.hasGoal = b;}
+    public long getStepTimeStamp() {return this.stepTimeStamp;}
+    public void setStepTimeStamp(long timeStamp) { this.stepTimeStamp = timeStamp;}
+    public int getDailySteps() {return this.dailySteps;}
+    public void setDailySteps(int steps) {this.dailySteps = steps;}
 
     @Override
     public int describeContents() {

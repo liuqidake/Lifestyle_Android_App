@@ -297,16 +297,9 @@ public class ChangeProfileFragment extends Fragment
                     user = new User(name, age, feet, inches, city, state, weight, sex, image_uri);
                      updateUserProfile(user, oldName);
 
-                    UserRepo.saveUserProfile(getContext(),user);
+                    UserRepo.updateUserProfile(getContext(),user);
 
-                } else {
-                    user = new User(name, age, feet, inches, city, state, weight, sex, image_uri);
-                    Log.e("user " , "here");
-                    saveUserProfile(user);
                 }
-
-
-                saveUserProfile(user);
                 //userDataPasser.onChangeProfileDataPass(user,9);
 
                 FragmentTransaction fTrans = getActivity().getSupportFragmentManager().beginTransaction();

@@ -11,6 +11,25 @@ public class UserTable {
     @PrimaryKey(autoGenerate = true)
     public int did;
 
+    public int getDid() {
+        return did;
+    }
+
+    public void setDid(int did) {
+        this.did = did;
+    }
+
+    @ColumnInfo(name ="name")
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @ColumnInfo(name ="age")
     int age;
 
@@ -22,63 +41,8 @@ public class UserTable {
         this.age = age;
     }
 
-    public int getFeet() {
-        return feet;
-    }
-
-    public void setFeet(int feet) {
-        this.feet = feet;
-    }
-
-    @ColumnInfo(name ="feet")
-    int feet;
-
-    @ColumnInfo(name ="inches")
-    int inches;
-
-    @ColumnInfo(name ="weight")
-    int weight;
-
-    @ColumnInfo(name ="name")
-    String name;
-
     @ColumnInfo(name ="city")
     String city;
-
-    @ColumnInfo(name ="state")
-    String state;
-
-    public int getDid() {
-        return did;
-    }
-
-    public void setDid(int did) {
-        this.did = did;
-    }
-
-    public int getInches() {
-        return inches;
-    }
-
-    public void setInches(int inches) {
-        this.inches = inches;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getCity() {
         return city;
@@ -88,6 +52,8 @@ public class UserTable {
         this.city = city;
     }
 
+    @ColumnInfo(name ="state")
+    String state;
     public String getState() {
         return state;
     }
@@ -95,6 +61,42 @@ public class UserTable {
     public void setState(String state) {
         this.state = state;
     }
+
+    @ColumnInfo(name ="feet")
+    int feet;
+
+    public int getFeet() {
+        return feet;
+    }
+
+    public void setFeet(int feet) {
+        this.feet = feet;
+    }
+
+    @ColumnInfo(name ="inches")
+    int inches;
+
+    public int getInches() {
+        return inches;
+    }
+
+    public void setInches(int inches) {
+        this.inches = inches;
+    }
+
+    @ColumnInfo(name ="weight")
+    int weight;
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    @ColumnInfo(name ="sex")
+    String sex;
 
     public String getSex() {
         return sex;
@@ -104,6 +106,19 @@ public class UserTable {
         this.sex = sex;
     }
 
+    @ColumnInfo(name ="hasGoal")
+    boolean hasGoal;
+
+    public boolean getHasGoal(){
+        return hasGoal;
+    }
+
+    public void setHasGoal(boolean hasGoal){
+        this.hasGoal = hasGoal;
+    }
+
+    @ColumnInfo(name ="goal")
+    Integer goal; //0 = lose weight, 1 = maintain weight, 2 = gain weight
     public Integer getGoal() {
         return goal;
     }
@@ -112,6 +127,8 @@ public class UserTable {
         this.goal = goal;
     }
 
+    @ColumnInfo(name ="act_level")
+    Integer act_level; //0 = sedentary, 1 = light, 2 = moderate, 3 = very, 4 = extremely
     public Integer getAct_level() {
         return act_level;
     }
@@ -119,6 +136,9 @@ public class UserTable {
     public void setAct_level(Integer act_level) {
         this.act_level = act_level;
     }
+
+    @ColumnInfo(name ="weight_amt")
+    Integer weight_amt; //If goal to lose or gain weight, amount to lose or gain
 
     public Integer getWeight_amt() {
         return weight_amt;
@@ -128,6 +148,9 @@ public class UserTable {
         this.weight_amt = weight_amt;
     }
 
+    @ColumnInfo(name ="uri")
+    String uri;
+
     public String getUri() {
         return uri;
     }
@@ -136,22 +159,27 @@ public class UserTable {
         this.uri = uri;
     }
 
-    @ColumnInfo(name ="sex")
-    String sex;
+    @ColumnInfo(name ="stepTimeStamp")
+    long stepTimeStamp;
 
-    //boolean hasGoal;
+    public long getStepTimeStamp(){
+        return this.stepTimeStamp;
+    }
 
-    @ColumnInfo(name ="goal")
-    Integer goal; //0 = lose weight, 1 = maintain weight, 2 = gain weight
+    public void setStepTimeStamp(long stepTimeStamp){
+        this.stepTimeStamp = stepTimeStamp;
+    }
 
-    @ColumnInfo(name ="act_level")
-    Integer act_level; //0 = sedentary, 1 = light, 2 = moderate, 3 = very, 4 = extremely
+    @ColumnInfo(name ="dailySteps")
+    int dailySteps;
 
-    @ColumnInfo(name ="weight_amt")
-    Integer weight_amt; //If goal to lose or gain weight, amount to lose or gain
+    public int getDailySteps(){
+        return this.dailySteps;
+    }
 
-    @ColumnInfo(name ="uri")
-    String uri;
+    public void setDailySteps(int dailySteps){
+        this.dailySteps = dailySteps;
+    }
 
 
 }

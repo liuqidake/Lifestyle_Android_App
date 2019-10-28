@@ -57,7 +57,7 @@ public class GoalsFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_goals, container, false);
 
-        u = getArguments().getParcelable("user");
+//        u = getArguments().getParcelable("user");
         //Get arguments
 //        goal = getArguments().getInt("Goal");
 //        act_level = getArguments().getInt("Act_Level");
@@ -82,22 +82,7 @@ public class GoalsFragment extends Fragment
 //            }
 //        }.execute();
 
-        goal = u.getGoal();
-        act_level = u.getAct_level();
-        weight_amt = u.getWeight_amt();
 
-        tvGoalTxt = view.findViewById(R.id.tv_goal_txt_d);
-        tvGoalHC = view.findViewById(R.id.tv_goal_hc);
-
-        tvCalAmt = view.findViewById(R.id.tv_cal_amt_d);
-        Long cal = Math.round(calcCalories());
-        if(cal<1200 || (cal<1000 && u.getSex().equals("Female"))){ //200 for male 1000 for female
-            Toast.makeText(getContext(), "not enough calories take in. Maybe reset your goal.", Toast.LENGTH_SHORT).show();
-        }
-        tvCalAmt.setText(cal.toString());
-
-        tvGoalAmt = view.findViewById(R.id.tv_goal_amt_d);
-        tvGoalAmt.setText(Integer.toString(weight_amt));
 
 
         bChangeGoal = view.findViewById(R.id.b_change_goal);
@@ -120,6 +105,22 @@ public class GoalsFragment extends Fragment
             // Update the UI if this data variable changes
             if(userData!=null) {
                 u = userData;
+                goal = u.getGoal();
+                act_level = u.getAct_level();
+                weight_amt = u.getWeight_amt();
+
+                tvGoalTxt = getView().findViewById(R.id.tv_goal_txt_d);
+                tvGoalHC = getView().findViewById(R.id.tv_goal_hc);
+
+                tvCalAmt = getView().findViewById(R.id.tv_cal_amt_d);
+                Long cal = Math.round(calcCalories());
+                if(cal<1200 || (cal<1000 && u.getSex().equals("Female"))){ //200 for male 1000 for female
+                    Toast.makeText(getContext(), "not enough calories take in. Maybe reset your goal.", Toast.LENGTH_SHORT).show();
+                }
+                tvCalAmt.setText(cal.toString());
+
+                tvGoalAmt = getView().findViewById(R.id.tv_goal_amt_d);
+                tvGoalAmt.setText(Integer.toString(weight_amt));
 //                tvCalAmt.setText(userData.getWeight_amt());
 //                tvGoalAmt.setText(userData.getWeight_amt());
             }

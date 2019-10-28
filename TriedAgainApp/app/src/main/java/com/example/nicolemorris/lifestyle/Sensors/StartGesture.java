@@ -11,6 +11,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.TextView;
 
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
+
 public class StartGesture {
 
     private SensorManager mSensorManager;
@@ -27,15 +29,16 @@ public class StartGesture {
     private double now_x, now_y,now_z;
     private boolean mNotFirstTime;
     int steps;
-    TextView tv_x, tv_y, tv_z;
 
     StepCounter stepCounter;
     StopGesture stopGesture;
     StartGesture thisGesture;
 
-    public StartGesture(Context context, TextView z){
+    UserViewModel mUserViewModel;
+
+    public StartGesture(Context context, UserViewModel userViewModel){
         mContext = context;
-        tv_z = z;
+        mUserViewModel = userViewModel;
         steps = 0;
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mTwoSteps = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
@@ -52,7 +55,6 @@ public class StartGesture {
         public void onSensorChanged(SensorEvent sensorEvent) {
 
             //Get the acceleration rates along the y and z axes
-            now_y = sensorEvent.values[1];
             now_z = sensorEvent.values[2];
 
 //            System.out.print("X: " + sensorEvent.values[0] + ", Y: " + sensorEvent.values[1] + ", Z: " + sensorEvent.values[2]);
@@ -78,15 +80,15 @@ public class StartGesture {
                         /*
                         START STEP COUNTER
                          */
-                        stepCounter = new StepCounter(mContext, tv_z);
+                        stepCounter = new StepCounter(mContext, mUserViewModel);
 
                         /*
                         START STOP GESTURE
                          */
-                        stopGesture = new StopGesture(mContext, stepCounter, tv_z); //REMOVE Z TV LATER
+                        stopGesture = new StopGesture(mContext, stepCounter, mUserViewModel);
 
                         /*
-                        PAUSE LISTENER
+                        STOP LISTENER
                          */
                         mSensorManager.unregisterListener(mListener);
 

@@ -9,6 +9,7 @@ import com.example.nicolemorris.lifestyle.Room.UserTable;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Scanner;
 
 import androidx.lifecycle.MutableLiveData;
@@ -86,7 +87,12 @@ public class UserRepo {
                 ut.setWeight(users[0].weight);
                 ut.setSex(users[0].sex);
                 ut.setUri(users[0].uri);
-                db.userDao().inserUserTable(ut);
+                ut.setGoal((users[0].goal));
+                ut.setAct_level((users[0].act_level));
+                ut.setWeight_amt((users[0].weight_amt));
+                ut.setStepTimeStamp((users[0].stepTimeStamp));
+                ut.setDailySteps((users[0].dailySteps));
+                db.userDao().insertUserTable(ut);
                 return null;
             }
         }.execute(user);
@@ -100,48 +106,28 @@ public class UserRepo {
     }
 
 
-    public static void updateUserProfile(Context context, User user){
-//        try {
-//            in = context.openFileInput(fileName);
-//            String temp = "";
-//            Scanner sc = new Scanner((InputStream)in);
-//            while(sc.hasNextLine()){
-//                String next = sc.nextLine();
-//                String currName = next.substring(0, next.indexOf(","));
-//                if(user.getName().equals(currName)){
-//                    temp += serializeUser(user);
-//                    if(sc.hasNextLine()){
-//                        temp+="\n";
-//                    }
-//                }else{
-//                    temp += next;
-//                    if(sc.hasNextLine()){
-//                        temp+="\n";
-//                    }
-//                }
-//            }
-//            out = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-//            out.write(temp.getBytes());
-//            out.close();
-//            in.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public static void updateUserProfile(Context context, final User user){
 
         new AsyncTask<User, Void, Void>(){
             @Override
             protected Void doInBackground(User... users) {
-                UserTable ut = new UserTable();
-                ut.setName(users[0].name);
-                ut.setAge(users[0].age);
-                ut.setFeet(users[0].feet);
-                ut.setInches(users[0].inches);
-                ut.setCity(users[0].city);
-                ut.setState(users[0].state);
-                ut.setWeight(users[0].weight);
-                ut.setSex(users[0].sex);
-                ut.setUri(users[0].uri);
-                db.userDao().inserUserTable(ut);
+                List<UserTable> uts = db.userDao().getAll();
+                UserTable ut = uts.get(0);
+                ut.setName(user.name);
+                ut.setAge(user.age);
+                ut.setFeet(user.feet);
+                ut.setInches(user.inches);
+                ut.setCity(user.city);
+                ut.setState(user.state);
+                ut.setWeight(user.weight);
+                ut.setSex(user.sex);
+                ut.setUri(user.uri);
+                ut.setGoal((user.goal));
+                ut.setAct_level((user.act_level));
+                ut.setWeight_amt((user.weight_amt));
+                ut.setStepTimeStamp((user.stepTimeStamp));
+                ut.setDailySteps((user.dailySteps));
+                db.userDao().updateUserTable(ut);
                 return null;
             }
         }.execute(user);
@@ -150,32 +136,17 @@ public class UserRepo {
 
 
     public static User readUserProfile(Context context){
-        try{
-            in = context.openFileInput(fileName);
-            String temp = "";
-            Scanner sc = new Scanner((InputStream)in);
-            String userInfo = "";
-            if(sc.hasNextLine()){
-                userInfo = sc.nextLine();
-                String[] info = userInfo.split(",");
-                User user;
-                if(info.length == 8){
-                    user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], "NoPic");
-                } else {
-                    user = new User(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), info[4], info[5], Integer.parseInt(info[6]), info[7], info[8]);
-                }
 
-                return user;
-            }
-            return null;
-        }catch(Exception e){
+        try{
+            UserTable ut = db.userDao().getAll().get(0);
+
+            User u = new User(ut.getName(), ut.getAge(), ut.getFeet(), ut.getInches(), ut.getCity(), ut.getState(),
+                    ut.getWeight(), ut.getSex(), ut.getUri(), ut.getGoal(), ut.getAct_level(), ut.getWeight_amt(), ut.getStepTimeStamp(), ut.getDailySteps());
+            return u;
+        } catch (Exception e){
             return null;
         }
 
-//        List<UserTable> uts = db.userDao().getAll();
-//        if(uts==null || uts.size()==0) return new User("Name",0,0,0,"city","state",0,"sex","uri");
-//        UserTable ut = uts.get(uts.size()-1);
-//        return new User(ut.getName(),ut.getAge(),ut.getFeet(),ut.getInches(),ut.getCity(),ut.getState(),ut.getWeight(),ut.getSex(),ut.getUri());
     }
 
 }

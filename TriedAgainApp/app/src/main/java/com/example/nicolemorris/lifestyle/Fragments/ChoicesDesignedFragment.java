@@ -3,17 +3,25 @@ package com.example.nicolemorris.lifestyle.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.example.nicolemorris.lifestyle.Model.User;
+import com.example.nicolemorris.lifestyle.Model.UserViewModel;
 import com.example.nicolemorris.lifestyle.R;
 
 public class ChoicesDesignedFragment extends Fragment
         implements View.OnClickListener {
 
+    UserViewModel mUserViewModel;
     OnChoiceDataPass mDataPasser;
     ImageButton profile_data, goals, bmi, hikes, weather, help, pic;
     Uri profile_image;
@@ -47,14 +55,13 @@ public class ChoicesDesignedFragment extends Fragment
         weather = view.findViewById(R.id.ib_weather);
         help = view.findViewById(R.id.ib_help);
 
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
-        String image_uri = getArguments().getString("uri");
-        if(!image_uri.equals("NoPic")){
-            profile_image = Uri.parse(image_uri);
-            //Uri profile_image = Uri.fromFile(new File(image_uri));
-            pic = view.findViewById(R.id.ib_choose_profile);
-            pic.setImageURI(profile_image);
-        }
+        //Set the observer
+        mUserViewModel.getData().observe(this,userObserver);
+
+//        String image_uri = getArguments().getString("uri");
+
 
 
         //Set listeners
@@ -67,6 +74,21 @@ public class ChoicesDesignedFragment extends Fragment
 
         return view;
     }
+
+    final Observer<User> userObserver  = new Observer<User>() {
+        @Override
+        public void onChanged(@Nullable final User u) {
+            // Update the UI if this data variable changes
+            if(u!=null) {
+                if(!u.getUri().equals("NoPic")){
+                    profile_image = Uri.parse(u.getUri());
+                    //Uri profile_image = Uri.fromFile(new File(image_uri));
+                    pic = getActivity().findViewById(R.id.ib_choose_profile);
+                    pic.setImageURI(profile_image);
+                }
+            }
+        }
+    };
 
     @Override
     public void onClick(View view) {

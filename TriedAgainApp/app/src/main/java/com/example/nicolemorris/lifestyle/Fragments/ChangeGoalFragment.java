@@ -91,7 +91,6 @@ public class ChangeGoalFragment extends Fragment
         //Set the observer
         mUserViewModel.getData().observe(this, userObserver);
 
-
         return view;
     }
 
@@ -153,18 +152,19 @@ public class ChangeGoalFragment extends Fragment
                 //mDataPasser.onChangeGoalDataPass(goal,act_level,weight_amt);
                 Log.e("ChangeGoalFrag", "goal, act_level, weitht: " + goal +"/" + act_level +"/" + weight_amt );
                 mUser.setGoal(goal, act_level,weight_amt);
+                UserRepo.updateUserProfile(getContext(), mUser);
                 MainActivity.hasGoal =true;
 //                Intent  intent2Main = new Intent(getContext(), MainActivity.class);
 //                intent2Main.putExtra("choice", 2);
 //                this.startActivity(intent2Main);
 
-                UserRepo.saveUserProfile(getContext(),mUser);
+                UserRepo.updateUserProfile(getContext(),mUser);
 
                 FragmentTransaction fTrans = getActivity().getSupportFragmentManager().beginTransaction();
                 GoalsFragment gf = new GoalsFragment();
-                Bundle sentData = new Bundle();
-                sentData.putParcelable("user",mUser);
-                gf.setArguments(sentData);
+//                Bundle sentData = new Bundle();
+//                sentData.putParcelable("user",mUser);
+//                gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
                 fTrans.commit();
 

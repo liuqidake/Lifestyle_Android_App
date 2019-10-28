@@ -12,7 +12,7 @@ import androidx.room.Update;
 public interface UserDao {
 
     @Insert
-    void inserUserTable(UserTable ut);
+    void insertUserTable(UserTable ut);
 
     @Delete
     void deleteUserTable(UserTable ut);
@@ -22,6 +22,9 @@ public interface UserDao {
 
     @Query("select * from UserTable" )
     List<UserTable> getAll();
+
+    @Query("select * from UserTable limit 1")
+    int getFirst();
 
     @Query("delete from UserTable")
     void deleteAll();

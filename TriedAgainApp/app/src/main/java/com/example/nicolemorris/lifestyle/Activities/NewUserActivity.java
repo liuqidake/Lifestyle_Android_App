@@ -164,8 +164,9 @@ public class NewUserActivity extends AppCompatActivity
             //Intent userIntent = new Intent(this, MainActivity.class);
             user = new User(name.trim(), age, feet, inches, city.trim(), state.trim(), weight, sex.trim(), profile_image);
             System.out.println(user.getUri());
-            UserRepo.saveUserProfile(getBaseContext(),user);
-            saveUserProfile(user);
+            UserRepo.saveUserProfile(getApplicationContext(),user);
+
+//            saveUserProfile(user);
             Bundle bundle = new Bundle();
             bundle.putParcelable("user", user);
             ReviewFragment fragment = new ReviewFragment();
@@ -187,7 +188,7 @@ public class NewUserActivity extends AppCompatActivity
             }
 
             fTrans.replace(R.id.fl_frag_ph_2, fragment, "Location");
-            creation_step++;
+            creation_step = 9;
 
         } else if (creation_step == 9) {
 
@@ -214,75 +215,16 @@ public class NewUserActivity extends AppCompatActivity
     }
 
 
-    private void saveUserProfile(User user){
-        try {
-            out = openFileOutput(fileName, MODE_APPEND);
-            String fileContents = serializeUser(user);
-            out.write(fileContents.getBytes());
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-//    private void updateUserProfile(User user){
+//    private void saveUserProfile(User user){
 //        try {
-//            in = openFileInput(fileName);
-//            String temp = "";
-//            Scanner sc = new Scanner((InputStream)in);
-//            while(sc.hasNextLine()){
-//                String next = sc.nextLine();
-//                String currName = next.substring(0, next.indexOf(","));
-//                if(user.getName().equals(currName)){
-//                    temp += serializeUser(user);
-//                    if(sc.hasNextLine()){
-//                        temp+="\n";
-//                    }
-//                }else{
-//                    temp += next;
-//                    if(sc.hasNextLine()){
-//                        temp+="\n";
-//                    }
-//                }
-//            }
-//            out = openFileOutput(fileName, Context.MODE_PRIVATE);
-//            out.write(temp.getBytes());
+//            out = openFileOutput(fileName, MODE_APPEND);
+//            String fileContents = serializeUser(user);
+//            out.write(fileContents.getBytes());
 //            out.close();
-//            in.close();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-//    }
-
-//    private String saveProfileImage(){
-//        ContextWrapper cw = new ContextWrapper(this);
-//        File directory = cw.getDir(folder, Context.MODE_PRIVATE);
-//        // Create imageDir
-//        File mypath=new File(directory,user.getName()+".jpg");
 //
-//        FileOutputStream fos = null;
-//        try {
-//            fos = new FileOutputStream(mypath);
-//            // Use the compress method on the BitMap object to write image to the OutputStream
-//            profileImage.compress(Bitmap.CompressFormat.PNG, 50, fos);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                fos.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return directory.getAbsolutePath();
-//    }
-
-//    private byte[] convertImageToByteArray(Bitmap image){
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        return stream.toByteArray();
 //    }
 
     boolean isTablet()

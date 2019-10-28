@@ -84,22 +84,22 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         mUserViewModel.setContext(getContext());
 
-        //Set the observer
-        mUserViewModel.getData().observe(this, userObserver);
+//        //Set the observer
+//        mUserViewModel.getData().observe(this, userObserver);
 
         return view;
     }
 
-    final Observer<User> userObserver = new Observer<User>() {
-        @Override
-        public void onChanged(@Nullable final User user) {
-            // Update the UI if this data variable changes
-            if (user != null) {
-                city = user.getCity();
-                state = user.getState();
-            }
-        }
-    };
+//    final Observer<User> userObserver = new Observer<User>() {
+//        @Override
+//        public void onChanged(@Nullable final User user) {
+//            // Update the UI if this data variable changes
+//            if (user != null) {
+//                city = user.getCity();
+//                state = user.getState();
+//            }
+//        }
+//    };
 
     @Override
     public void onClick(View view){

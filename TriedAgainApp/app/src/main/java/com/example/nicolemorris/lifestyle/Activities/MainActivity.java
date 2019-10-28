@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ import com.example.nicolemorris.lifestyle.Model.UserRepo;
 import com.example.nicolemorris.lifestyle.Model.UserViewModel;
 import com.example.nicolemorris.lifestyle.R;
 import com.example.nicolemorris.lifestyle.Room.DataBase;
+import com.example.nicolemorris.lifestyle.Sensors.StartGesture;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity
     double weight_pounds = 105;
     public static boolean hasGoal = false;
     boolean isFirstChoice;
-
+    User mUserData;
 
     public static DataBase db;
 
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity
 
     int choice;
 
+    StartGesture startGesture;
 
 
     @Override
@@ -111,14 +114,15 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        user_choice = 0;
+
         if(getIntent().getExtras()!= null){
             user_choice = getIntent().getExtras().getInt("CHOICE");
         }
 
-        db = DataBase.getInstance(getBaseContext());
+        db = DataBase.getInstance(getApplicationContext());
 
-        u = UserRepo.readUserProfile(getBaseContext());
-
+//        u = UserRepo.readUserProfile(getBaseContext());
 
         System.out.println("user choice"+user_choice);
         //Add permission for getting access to the current location
@@ -127,33 +131,26 @@ public class MainActivity extends AppCompatActivity
 
         isFirstChoice = true;
 
-        if (u == null) {
-            Intent messageIntent = new Intent(this, NewUserActivity.class);
-            this.startActivity(messageIntent);
 
-        } else if (user_choice != 0){
-            Toast.makeText(getBaseContext(), "user_choice-oncreate" + user_choice, Toast.LENGTH_SHORT).show();
-            changeFragments();
-        } else {
-            Intent messageIntent = new Intent(this, HomeActivity.class);
-            messageIntent.putExtra("uri", u.getUri());
-            this.startActivity(messageIntent);
-        }
+//        if (u == null) {
+//            Intent messageIntent = new Intent(this, NewUserActivity.class);
+//            this.startActivity(messageIntent);
+//
+//        } else if (user_choice != 0){
+//            Toast.makeText(getBaseContext(), "user_choice-oncreate" + user_choice, Toast.LENGTH_SHORT).show();
+//            changeFragments();
+//        } else {
+//            Intent messageIntent = new Intent(this, HomeActivity.class);
+//            messageIntent.putExtra("uri", u.getUri());
+//            this.startActivity(messageIntent);
+//        }
 
 
 
-//        //Create the view model
-//        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-//
-//        //Set the observer
-//        mUserViewModel.getData().observe(this,userObserver);
-//
-//
-//        //Create the view model
-//        mChoiceViewModel = ViewModelProviders.of(this).get(ChoiceViewModel.class);
-//
-//        //Set the observer
-//        mChoiceViewModel.getData().observe(this,choiceObserver);
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        //Set the observer
+        mUserViewModel.getData().observe(this,userObserver);
 
     }
 
@@ -161,12 +158,16 @@ public class MainActivity extends AppCompatActivity
     final Observer<User> userObserver  = new Observer<User>() {
         @Override
         public void onChanged(@Nullable final User userData) {
-        if (userData == null) {
+
+            mUserData = userData;
+            if (userData == null) {
             createNewUser();
         } else if (user_choice != 0){
             changeFragments();
+            startGesture = new StartGesture(getApplicationContext(), mUserViewModel);
         } else {
             goHome();
+            startGesture = new StartGesture(getApplicationContext(), mUserViewModel);
         }
         }
     };
@@ -277,13 +278,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (user_choice == 2){
             isFirstChoice = false;
-            u.setHasGoal(true);
-            if(u.checkGoal() && hasGoal){
+//            u.setHasGoal(true);
+            if(mUserData.checkGoal()){
                 //Launch fitness goals
                 gf = new GoalsFragment();
-                Bundle sentData = new Bundle();
-                sentData.putParcelable("user", u);
-                gf.setArguments(sentData);
+//                Bundle sentData = new Bundle();
+//                sentData.putParcelable("user", u);
+//                gf.setArguments(sentData);
                 fTrans.replace(R.id.fl_frag_ph_2,gf,"Goals");
 
             } else {
@@ -297,11 +298,11 @@ public class MainActivity extends AppCompatActivity
             bf = new BmiFragment();
 
             //Send data to it
-            Bundle sentData = new Bundle();
-            height_inches = (u.getFeet() * 12) + u.getInches();
-            sentData.putDouble("HEIGHT",height_inches);
-            sentData.putDouble("WEIGHT",u.getWeight());
-            bf.setArguments(sentData);
+//            Bundle sentData = new Bundle();
+//            height_inches = (u.getFeet() * 12) + u.getInches();
+//            sentData.putDouble("HEIGHT",height_inches);
+//            sentData.putDouble("WEIGHT",u.getWeight());
+//            bf.setArguments(sentData);
 
             //Launch bmi
             fTrans.replace(R.id.fl_frag_ph_2,bf,"BMI");
@@ -354,7 +355,7 @@ public class MainActivity extends AppCompatActivity
             hef = new HeaderFragment();
             Bundle sentData = new Bundle();
             sentData.putInt("CHOICE",user_choice);
-            sentData.putString("uri", u.getUri());
+//            sentData.putString("uri", u.getUri());
             hef.setArguments(sentData);
             fTrans.replace(R.id.fl_frag_ph_1,hef,"Header");
         } else {

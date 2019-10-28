@@ -28,12 +28,13 @@ public class HeaderFragment extends Fragment {
         user_choice = getArguments().getInt("CHOICE");
         tvHeaderTitle = view.findViewById(R.id.tv_header_title);
 
-        String image_uri = getArguments().getString("uri");
-        if(!image_uri.equals("NoPic")){
-            profile_image = Uri.parse(image_uri);
-            imageBtn = view.findViewById(R.id.ib_profile);
-            imageBtn.setImageURI(profile_image);
-        }
+        //ToDo
+//        String image_uri = getArguments().getString("uri");
+//        if(!image_uri.equals("NoPic")){
+//            profile_image = Uri.parse(image_uri);
+//            imageBtn = view.findViewById(R.id.ib_profile);
+//            imageBtn.setImageURI(profile_image);
+//        }
 
         setHeaderTitle();
 

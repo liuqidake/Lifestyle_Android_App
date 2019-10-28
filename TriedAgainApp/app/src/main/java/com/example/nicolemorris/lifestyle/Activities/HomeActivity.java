@@ -17,13 +17,13 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        image_uri = getIntent().getExtras().getString("uri");
+//        image_uri = getIntent().getExtras().getString("uri");
 
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
         ChoicesDesignedFragment fragment = new ChoicesDesignedFragment();
-        Bundle b = new Bundle();
-        b.putString("uri", image_uri);
-        fragment.setArguments(b);
+//        Bundle b = new Bundle();
+//        b.putString("uri", image_uri);
+//        fragment.setArguments(b);
         fTrans.replace(R.id.fl_frag_ph_1,fragment,"Choices");
         fTrans.commit();
 
