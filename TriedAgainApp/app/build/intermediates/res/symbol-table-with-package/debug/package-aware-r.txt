@@ -91,6 +91,7 @@ attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
 attr buttonTintMode
+attr button_style
 attr chainUseRtl
 attr checkboxStyle
 attr checkedTextViewStyle
@@ -161,6 +162,7 @@ attr fontProviderQuery
 attr fontStyle
 attr fontVariationSettings
 attr fontWeight
+attr forgotPasswordViewBackgroundColor
 attr gapBetweenBars
 attr goIcon
 attr height
@@ -254,6 +256,9 @@ attr logo
 attr logoDescription
 attr maxButtonHeight
 attr measureWithLargestChild
+attr metaButtonBarButtonStyle
+attr metaButtonBarStyle
+attr mfaViewBackgroundColor
 attr multiChoiceItemLayout
 attr navigationContentDescription
 attr navigationIcon
@@ -291,6 +296,10 @@ attr showAsAction
 attr showDividers
 attr showText
 attr showTitle
+attr signInBackgroundColor
+attr signInImageResId
+attr signUpConfirmViewBackgroundColor
+attr signUpViewBackgroundColor
 attr singleChoiceItemLayout
 attr spanCount
 attr spinBars
@@ -312,6 +321,7 @@ attr switchMinWidth
 attr switchPadding
 attr switchStyle
 attr switchTextAppearance
+attr text
 attr textAllCaps
 attr textAppearanceLargePopupMenu
 attr textAppearanceListItem
@@ -465,6 +475,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color sign_in_separator_color
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -586,6 +597,10 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen sign_in_button_height
+dimen sign_in_button_margin
+dimen sign_in_button_width
+dimen sign_in_separator_height
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
@@ -598,6 +613,11 @@ dimen tooltip_precise_anchor_threshold
 dimen tooltip_vertical_padding
 dimen tooltip_y_offset_non_touch
 dimen tooltip_y_offset_touch
+dimen user_pools_button_height
+dimen user_pools_button_text_size
+dimen user_pools_form_margin
+dimen user_pools_intra_group_separation
+dimen user_pools_sign_in_button_margin_top_bottom
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
 drawable abc_btn_borderless_material
@@ -701,6 +721,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable default_sign_in_logo
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable header_bmi
@@ -797,6 +818,10 @@ id chronometer
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id confirm_account_button
+id confirm_account_message1
+id confirm_account_message2
+id confirm_account_title
 id constraintLayout
 id content
 id contentPanel
@@ -824,7 +849,17 @@ id fl_frag_ph_1
 id fl_frag_ph_2
 id fl_frag_ph_3
 id fl_frag_profilelist
+id force_change_password_button
+id force_change_password_form
+id force_change_password_message
+id force_change_password_title
+id force_change_password_view
 id forever
+id forgot_password_button
+id forgot_password_form
+id forgot_password_message
+id forgot_password_title
+id forgot_password_view
 id frag_bmi
 id frag_change_goal
 id frag_goals
@@ -869,6 +904,7 @@ id italic
 id item_touch_helper_previous_elevation
 id iv_heart
 id iv_profile
+id large
 id left
 id light
 id line1
@@ -886,6 +922,11 @@ id listMode
 id list_item
 id media_actions
 id message
+id mfa_button
+id mfa_form
+id mfa_message
+id mfa_title
+id mfa_view
 id middle
 id multiply
 id never
@@ -933,6 +974,14 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id signup_button
+id signup_confirm_form
+id signup_confirm_view
+id signup_form
+id signup_layout
+id signup_message
+id signup_view
+id small
 id spacer
 id split_action_bar
 id spread
@@ -1017,6 +1066,7 @@ id tv_weight_hc_revf
 id uniform
 id up
 id useLogo
+id user_pool_sign_in_view_id
 id vll_rev_frag
 id wide
 id withText
@@ -1056,9 +1106,15 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_force_change_password
+layout activity_forgot_password
 layout activity_home
 layout activity_main
+layout activity_mfa
 layout activity_new_user
+layout activity_sign_in
+layout activity_sign_up
+layout activity_sign_up_confirm
 layout fragment_bmi
 layout fragment_bottom_buttons
 layout fragment_change_goal
@@ -1078,6 +1134,8 @@ layout fragment_review
 layout fragment_step_counter
 layout fragment_title
 layout fragment_weather
+layout horizontal_or_sign_in_divider
+layout horizontal_sign_in_divider
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1157,9 +1215,65 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string email_address_text
+string force_change_password_body
+string force_change_password_button_hint
+string force_change_password_header
+string forgot_password_body
+string forgot_password_button_hint
+string forgot_password_header
+string forgot_password_input_code_hint
+string given_name_text
 string hello_blank_fragment
+string incorrect_username_or_password
+string login_failed
+string mfa_code_empty
+string mfa_code_sent_message
+string mfa_failed
+string mfa_header
+string password_change_failed
+string password_change_no_verification_failed
+string password_change_success
+string password_length_validation_failed
+string phone_number_text
+string please_wait
 string search_menu_title
+string sign_in_button_text
+string sign_in_canceled_message_format
+string sign_in_failure_message_format
+string sign_in_forgot_password
+string sign_in_hide_password
+string sign_in_new_account
+string sign_in_or
+string sign_in_password
+string sign_in_show_password
+string sign_in_succeeded_message_format
+string sign_in_username
+string sign_in_with
+string sign_up_confirm_code
+string sign_up_confirm_code_missing
+string sign_up_confirm_code_sent
+string sign_up_confirm_enter_code
+string sign_up_confirm_failed
+string sign_up_confirm_success
+string sign_up_confirm_text
+string sign_up_confirm_title
+string sign_up_failed
+string sign_up_header
+string sign_up_in_progress
+string sign_up_success
+string sign_up_username_missing
 string status_bar_notification_info_overflow
+string title_activity_force_change_password
+string title_activity_forgot_password
+string title_activity_mfa
+string title_activity_sign_in
+string title_activity_sign_up
+string title_activity_sign_up_confirm
+string title_dialog_sign_up_failed
+string user_does_not_exist
+string username_text
+string verify_button_text
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -1527,6 +1641,7 @@ styleable AppCompatSeekBar android_thumb tickMark tickMarkTint tickMarkTintMode
 styleable AppCompatTextHelper android_textAppearance android_drawableTop android_drawableBottom android_drawableLeft android_drawableRight android_drawableStart android_drawableEnd
 styleable AppCompatTextView android_textAppearance autoSizeMaxTextSize autoSizeMinTextSize autoSizePresetSizes autoSizeStepGranularity autoSizeTextType firstBaselineToTopHeight fontFamily lastBaselineToBottomHeight lineHeight textAllCaps
 styleable AppCompatTheme android_windowIsFloating android_windowAnimationStyle actionBarDivider actionBarItemBackground actionBarPopupTheme actionBarSize actionBarSplitStyle actionBarStyle actionBarTabBarStyle actionBarTabStyle actionBarTabTextStyle actionBarTheme actionBarWidgetTheme actionButtonStyle actionDropDownStyle actionMenuTextAppearance actionMenuTextColor actionModeBackground actionModeCloseButtonStyle actionModeCloseDrawable actionModeCopyDrawable actionModeCutDrawable actionModeFindDrawable actionModePasteDrawable actionModePopupWindowStyle actionModeSelectAllDrawable actionModeShareDrawable actionModeSplitBackground actionModeStyle actionModeWebSearchDrawable actionOverflowButtonStyle actionOverflowMenuStyle activityChooserViewStyle alertDialogButtonGroupStyle alertDialogCenterButtons alertDialogStyle alertDialogTheme autoCompleteTextViewStyle borderlessButtonStyle buttonBarButtonStyle buttonBarNegativeButtonStyle buttonBarNeutralButtonStyle buttonBarPositiveButtonStyle buttonBarStyle buttonStyle buttonStyleSmall checkboxStyle checkedTextViewStyle colorAccent colorBackgroundFloating colorButtonNormal colorControlActivated colorControlHighlight colorControlNormal colorError colorPrimary colorPrimaryDark colorSwitchThumbNormal controlBackground dialogCornerRadius dialogPreferredPadding dialogTheme dividerHorizontal dividerVertical dropDownListViewStyle dropdownListPreferredItemHeight editTextBackground editTextColor editTextStyle homeAsUpIndicator imageButtonStyle listChoiceBackgroundIndicator listDividerAlertDialog listMenuViewStyle listPopupWindowStyle listPreferredItemHeight listPreferredItemHeightLarge listPreferredItemHeightSmall listPreferredItemPaddingLeft listPreferredItemPaddingRight panelBackground panelMenuListTheme panelMenuListWidth popupMenuStyle popupWindowStyle radioButtonStyle ratingBarStyle ratingBarStyleIndicator ratingBarStyleSmall searchViewStyle seekBarStyle selectableItemBackground selectableItemBackgroundBorderless spinnerDropDownItemStyle spinnerStyle switchStyle textAppearanceLargePopupMenu textAppearanceListItem textAppearanceListItemSecondary textAppearanceListItemSmall textAppearancePopupMenuHeader textAppearanceSearchResultSubtitle textAppearanceSearchResultTitle textAppearanceSmallPopupMenu textColorAlertDialogListItem textColorSearchUrl toolbarNavigationButtonStyle toolbarStyle tooltipForegroundColor tooltipFrameBackground viewInflaterClass windowActionBar windowActionBarOverlay windowActionModeOverlay windowFixedHeightMajor windowFixedHeightMinor windowFixedWidthMajor windowFixedWidthMinor windowMinWidthMajor windowMinWidthMinor windowNoTitle
+styleable ButtonBarContainerTheme metaButtonBarButtonStyle metaButtonBarStyle
 styleable ButtonBarLayout allowStacking
 styleable ColorStateListItem android_color android_alpha alpha
 styleable CompoundButton android_button buttonTint buttonTintMode
@@ -1538,6 +1653,7 @@ styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_a
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery
 styleable FontFamilyFont android_font android_fontWeight android_fontStyle android_ttcIndex android_fontVariationSettings font fontStyle fontVariationSettings fontWeight ttcIndex
+styleable ForgotPasswordView forgotPasswordViewBackgroundColor
 styleable GradientColor android_startColor android_endColor android_type android_centerX android_centerY android_gradientRadius android_tileMode android_centerColor android_startX android_startY android_endX android_endY
 styleable GradientColorItem android_color android_offset
 styleable LinearConstraintLayout android_orientation
@@ -1545,6 +1661,7 @@ styleable LinearLayoutCompat android_gravity android_orientation android_baselin
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
+styleable MFAView mfaViewBackgroundColor
 styleable MenuGroup android_enabled android_id android_visible android_menuCategory android_orderInCategory android_checkableBehavior
 styleable MenuItem android_icon android_enabled android_id android_checked android_visible android_menuCategory android_orderInCategory android_title android_titleCondensed android_alphabeticShortcut android_numericShortcut android_checkable android_onClick actionLayout actionProviderClass actionViewClass alphabeticModifiers contentDescription iconTint iconTintMode numericModifiers showAsAction tooltipText
 styleable MenuView android_windowAnimationStyle android_itemTextAppearance android_horizontalDivider android_verticalDivider android_headerBackground android_itemBackground android_itemIconDisabledAlpha preserveIconSpacing subMenuArrow
@@ -1553,7 +1670,10 @@ styleable PopupWindowBackgroundState state_above_anchor
 styleable RecycleListView paddingBottomNoButtons paddingTopNoTitle
 styleable RecyclerView android_orientation android_descendantFocusability fastScrollEnabled fastScrollHorizontalThumbDrawable fastScrollHorizontalTrackDrawable fastScrollVerticalThumbDrawable fastScrollVerticalTrackDrawable layoutManager reverseLayout spanCount stackFromEnd
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon
-styleable SignInButton buttonSize colorScheme scopeUris
+styleable SignInButton buttonSize button_style colorScheme scopeUris text
+styleable SignInView signInBackgroundColor signInImageResId
+styleable SignUpConfirmView signUpConfirmViewBackgroundColor
+styleable SignUpView signUpViewBackgroundColor
 styleable Spinner android_entries android_popupBackground android_prompt android_dropDownWidth popupTheme
 styleable StateListDrawable android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable StateListDrawableItem android_drawable
